@@ -90,7 +90,8 @@
   var DAY_GROUPS = [
     { title: "Activities", kinds: ["sight", "activity", "transit"] },
     { title: "Shop", kinds: ["shop"] },
-    { title: "Food & Drink", kinds: ["eat", "coffee", "bar", "drink"] },
+    { title: "Food", kinds: ["eat", "coffee"] },
+    { title: "Bars", kinds: ["bar", "drink"] },
   ];
 
   // ---- Maps -------------------------------------------------
@@ -341,8 +342,8 @@
         DAY_GROUPS.forEach(function (g) {
           var items = cards.filter(function (c) { return g.kinds.indexOf(c.kind) >= 0; });
           if (!items.length) return;
-          var grp = el("div", "day__group");
-          grp.appendChild(el("div", "day__grouptitle", g.title + " · " + items.length));
+          var grp = el("details", "day__group"); grp.setAttribute("open", "");
+          grp.appendChild(el("summary", "day__grouptitle", g.title + ' <span class="day__groupcount">' + items.length + "</span>"));
           var list = el("div", "ditems");
           items.forEach(function (c) { list.appendChild(listItem(c, doneIdFor(city.id, d.date, c.name))); });
           grp.appendChild(list);
@@ -382,7 +383,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=6");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=7");
   }
 
   function switchRow(label, order, labels, current, storeKey) {

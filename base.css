@@ -129,8 +129,13 @@ a { color: inherit; }
 .day__head { align-items: center; }
 .day__progress { margin-left: auto; font-family: var(--ticket-mono); font-size: 0.66rem; letter-spacing: 0.03em; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 0.14rem 0.6rem; white-space: nowrap; }
 .day__progress.is-complete { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-.day__groups { display: flex; flex-direction: column; gap: 1.15rem; margin-top: 0.8rem; }
-.day__grouptitle { font-family: var(--ticket-mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; padding-bottom: 0.32rem; border-bottom: 1px dashed var(--line); }
+.day__groups { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 0.9rem; }
+.day__group { border: 0; }
+.day__grouptitle { display: flex; align-items: center; gap: 0.55rem; cursor: pointer; list-style: none; font-family: var(--disp); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem; padding-bottom: 0.45rem; border-bottom: 2px solid var(--line); }
+.day__grouptitle::-webkit-details-marker { display: none; }
+.day__groupcount { font-family: var(--ticket-mono); font-size: 0.72rem; font-weight: 500; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 0.05rem 0.5rem; }
+.day__grouptitle::after { content: "⌄"; margin-left: auto; font-size: 1rem; line-height: 1; opacity: 0.55; transition: transform 0.2s ease; }
+.day__group[open] .day__grouptitle::after { transform: rotate(180deg); }
 /* done toggle */
 .card__done { position: absolute; top: 0.5rem; right: 0.5rem; z-index: 3; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); background: color-mix(in srgb, var(--card) 82%, transparent); color: transparent; font-size: 0.78rem; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: all 0.15s; }
 .card__done:hover { border-color: var(--accent); color: color-mix(in srgb, var(--accent) 55%, transparent); transform: scale(1.1); }
