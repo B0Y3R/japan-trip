@@ -12,7 +12,7 @@ window.TRIP = {
   subtitle: "Tokyo · Kyoto · Hakone",
   dateRange: "Nov 19 – Dec 4, 2026",
   summary:
-    "James + wife · 15 nights · Tokyo as home base with a Kyoto leg and a Hakone onsen night. " +
+    "James + Sasha · 15 nights · Tokyo as home base with a Kyoto leg and a Hakone onsen night. " +
     "Late November = peak autumn leaves (kōyō), crisp clear days, and the best of the city after dark.",
   notionUrl: "https://app.notion.com/p/38d8319b49c181838efec05155afc495",
 

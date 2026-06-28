@@ -217,6 +217,7 @@
     var home = el("a", "topnav__home" + (currentId ? "" : " is-active"), "日本 HOME");
     home.href = "index.html"; nav.appendChild(home);
     TRIP.cities.forEach(function (c) {
+      if (c.info) return; // skip Logistics in the header
       var a = el("a", "topnav__chip" + (c.id === currentId ? " is-active" : ""), c.flag + " " + esc(c.name));
       a.href = c.id + ".html"; a.style.setProperty("--accent", accentOf(c.id)); nav.appendChild(a);
     });
@@ -285,7 +286,7 @@
   function footer() {
     var f = el("footer", "footer");
     f.appendChild(el("p", "footer__big", "また ね ✦ SEE YOU IN JAPAN"));
-    f.appendChild(el("p", "footer__small", TRIP.notionUrl ? 'James + wife · Nov 2026 · <a href="' + TRIP.notionUrl + '" target="_blank" rel="noopener">full plan ↗</a>' : "James + wife · Nov 2026"));
+    f.appendChild(el("p", "footer__small", TRIP.notionUrl ? 'James + Sasha · Nov 2026 · <a href="' + TRIP.notionUrl + '" target="_blank" rel="noopener">full plan ↗</a>' : "James + Sasha · Nov 2026"));
     return f;
   }
 
@@ -297,7 +298,6 @@
     hero.appendChild(el("h1", "hero__title", esc(TRIP.title)));
     hero.appendChild(el("p", "hero__kicker", esc(TRIP.subtitle)));
     hero.appendChild(el("p", "hero__dates", esc(TRIP.dateRange)));
-    hero.appendChild(el("p", "hero__summary", esc(TRIP.summary)));
     app.appendChild(hero);
 
     // book ahead — scannable checklist
@@ -499,7 +499,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=11");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=12");
   }
 
   function switchRow(label, order, labels, current, storeKey) {
