@@ -72,6 +72,27 @@
   function mapsSearch(q) { return "https://www.google.com/maps/search/?api=1&query=" + enc(q); }
   function cityById(id) { return TRIP.cities.filter(function (c) { return c.id === id; })[0]; }
 
+  // ---- Done-tracking (per itinerary item, saved in localStorage) ----
+  var DONE = (function () { try { return JSON.parse(localStorage.getItem("jp-done") || "{}"); } catch (e) { return {}; } })();
+  function saveDone() { try { localStorage.setItem("jp-done", JSON.stringify(DONE)); } catch (e) {} }
+  function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 44); }
+  function doneIdFor(cityId, date, name) { return cityId + "|" + slug(date) + "|" + slug(name); }
+  function dayProgress(dayEl) {
+    var total = dayEl.querySelectorAll(".card[data-done-id]").length;
+    var done = dayEl.querySelectorAll(".card.is-done").length;
+    var chip = dayEl.querySelector(".day__progress");
+    if (!chip) return;
+    chip.textContent = done + " / " + total + " done";
+    chip.classList.toggle("is-complete", total > 0 && done === total);
+  }
+
+  // Day items grouped into glanceable subsections.
+  var DAY_GROUPS = [
+    { title: "Activities", kinds: ["sight", "activity", "transit"] },
+    { title: "Shop", kinds: ["shop"] },
+    { title: "Food & Drink", kinds: ["eat", "coffee", "bar", "drink"] },
+  ];
+
   // ---- Maps -------------------------------------------------
   function renderMap(canvas, stops, accent, link) {
     var pts = stops.filter(function (s) { return s.lat && s.lng; });
@@ -136,11 +157,25 @@
     return nav;
   }
 
-  function card(c) {
+  function card(c, doneId) {
     var k = KIND[c.kind] || ["・", ""];
     var href = c.url || mapsSearch(c.query || c.name);
     var a = el("a", "card"); a.href = href; a.target = "_blank"; a.rel = "noopener";
     a.appendChild(el("span", "card__kanji", k[0]));
+    if (doneId) {
+      a.setAttribute("data-done-id", doneId);
+      if (DONE[doneId]) a.className = "card is-done";
+      var btn = el("button", "card__done", "✓"); btn.type = "button"; btn.setAttribute("aria-label", "Mark done");
+      btn.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var on = !a.classList.contains("is-done");
+        a.classList.toggle("is-done", on);
+        if (on) DONE[doneId] = 1; else delete DONE[doneId];
+        saveDone();
+        var day = a.closest ? a.closest(".day") : null; if (day) dayProgress(day);
+      });
+      a.appendChild(btn);
+    }
     if (k[1]) a.appendChild(el("div", "card__cat", k[1]));
     a.appendChild(el("div", "card__name", esc(c.name)));
     if (c.blurb) a.appendChild(el("div", "card__blurb", esc(c.blurb)));
@@ -269,10 +304,24 @@
         var head = el("div", "day__head");
         head.appendChild(el("span", "day__date", esc(d.date)));
         if (d.area) head.appendChild(el("span", "day__area", esc(d.area)));
+        if (d.cards && d.cards.length) head.appendChild(el("span", "day__progress", ""));
         blk.appendChild(head);
         if (d.note) blk.appendChild(el("p", "day__note", esc(d.note)));
-        if (d.cards && d.cards.length) blk.appendChild(cardsGrid(d.cards));
+        var cards = d.cards || [];
+        var grouped = el("div", "day__groups");
+        DAY_GROUPS.forEach(function (g) {
+          var items = cards.filter(function (c) { return g.kinds.indexOf(c.kind) >= 0; });
+          if (!items.length) return;
+          var grp = el("div", "day__group");
+          grp.appendChild(el("div", "day__grouptitle", g.title + " · " + items.length));
+          var grid = el("div", "cards");
+          items.forEach(function (c) { grid.appendChild(card(c, doneIdFor(city.id, d.date, c.name))); });
+          grp.appendChild(grid);
+          grouped.appendChild(grp);
+        });
+        blk.appendChild(grouped);
         ds.appendChild(blk);
+        dayProgress(blk);
       });
       app.appendChild(ds);
     }
@@ -304,7 +353,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=4");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=5");
   }
 
   function switchRow(label, order, labels, current, storeKey) {

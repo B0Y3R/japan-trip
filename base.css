@@ -125,7 +125,19 @@ a { color: inherit; }
 .day__date { font-family: var(--disp); font-weight: 700; font-size: 0.92rem; color: var(--accent); }
 .day__area { font-family: var(--disp); font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.02em; }
 .day__note { font-size: 0.9rem; line-height: 1.5; color: var(--ink-soft); margin: 0 0 0.8rem; max-width: 70ch; }
-.day .cards { margin-top: 0.6rem; }
+.day .cards { margin-top: 0; }
+.day__head { align-items: center; }
+.day__progress { margin-left: auto; font-family: var(--ticket-mono); font-size: 0.66rem; letter-spacing: 0.03em; color: var(--ink-soft); border: 1px solid var(--line); border-radius: 999px; padding: 0.14rem 0.6rem; white-space: nowrap; }
+.day__progress.is-complete { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.day__groups { display: flex; flex-direction: column; gap: 1.15rem; margin-top: 0.8rem; }
+.day__grouptitle { font-family: var(--ticket-mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; padding-bottom: 0.32rem; border-bottom: 1px dashed var(--line); }
+/* done toggle */
+.card__done { position: absolute; top: 0.5rem; right: 0.5rem; z-index: 3; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); background: color-mix(in srgb, var(--card) 82%, transparent); color: transparent; font-size: 0.78rem; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: all 0.15s; }
+.card__done:hover { border-color: var(--accent); color: color-mix(in srgb, var(--accent) 55%, transparent); transform: scale(1.1); }
+.card.is-done .card__done { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.card.is-done { opacity: 0.5; }
+.card.is-done .card__name { text-decoration: line-through; }
+.card.is-done .card__kanji { color: color-mix(in srgb, var(--ink) 9%, transparent) !important; filter: none !important; }
 .bridge { display: block; text-decoration: none; margin: 0.4rem 0 1.4rem; padding: 0.8rem 1rem; border: 1px dashed var(--accent); border-radius: var(--radius); background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); font-family: var(--disp); font-weight: 700; letter-spacing: 0.04em; transition: background 0.15s; }
 .bridge:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
 
