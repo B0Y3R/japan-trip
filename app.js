@@ -86,6 +86,24 @@
     chip.classList.toggle("is-complete", total > 0 && done === total);
   }
 
+  // ---- Geocode cache (seeded from build-time places.js, filled live by Google) ----
+  var GEO = (function () { try { return JSON.parse(localStorage.getItem("jp-geo") || "{}"); } catch (e) { return {}; } })();
+  (function () { var p = window.PLACES || {}, ch = false; for (var k in p) { if (!GEO[k]) { GEO[k] = p[k]; ch = true; } } if (ch) try { localStorage.setItem("jp-geo", JSON.stringify(GEO)); } catch (e) {} })();
+  function saveGeo() { try { localStorage.setItem("jp-geo", JSON.stringify(GEO)); } catch (e) {} }
+  function cardQ(c) { return c.query || c.name; }
+  var _geocoder = null, _gq = [], _gqRunning = false;
+  function geocodeRaw(q, cb) {
+    if (GEO[q]) { cb(GEO[q]); return; }
+    if (!(window.google && google.maps && google.maps.Geocoder)) { cb(null); return; }
+    if (!_geocoder) _geocoder = new google.maps.Geocoder();
+    _geocoder.geocode({ address: q, region: "jp" }, function (res, status) {
+      if (status === "OK" && res && res[0]) { var L = res[0].geometry.location; GEO[q] = { lat: L.lat(), lng: L.lng() }; saveGeo(); cb(GEO[q]); }
+      else cb(null);
+    });
+  }
+  function geocode(q, cb) { if (GEO[q]) { cb(GEO[q]); return; } _gq.push([q, cb]); runGq(); }
+  function runGq() { if (_gqRunning) return; var job = _gq.shift(); if (!job) return; _gqRunning = true; geocodeRaw(job[0], function (r) { job[1](r); _gqRunning = false; setTimeout(runGq, 150); }); }
+
   // Day items grouped into glanceable subsections.
   var DAY_GROUPS = [
     { title: "Activities", kinds: ["sight", "activity", "transit"] },
@@ -121,24 +139,71 @@
   function mapBlock(stops, accent, opts) {
     opts = opts || {};
     var wrap = el("div", "map");
-    if (!HAS_KEY) wrap.appendChild(el("div", "map__notice", "🔑 Add your Maps JavaScript API key to <code>config.js</code>"));
-    else { var c = el("div", "map__canvas"); wrap.appendChild(c); MAPS_TO_INIT.push({ canvas: c, stops: stops, accent: accent, link: !!opts.linkToCity }); }
-    if (opts.legend && stops.length > 1) {
-      var lg = el("div", "map__legend");
-      stops.forEach(function (s, i) {
+    if (!HAS_KEY) { wrap.appendChild(el("div", "map__notice", "🔑 Add your Maps JavaScript API key to <code>config.js</code>")); return wrap; }
+    var c = el("div", "map__canvas"); wrap.appendChild(c);
+    var lg = opts.legend ? el("div", "map__legend") : null;
+    if (opts.dayMap) {
+      MAPS_TO_INIT.push({ canvas: c, dayMap: true, accent: accent, legend: lg, center: opts.center });
+    } else {
+      MAPS_TO_INIT.push({ canvas: c, stops: stops, accent: accent, link: !!opts.linkToCity });
+      if (lg && stops.length > 1) stops.forEach(function (s, i) {
         var a = el("a", "map__legend-item", "<b>" + (i + 1) + "</b> " + esc(s.name));
         a.href = (opts.linkToCity && s.cityId) ? s.cityId + ".html" : mapsSearch(s.q || s.name);
         if (!(opts.linkToCity && s.cityId)) { a.target = "_blank"; a.rel = "noopener"; }
         lg.appendChild(a);
       });
-      wrap.appendChild(lg);
     }
+    if (lg) wrap.appendChild(lg);
     return wrap;
+  }
+
+  // ---- Live day map (markers update when the day changes) ----
+  var DM = { map: null, accent: "#000", legend: null, center: null, markers: [], token: 0, pending: null };
+  function makeDayMap(canvas, accent, legend, center) {
+    DM.map = new google.maps.Map(canvas, { mapTypeControl: false, streetViewControl: false, fullscreenControl: true, gestureHandling: "cooperative", backgroundColor: "#10121a", styles: MAP_STYLE, center: center || { lat: 35.68, lng: 139.76 }, zoom: 12 });
+    DM.accent = accent; DM.legend = legend; DM.center = center;
+    if (DM.pending) showDayOnMap(DM.pending);
+  }
+  function dmFit(bounds, n) {
+    if (!DM.map) return;
+    if (n > 1) DM.map.fitBounds(bounds, 56);
+    else if (n === 1) { DM.map.setCenter(bounds.getCenter()); DM.map.setZoom(15); }
+    else if (DM.center) { DM.map.setCenter(DM.center); DM.map.setZoom(12); }
+  }
+  function dmMarker(c, coord, idx, bounds) {
+    var pos = { lat: coord.lat, lng: coord.lng };
+    var m = new google.maps.Marker({ position: pos, map: DM.map, title: idx + ". " + c.name,
+      label: { text: String(idx), color: "#0a0c12", fontFamily: "sans-serif", fontWeight: "700", fontSize: "12px" },
+      icon: { path: google.maps.SymbolPath.CIRCLE, scale: 12, fillColor: DM.accent, fillOpacity: 1, strokeColor: "#0a0c12", strokeWeight: 2 } });
+    var iw = new google.maps.InfoWindow({ content: '<div style="font:700 14px system-ui;color:#111;margin-bottom:4px">' + idx + ". " + esc(c.name) + '</div><a href="' + mapsSearch(cardQ(c)) + '" target="_blank" rel="noopener" style="font:700 12px monospace;color:#c81d6b">Open in Maps ↗</a>' });
+    m.addListener("click", function () { iw.open(DM.map, m); });
+    DM.markers.push(m); bounds.extend(pos);
+    if (DM.legend) { var a = el("a", "map__legend-item", "<b>" + idx + "</b> " + esc(c.name)); a.href = mapsSearch(cardQ(c)); a.target = "_blank"; a.rel = "noopener"; DM.legend.appendChild(a); }
+  }
+  function showDayOnMap(day) {
+    DM.pending = day;
+    if (!DM.map) return;
+    var token = ++DM.token;
+    DM.markers.forEach(function (m) { m.setMap(null); }); DM.markers = [];
+    if (DM.legend) DM.legend.innerHTML = "";
+    var bounds = new google.maps.LatLngBounds(); var counter = { n: 0 };
+    (day.cards || []).forEach(function (c) {
+      var hit = GEO[cardQ(c)];
+      if (hit) dmMarker(c, hit, ++counter.n, bounds);
+    });
+    dmFit(bounds, counter.n);
+    (day.cards || []).forEach(function (c) {
+      if (GEO[cardQ(c)]) return;
+      geocode(cardQ(c), function (coord) {
+        if (DM.token !== token || !coord) return;
+        dmMarker(c, coord, ++counter.n, bounds); dmFit(bounds, counter.n);
+      });
+    });
   }
 
   function loadMaps() {
     if (!HAS_KEY || !MAPS_TO_INIT.length) return;
-    window.__initJP = function () { MAPS_TO_INIT.forEach(function (m) { try { renderMap(m.canvas, m.stops, m.accent, m.link); } catch (e) { m.canvas.innerHTML = '<div class="map__notice">map failed</div>'; } }); };
+    window.__initJP = function () { MAPS_TO_INIT.forEach(function (m) { try { if (m.dayMap) makeDayMap(m.canvas, m.accent, m.legend, m.center); else renderMap(m.canvas, m.stops, m.accent, m.link); } catch (e) { m.canvas.innerHTML = '<div class="map__notice">map failed</div>'; } }); };
     var s = document.createElement("script");
     s.src = "https://maps.googleapis.com/maps/api/js?key=" + enc(KEY) + "&callback=__initJP&v=weekly&loading=async";
     s.async = true;
@@ -314,11 +379,20 @@
     if (city.currency) hero.appendChild(el("p", "hero__cur", "💱 " + esc(city.currency)));
     app.appendChild(hero);
 
-    if (city.map) {
+    var dayMapLabel = null;
+    if (city.days) {
       var ms = el("section", "section reveal");
-      ms.appendChild(el("h2", "section__title", "🗺️ The Map"));
-      ms.appendChild(mapBlock(city.map.stops, accentOf(city.id), { legend: true }));
+      var mtitle = el("h2", "section__title", "🗺️ Map · ");
+      dayMapLabel = el("span", "section__sub", ""); mtitle.appendChild(dayMapLabel);
+      ms.appendChild(mtitle);
+      var center = (window.COORDS || {})["city_" + city.id];
+      ms.appendChild(mapBlock([], accentOf(city.id), { dayMap: true, legend: true, center: center }));
       app.appendChild(ms);
+    } else if (city.map) {
+      var ms2 = el("section", "section reveal");
+      ms2.appendChild(el("h2", "section__title", "🗺️ The Map"));
+      ms2.appendChild(mapBlock(city.map.stops, accentOf(city.id), { legend: true }));
+      app.appendChild(ms2);
     }
 
     if (city.days) {
@@ -326,12 +400,13 @@
       ds.appendChild(el("h2", "section__title", "🗓️ Day by Day"));
       var tabs = el("div", "daytabs");
       var panels = el("div", "daypanels");
-      var dayEls = [], tabEls = [];
+      var dayEls = [], tabEls = [], dayObjs = [];
 
       function selectDay(i) {
         dayEls.forEach(function (p, j) { p.classList.toggle("is-active", j === i); });
         tabEls.forEach(function (t, j) { t.classList.toggle("is-active", j === i); });
         if (tabEls[i] && tabEls[i].scrollIntoView) tabEls[i].scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+        if (dayObjs[i]) { if (dayMapLabel) dayMapLabel.textContent = dayObjs[i].date + (dayObjs[i].area ? " · " + dayObjs[i].area : ""); showDayOnMap(dayObjs[i]); }
         try { localStorage.setItem("jp-day-" + city.id, String(i)); } catch (e) {}
       }
 
@@ -341,6 +416,7 @@
           tabs.appendChild(bchip); return;
         }
         var idx = dayEls.length;
+        dayObjs.push(d);
         var tab = el("button", "daytab"); tab.type = "button"; tab.textContent = d.date;
         tab.addEventListener("click", function () { selectDay(idx); });
         tabs.appendChild(tab); tabEls.push(tab);
@@ -402,7 +478,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=8");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=9");
   }
 
   function switchRow(label, order, labels, current, storeKey) {

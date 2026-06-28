@@ -47,6 +47,7 @@ a { color: inherit; }
 .section { padding: clamp(1.6rem,4vw,2.6rem) 0 0; }
 .section__title { font-family: var(--disp); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: clamp(0.95rem,2.2vw,1.25rem); margin: 0 0 1.1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 0.5rem; }
 .section__title::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); border-radius: 2px; }
+.section__sub { font-family: var(--ticket-mono); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.01em; color: var(--ink-soft); text-transform: none; }
 
 /* BOOK AHEAD — realistic tear-off tickets (paper stock + perforated stub) */
 .ticket-grid { display: grid; gap: 1.15rem; grid-template-columns: repeat(auto-fill, minmax(min(100%,340px),1fr)); }
