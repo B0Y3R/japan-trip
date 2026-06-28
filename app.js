@@ -78,8 +78,8 @@
   function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 44); }
   function doneIdFor(cityId, date, name) { return cityId + "|" + slug(date) + "|" + slug(name); }
   function dayProgress(dayEl) {
-    var total = dayEl.querySelectorAll(".card[data-done-id]").length;
-    var done = dayEl.querySelectorAll(".card.is-done").length;
+    var total = dayEl.querySelectorAll("[data-done-id]").length;
+    var done = dayEl.querySelectorAll("[data-done-id].is-done").length;
     var chip = dayEl.querySelector(".day__progress");
     if (!chip) return;
     chip.textContent = done + " / " + total + " done";
@@ -186,6 +186,35 @@
   }
 
   function cardsGrid(list) { var g = el("div", "cards"); list.forEach(function (c) { g.appendChild(card(c)); }); return g; }
+
+  // Compact list row for day-by-day itinerary items.
+  function listItem(c, doneId) {
+    var href = c.url || mapsSearch(c.query || c.name);
+    var a = el("a", "ditem"); a.href = href; a.target = "_blank"; a.rel = "noopener";
+    if (doneId) {
+      a.setAttribute("data-done-id", doneId);
+      if (DONE[doneId]) a.className = "ditem is-done";
+      var btn = el("button", "ditem__check", "✓"); btn.type = "button"; btn.setAttribute("aria-label", "Mark done");
+      btn.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var on = !a.classList.contains("is-done");
+        a.classList.toggle("is-done", on);
+        if (on) DONE[doneId] = 1; else delete DONE[doneId];
+        saveDone();
+        var day = a.closest ? a.closest(".day") : null; if (day) dayProgress(day);
+      });
+      a.appendChild(btn);
+    }
+    var body = el("div", "ditem__body");
+    var line = el("div", "ditem__line");
+    line.appendChild(el("span", "ditem__name", esc(c.name)));
+    if (c.tags && c.tags.length) c.tags.forEach(function (t) { line.appendChild(el("span", "ditem__tag", esc(t))); });
+    body.appendChild(line);
+    if (c.blurb) body.appendChild(el("div", "ditem__blurb", esc(c.blurb)));
+    a.appendChild(body);
+    a.appendChild(el("span", "ditem__go", "↗"));
+    return a;
+  }
 
   function footer() {
     var f = el("footer", "footer");
@@ -314,9 +343,9 @@
           if (!items.length) return;
           var grp = el("div", "day__group");
           grp.appendChild(el("div", "day__grouptitle", g.title + " · " + items.length));
-          var grid = el("div", "cards");
-          items.forEach(function (c) { grid.appendChild(card(c, doneIdFor(city.id, d.date, c.name))); });
-          grp.appendChild(grid);
+          var list = el("div", "ditems");
+          items.forEach(function (c) { list.appendChild(listItem(c, doneIdFor(city.id, d.date, c.name))); });
+          grp.appendChild(list);
           grouped.appendChild(grp);
         });
         blk.appendChild(grouped);
@@ -353,7 +382,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=5");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=6");
   }
 
   function switchRow(label, order, labels, current, storeKey) {
