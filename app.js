@@ -333,9 +333,37 @@
     });
     ba.appendChild(baList); app.appendChild(ba); baUpdate();
 
+    // logistics — its own section, below Book Ahead
+    var logi = cityById("logistics");
+    if (logi) {
+      var lsec = el("section", "section reveal");
+      lsec.appendChild(el("h2", "section__title", "🧳 Logistics"));
+      var la = el("a", "logi-card"); la.href = "logistics.html"; la.style.setProperty("--accent", accentOf("logistics"));
+      var lb = el("div", "logi-card__body");
+      lb.appendChild(el("div", "logi-card__title", "Trains · eSIM · Yen · Visit Japan Web · Apps"));
+      lb.appendChild(el("div", "logi-card__sub", esc(logi.blurb)));
+      la.appendChild(lb);
+      la.appendChild(el("span", "logi-card__go", "Open →"));
+      lsec.appendChild(la); app.appendChild(lsec);
+    }
+
+    // the legs — Tokyo / Kyoto / Hakone in one row
+    var cs = el("section", "section reveal");
+    cs.appendChild(el("h2", "section__title", "📖 The Legs"));
+    var grid = el("div", "city-grid city-grid--legs");
+    TRIP.cities.filter(function (c) { return !c.info; }).forEach(function (c) {
+      var a = el("a", "city-card"); a.href = c.id + ".html"; a.style.setProperty("--accent", accentOf(c.id));
+      a.appendChild(el("div", "city-card__flag", c.flag));
+      a.appendChild(el("div", "city-card__name", esc(c.name)));
+      a.appendChild(el("div", "city-card__meta", esc(c.dates) + (c.nights ? " · " + c.nights + (c.nights === 1 ? " night" : " nights") : "")));
+      a.appendChild(el("div", "city-card__go", "Open →"));
+      grid.appendChild(a);
+    });
+    cs.appendChild(grid); app.appendChild(cs);
+
     // map
     var ms = el("section", "section reveal");
-    ms.appendChild(el("h2", "section__title", "🗺️ The Map"));
+    ms.appendChild(el("h2", "section__title", "🗺️ Every Stop"));
     var stops = ["tokyo", "kyoto", "hakone"].map(function (id) {
       var co = (window.COORDS || {})["city_" + id] || {}; var c = cityById(id);
       return { name: c.name, lat: co.lat, lng: co.lng, cityId: id, q: c.name };
@@ -343,7 +371,7 @@
     ms.appendChild(mapBlock(stops, ACCENT_DEFAULT, { legend: true, linkToCity: true }));
     app.appendChild(ms);
 
-    // timeline
+    // day by day (timeline)
     var tl = el("section", "section reveal");
     tl.appendChild(el("h2", "section__title", "📅 Day by Day"));
     var box = el("div", "timeline");
@@ -356,22 +384,6 @@
       box.appendChild(r);
     });
     tl.appendChild(box); app.appendChild(tl);
-
-    // city grid
-    var cs = el("section", "section reveal");
-    cs.appendChild(el("h2", "section__title", "📖 The Legs"));
-    var grid = el("div", "city-grid");
-    TRIP.cities.forEach(function (c) {
-      var a = el("a", "city-card"); a.href = c.id + ".html"; a.style.setProperty("--accent", accentOf(c.id));
-      a.appendChild(el("div", "city-card__flag", c.flag));
-      var jp = el("div", "city-card__jp", esc(c.jp || "")); jp.style.viewTransitionName = "k-" + c.id; a.appendChild(jp);
-      a.appendChild(el("div", "city-card__name", esc(c.name)));
-      a.appendChild(el("div", "city-card__meta", esc(c.dates) + (c.nights ? " · " + c.nights + (c.nights === 1 ? " night" : " nights") : "")));
-      a.appendChild(el("div", "city-card__blurb", esc(c.blurb)));
-      a.appendChild(el("div", "city-card__go", "Open →"));
-      grid.appendChild(a);
-    });
-    cs.appendChild(grid); app.appendChild(cs);
     app.appendChild(footer());
   }
 
@@ -487,7 +499,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=10");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=11");
   }
 
   function switchRow(label, order, labels, current, storeKey) {

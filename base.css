@@ -119,6 +119,21 @@ a { color: inherit; }
 .city-card__blurb { font-size: 0.88rem; line-height: 1.45; color: var(--ink-soft); flex: 1; }
 .city-card__go { font-family: var(--disp); font-weight: 700; font-size: 0.8rem; color: var(--ink); }
 
+/* Legs row — Tokyo/Kyoto/Hakone in one horizontal row, no hover motion, no kanji */
+.city-grid--legs { grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+.city-grid--legs .city-card { min-height: 0; padding: 1rem 0.9rem; border: 1px solid transparent; box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 9%, transparent); transition: border-color 0.12s ease; }
+.city-grid--legs .city-card:hover { transform: none; overflow: hidden; background: var(--card); box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 9%, transparent); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.city-grid--legs .city-card__flag { font-size: 1.7rem; }
+.city-grid--legs .city-card__name { font-size: clamp(1rem, 3.4vw, 1.35rem); }
+.city-grid--legs .city-card__meta { font-size: 0.68rem; }
+
+/* Logistics banner card */
+.logi-card { display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1rem 1.2rem; transition: border-color 0.12s ease; }
+.logi-card:hover { border-color: var(--accent); }
+.logi-card__title { font-family: var(--disp); font-weight: 700; font-size: 1.02rem; }
+.logi-card__sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.2rem; line-height: 1.4; }
+.logi-card__go { flex: none; font-family: var(--ticket-mono); font-weight: 700; font-size: 0.82rem; color: var(--accent); }
+
 /* DAYS — one day at a time, selected from the tab strip */
 .daytabs { display: flex; gap: 0.45rem; overflow-x: auto; padding: 0.1rem 0.1rem 0.7rem; margin-bottom: 1.1rem; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
 .daytab { flex: none; font-family: var(--disp); font-weight: 700; font-size: 0.82rem; padding: 0.45rem 0.85rem; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink-soft); cursor: pointer; white-space: nowrap; transition: background 0.12s, color 0.12s, border-color 0.12s; }
