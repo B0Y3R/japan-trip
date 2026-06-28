@@ -324,12 +324,27 @@
     if (city.days) {
       var ds = el("section", "section reveal");
       ds.appendChild(el("h2", "section__title", "🗓️ Day by Day"));
+      var tabs = el("div", "daytabs");
+      var panels = el("div", "daypanels");
+      var dayEls = [], tabEls = [];
+
+      function selectDay(i) {
+        dayEls.forEach(function (p, j) { p.classList.toggle("is-active", j === i); });
+        tabEls.forEach(function (t, j) { t.classList.toggle("is-active", j === i); });
+        if (tabEls[i] && tabEls[i].scrollIntoView) tabEls[i].scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+        try { localStorage.setItem("jp-day-" + city.id, String(i)); } catch (e) {}
+      }
+
       city.days.forEach(function (d) {
         if (d.bridge) {
-          var br = el("a", "bridge"); br.href = d.bridge.to + ".html";
-          br.appendChild(el("span", "bridge__text", esc(d.bridge.text)));
-          ds.appendChild(br); return;
+          var bchip = el("a", "daytab daytab--bridge", esc(d.bridge.text)); bchip.href = d.bridge.to + ".html";
+          tabs.appendChild(bchip); return;
         }
+        var idx = dayEls.length;
+        var tab = el("button", "daytab"); tab.type = "button"; tab.textContent = d.date;
+        tab.addEventListener("click", function () { selectDay(idx); });
+        tabs.appendChild(tab); tabEls.push(tab);
+
         var blk = el("div", "day");
         var head = el("div", "day__head");
         head.appendChild(el("span", "day__date", esc(d.date)));
@@ -350,10 +365,14 @@
           grouped.appendChild(grp);
         });
         blk.appendChild(grouped);
-        ds.appendChild(blk);
+        panels.appendChild(blk); dayEls.push(blk);
         dayProgress(blk);
       });
-      app.appendChild(ds);
+
+      ds.appendChild(tabs); ds.appendChild(panels); app.appendChild(ds);
+      var start = 0;
+      try { var s = parseInt(localStorage.getItem("jp-day-" + city.id), 10); if (!isNaN(s) && s >= 0 && s < dayEls.length) start = s; } catch (e) {}
+      if (dayEls.length) selectDay(start);
     }
 
     (city.sections || []).forEach(function (sec) {
@@ -383,7 +402,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=7");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=8");
   }
 
   function switchRow(label, order, labels, current, storeKey) {
