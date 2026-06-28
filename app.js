@@ -300,29 +300,38 @@
     hero.appendChild(el("p", "hero__summary", esc(TRIP.summary)));
     app.appendChild(hero);
 
-    // book ahead — tear-off tickets
+    // book ahead — scannable checklist
     var ba = el("section", "section reveal");
-    ba.appendChild(el("h2", "section__title", "🎫 Book Ahead"));
-    var bag = el("div", "ticket-grid");
-    TRIP.bookAhead.forEach(function (b, i) {
-      var num = ("0" + (i + 1)).slice(-2);
-      var t = el("div", "ticket ticket--" + b.level);
-      var main = el("div", "ticket__main");
-      var head = el("div", "ticket__head");
-      head.appendChild(el("span", "ticket__class", LEVEL[b.level] || ""));
-      head.appendChild(el("span", "ticket__sub", "PRIORITY · 優先"));
-      main.appendChild(head);
-      main.appendChild(el("div", "ticket__title", esc(b.name)));
-      main.appendChild(el("div", "ticket__note", esc(b.note)));
-      main.appendChild(el("div", "ticket__barcode"));
-      main.appendChild(el("div", "ticket__code", "JP–26–" + ("00" + (i + 1)).slice(-3) + "  ·  NRT"));
-      var stub = el("div", "ticket__stub");
-      stub.appendChild(el("div", "ticket__admit", "ADMIT ONE"));
-      stub.appendChild(el("div", "ticket__no", "NO." + num));
-      t.appendChild(main); t.appendChild(stub);
-      bag.appendChild(t);
+    var baTitle = el("h2", "section__title", "🎫 Book Ahead · ");
+    var baChip = el("span", "section__sub", ""); baTitle.appendChild(baChip);
+    ba.appendChild(baTitle);
+    var baList = el("div", "ditems");
+    function baUpdate() {
+      var t = baList.querySelectorAll("[data-done-id]").length;
+      var dn = baList.querySelectorAll("[data-done-id].is-done").length;
+      baChip.textContent = dn + " / " + t + " booked";
+    }
+    TRIP.bookAhead.forEach(function (b) {
+      var id = "book|" + slug(b.name);
+      var row = el("div", "ditem ditem--task" + (DONE[id] ? " is-done" : ""));
+      row.setAttribute("data-done-id", id);
+      row.appendChild(el("button", "ditem__check", "✓"));
+      var body = el("div", "ditem__body");
+      var line = el("div", "ditem__line");
+      line.appendChild(el("span", "ditem__name", esc(b.name)));
+      line.appendChild(el("span", "ditem__tag ditem__tag--" + b.level, LEVEL[b.level] || ""));
+      body.appendChild(line);
+      if (b.note) body.appendChild(el("div", "ditem__blurb", esc(b.note)));
+      row.appendChild(body);
+      row.addEventListener("click", function () {
+        var on = !row.classList.contains("is-done");
+        row.classList.toggle("is-done", on);
+        if (on) DONE[id] = 1; else delete DONE[id];
+        saveDone(); baUpdate();
+      });
+      baList.appendChild(row);
     });
-    ba.appendChild(bag); app.appendChild(ba);
+    ba.appendChild(baList); app.appendChild(ba); baUpdate();
 
     // map
     var ms = el("section", "section reveal");
@@ -478,7 +487,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=9");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=10");
   }
 
   function switchRow(label, order, labels, current, storeKey) {

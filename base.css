@@ -167,6 +167,11 @@ a { color: inherit; }
 .ditem__go { flex: none; align-self: center; color: var(--ink-soft); font-family: var(--ticket-mono); font-size: 0.85rem; }
 .ditem.is-done { opacity: 0.5; }
 .ditem.is-done .ditem__name { text-decoration: line-through; }
+/* book-ahead task rows (not links) */
+.ditem--task { cursor: pointer; }
+.ditem__tag--now { color: #fff; background: var(--c-now, var(--accent)); }
+.ditem__tag--soon { color: #fff; background: var(--c-soon, var(--accent)); }
+.ditem__tag--before { color: #fff; background: var(--c-before, var(--accent)); }
 .bridge { display: block; text-decoration: none; margin: 0.4rem 0 1.4rem; padding: 0.8rem 1rem; border: 1px dashed var(--accent); border-radius: var(--radius); background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); font-family: var(--disp); font-weight: 700; letter-spacing: 0.04em; transition: background 0.15s; }
 .bridge:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
 
