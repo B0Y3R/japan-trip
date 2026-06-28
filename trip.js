@@ -149,31 +149,14 @@ window.TRIP = {
           { kind: "sight", name: "Tokyo Tower at sunset", blurb: "The classic red-and-white icon — go up around dusk for day-to-night views.", url: "https://www.tokyotower.co.jp/en/" },
           { kind: "eat", name: "Dinner: Bird Land / Kagari", blurb: "Michelin yakitori (Bird Land) or simple, great Kagari ramen; or graze the Mitsukoshi depachika.", tags: ["dinner"], query: "Kagari ramen Ginza" },
           { kind: "bar", name: "Bar High Five (Ginza)", blurb: "Hidetsugu Ueno's no-menu temple of the classic cocktail. Closed Wed/Sun → Thu works. Reserve.", tags: ["★ bar"], query: "Bar High Five Ginza" },
+          { kind: "bar", name: "Planetarium Bar (Ginza)", blurb: "Cocktails under a projected starfield. Your pick.", tags: ["★ pick"], query: "Planetarium Bar Ginza Tokyo" },
+          { kind: "bar", name: "Anomaly (Nihonbashi)", blurb: "'Near-future concept' cocktail bar in Nihonbashi (4F). Your pick — bar time from 6pm, no res needed.", tags: ["★ pick"], url: "https://anomalytokyo.com/en/" },
         ] },
         { date: "Fri 12/4", area: "Departure · Narita ~3p", note: "Last konbini haul + final depachika souvenirs (Ginza Mitsukoshi or Tokyo Station's Daimaru). You land Haneda but LEAVE from Narita — allow 90+ min (N'EX ~80 min). Moving by ~2:30–3p for the 6:15p to Vancouver.", cards: [
           { kind: "shop", name: "Depachika souvenirs", blurb: "Ginza Mitsukoshi or Tokyo Station's Daimaru food hall for the last gifts.", query: "Daimaru Tokyo Station depachika" },
         ] },
       ],
       sections: [
-        { title: "Stay", icon: "🏨", cards: [
-          { kind: "stay", name: "sequence MIYASHITA PARK (Shibuya)", blurb: "Design hotel atop Miyashita Park with a buzzy rooftop bar. Best location-to-style ratio.", tags: ["★ pick", "~$185–280"], url: "https://www.sequencehotels.com/miyashita-park/eng/" },
-          { kind: "stay", name: "TRUNK (HOTEL) Cat Street", blurb: "Stylish boutique literally on Cat Street, great bar scene. Splurge end.", tags: ["~$310–490"], url: "https://catstreet.trunk-hotel.com/" },
-          { kind: "stay", name: "Hotel Koe Tokyo (Shibuya)", blurb: "Design-forward above a bakery, 2 min from the Crossing. Big rooms, great value.", tags: ["value", "~$175–250"], url: "https://www.booking.com/searchresults.html?ss=Hotel+koe+Tokyo+Shibuya&checkin=2026-11-20&checkout=2026-11-25&group_adults=2&no_rooms=1" },
-          { kind: "stay", name: "Mustard Hotel Shimokitazawa", blurb: "Small design hotel in the heart of Shimokita, craft-beer ground floor. Budget-boutique pick.", tags: ["~$125–175"], url: "https://mustardhotel.com/shimokitazawa/" },
-          { kind: "stay", name: "Airbnb — Tokyo #1 (11/20–25)", blurb: "Live search, your dates + 2 guests preset. Filter to Shibuya / Ebisu / Setagaya.", tags: ["airbnb"], url: "https://www.airbnb.com/s/Tokyo--Japan/homes?checkin=2026-11-20&checkout=2026-11-25&adults=2&min_bedrooms=1" },
-          { kind: "stay", name: "Airbnb — Tokyo #2 (11/27–12/04)", blurb: "Keep this through the Hakone night and just take an overnight bag.", tags: ["airbnb"], url: "https://www.airbnb.com/s/Tokyo--Japan/homes?checkin=2026-11-27&checkout=2026-12-04&adults=2&min_bedrooms=1" },
-        ] },
-        { title: "Bars & nightlife", icon: "🍸", cards: [
-          { kind: "bar", name: "The SG Club (Shibuya)", blurb: "World's 50 Best — banana old-fashioned. Closed Mon.", url: "https://sg-management.jp/" },
-          { kind: "bar", name: "Bar Benfiddich (Shinjuku)", blurb: "Top-20 in the world, farm-to-glass alchemy. Closed Sun/Mon → Tue 12/1.", query: "Bar Benfiddich Shinjuku" },
-          { kind: "bar", name: "Bar High Five (Ginza)", blurb: "Legendary no-menu classics bar. Closed Wed/Sun.", query: "Bar High Five Ginza" },
-          { kind: "bar", name: "Bar Trench / Bar Martha (Ebisu)", blurb: "Intimate cocktails / vinyl-and-whisky.", query: "Bar Trench Ebisu" },
-          { kind: "bar", name: "Shinjuku Golden Gai", blurb: "Alley of 200+ micro-bars — pick a friendly door.", query: "Shinjuku Golden Gai" },
-          { kind: "bar", name: "Planetarium Bar", blurb: "Your pick — cocktails under a projected starfield.", query: "Planetarium Bar Ginza Tokyo" },
-          { kind: "bar", name: "Anomaly", blurb: "Your pick — saved spot.", url: "https://share.google/P8JdRpzoRX3FEDMBe" },
-          { kind: "bar", name: "Muscle Girls Bar (Ikebukuro)", blurb: "Sat 11/28 — book on Klook. Pole shows + flexing + all-you-can-drink. Closed Tue.", tags: ["★ Sat 11/28"], url: "https://www.klook.com/en-US/activity/168642-muscle-women-bar-strong-women-and-high-energy-interactions/" },
-          { kind: "bar", name: "Hoppy Street (Asakusa)", blurb: "Cheap daytime drinking alley.", query: "Hoppy Street Asakusa" },
-        ] },
         { title: "Shopping (the full set)", icon: "🛍️", cards: [
           { kind: "shop", name: "Harajuku / Shibuya (Sat)", blurb: "Vivienne Westwood (LaForet 1F), Closet Child, LaForet, Kensscratch, OAO (appt). Nearby: BERBERJIN, RAGTAG, Kindal.", query: "Harajuku vintage shopping" },
           { kind: "shop", name: "Shinjuku / Nakano (Mon)", blurb: "BEAMS JAPAN flagship, The Four Eyed (Kabukicho). Nearby: Disk Union, Isetan, Mandarake + Nakano watch dealers.", query: "BEAMS JAPAN Shinjuku" },
@@ -211,6 +194,9 @@ window.TRIP = {
           { kind: "sight", name: "Fushimi Inari Taisha", blurb: "The endless vermilion torii. Open 24h — arrive late afternoon and climb past the crowds as light goes gold.", tags: ["★ free"], url: "https://inari.jp/en/" },
           { kind: "sight", name: "Pontocho + Kamo River", blurb: "Lantern-lit alley one block off the river (indoor dining in Nov). Dinner at a Pontocho izakaya.", query: "Pontocho Alley Kyoto" },
           { kind: "sight", name: "Gion (evening)", blurb: "Stroll Hanamikoji and Shirakawa — stick to main streets (Kyoto fines tourists in private alleys).", query: "Gion Kyoto" },
+          { kind: "bar", name: "Bee's Knees", blurb: "Hidden, consistently rated Kyoto's best cocktail bar — downtown.", tags: ["★ cocktails"], query: "Bees Knees bar Kyoto" },
+          { kind: "bar", name: "L'Escamoteur", blurb: "Theatrical, candle-lit French-run cocktail den near Shijo.", query: "L'Escamoteur Kyoto" },
+          { kind: "bar", name: "Sake bar Yoramu", blurb: "Tiny, expert-led sake flights for the obsessive — central.", tags: ["sake"], query: "Yoramu sake Kyoto" },
         ] },
         { date: "Thu 11/26", area: "E-bike · Higashiyama · Kamo sunset", cards: [
           { kind: "activity", name: "Kyoto e-bike tour", blurb: "Great for the spread-out sights — many run through Arashiyama or a temple loop. Book ahead.", tags: ["~¥10,000"], query: "Kyoto ebike tour" },
@@ -225,19 +211,7 @@ window.TRIP = {
           { kind: "transit", name: "Shinkansen Kyoto → Tokyo", blurb: "Book the early train (reservation opens Oct 27). ~2h15 to Tokyo.", tags: ["SmartEX"], query: "Kyoto Station" },
         ] },
       ],
-      sections: [
-        { title: "Stay", icon: "🏨", cards: [
-          { kind: "stay", name: "Nol Kyoto Sanjo", blurb: "Machiya-inspired boutique downtown with a courtyard + great little bar, steps from Pontocho. The sweet spot.", tags: ["★ pick", "~$175–250"], url: "https://www.nolhotels.com/kyoto-sanjo/en/" },
-          { kind: "stay", name: "Hotel Seiryu Kyoto Kiyomizu", blurb: "Converted schoolhouse in Higashiyama with a rooftop bar over the Kiyomizu pagoda. Atmospheric splurge.", tags: ["~$370–555"], url: "https://www.seiryukiyomizu.com/en" },
-          { kind: "stay", name: "Kyoto Granbell Hotel (Gion)", blurb: "Sleek, small onsen-style bath, by the Kamo River and Pontocho. Reliable mid-range.", tags: ["~$155–235"], url: "https://en.granbellhotel.jp/kyoto/" },
-          { kind: "stay", name: "Airbnb — machiya (11/25–27)", blurb: "Kyoto's signature stay is a restored machiya townhouse. Live search, dates preset.", tags: ["airbnb"], url: "https://www.airbnb.com/s/Kyoto--Japan/homes?checkin=2026-11-25&checkout=2026-11-27&adults=2&min_bedrooms=1" },
-        ] },
-        { title: "Bars", icon: "🍸", cards: [
-          { kind: "bar", name: "Bee's Knees", blurb: "Hidden, consistently rated Kyoto's best cocktail bar.", query: "Bees Knees bar Kyoto" },
-          { kind: "bar", name: "L'Escamoteur", blurb: "Theatrical, candle-lit French-run cocktail den near Shijo.", query: "L'Escamoteur Kyoto" },
-          { kind: "bar", name: "Sake bar Yoramu", blurb: "Tiny, expert-led sake flights for the obsessive.", query: "Yoramu sake Kyoto" },
-        ] },
-      ],
+      sections: [],
     },
 
     // ===================================================== HAKONE
