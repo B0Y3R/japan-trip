@@ -1,0 +1,3 @@
+# config.js holds the referrer-restricted Maps key — committed so GitHub Pages can use it.
+.DS_Store
+node_modules/
