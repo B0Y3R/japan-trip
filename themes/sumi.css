@@ -1,0 +1,16 @@
+/* THEME: Sumi-e — ink & washi (light, refined) */
+@import url("https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap");
+:root {
+  --bg: #f4efe3; --bg-2: #efe8d8; --card: #faf6ec; --card-2: #efe7d6;
+  --ink: #1f1b16; --ink-soft: #6b6357; --line: #d8cdb6; --accent: #c4382b;
+  --disp: "Zen Old Mincho", serif; --body: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --radius: 4px;
+  --shadow: 0 10px 28px -20px rgba(31,27,22,0.55); --glow: none;
+  --c-now: #c4382b; --c-soon: #3f6f6a; --c-before: #8a7b3a;
+}
+/* faint washi grain */
+body::before { content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.28; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E"); }
+.hero__title { font-weight: 900; letter-spacing: 0.02em; }
+.hero__jp { -webkit-text-stroke: 0; color: color-mix(in srgb, var(--accent) 12%, transparent); }
+.section__title { border-bottom-width: 2px; }
+.topnav__home { letter-spacing: 0.14em; }

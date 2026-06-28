@@ -1,0 +1,15 @@
+/* THEME: Ai — Japanese indigo + paper (clean, minimal) */
+@import url("https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap");
+:root {
+  --bg: #f2f0e9; --bg-2: #e9e6db; --card: #fbfaf5; --card-2: #e7e3d6;
+  --ink: #16202e; --ink-soft: #5d6675; --line: #cdd2c6; --accent: #20407a;
+  --disp: "Zen Kaku Gothic New", system-ui, sans-serif; --body: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --radius: 6px;
+  --shadow: 0 12px 30px -20px rgba(22,32,46,0.45); --glow: none;
+  --c-now: #b03a2e; --c-soon: #20407a; --c-before: #2f6f5e;
+}
+body { background-image: radial-gradient(60vw 50vw at 100% -8%, rgba(32,64,122,0.10), transparent 60%); }
+.hero__title { font-weight: 900; letter-spacing: -0.01em; }
+.hero__jp { -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 26%, transparent); }
+.hero__kicker { color: #b03a2e; } /* vermilion seal accent */
+.section__title { letter-spacing: 0.1em; }

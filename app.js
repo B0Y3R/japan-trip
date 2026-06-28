@@ -8,14 +8,15 @@
   var KEY = window.GOOGLE_MAPS_API_KEY;
   var HAS_KEY = !!KEY && KEY !== "YOUR_MAPS_JS_API_KEY_HERE";
 
-  var KIND_EMOJI = {
-    sight: "⛩", eat: "🍜", coffee: "☕", bar: "🍸", stay: "🏨",
-    transit: "🚄", activity: "🎟", shop: "🛍",
+  // kind -> [big background kanji, small category label]
+  var KIND = {
+    eat: ["食", "Eat"], bar: ["酒", "Drink"], drink: ["酒", "Drink"], coffee: ["珈", "Coffee"],
+    stay: ["宿", "Stay"], sight: ["観", "See"], transit: ["駅", "Transit"],
+    activity: ["遊", "Do"], shop: ["買", "Shop"],
   };
   var LEVEL = { now: "BOOK NOW", soon: "BOOK SOON", before: "BEFORE YOU FLY" };
 
-  // dark Google Maps style — neon-night vibe
-  var MAP_STYLE = [
+  var DARK_MAP_STYLE = [
     { elementType: "geometry", stylers: [{ color: "#10121a" }] },
     { elementType: "labels.text.stroke", stylers: [{ color: "#10121a" }] },
     { elementType: "labels.text.fill", stylers: [{ color: "#8a8fa3" }] },
@@ -23,11 +24,45 @@
     { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#16231c" }] },
     { featureType: "road", elementType: "geometry", stylers: [{ color: "#222533" }] },
     { featureType: "road", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
-    { featureType: "road.highline", elementType: "geometry", stylers: [{ color: "#2a2e40" }] },
     { featureType: "transit", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
     { featureType: "water", elementType: "geometry", stylers: [{ color: "#0a0c12" }] },
     { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#2a2e40" }] },
   ];
+  var LIGHT_MAP_STYLE = [
+    { elementType: "geometry", stylers: [{ color: "#f1ece0" }] },
+    { elementType: "labels.text.fill", stylers: [{ color: "#7a7263" }] },
+    { elementType: "labels.text.stroke", stylers: [{ color: "#f6f1e6" }] },
+    { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
+    { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#d8e2c4" }] },
+    { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] },
+    { featureType: "road", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+    { featureType: "transit", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+    { featureType: "water", elementType: "geometry", stylers: [{ color: "#bcd4dd" }] },
+  ];
+
+  // Theme registry: map mode + per-city accent palette. CSS lives in /themes.
+  var THEMES = {
+    sumi:   { label: "Sumi-e", map: "light", def: "#c4382b", accents: { tokyo: "#c4382b", kyoto: "#4f6f54", hakone: "#7a5a44", logistics: "#6b6357" } },
+    koyo:   { label: "Kōyō",   map: "light", def: "#b3402a", accents: { tokyo: "#b3402a", kyoto: "#c8741f", hakone: "#9a6b2e", logistics: "#6b7a3a" } },
+    indigo: { label: "Ai",     map: "light", def: "#20407a", accents: { tokyo: "#20407a", kyoto: "#2f6f5e", hakone: "#5b4a8f", logistics: "#7a6a3a" } },
+    neon:   { label: "Neon",   map: "dark",  def: "#ff2d95", accents: { tokyo: "#ff2d95", kyoto: "#19e3ff", hakone: "#b96bff", logistics: "#9dff3c" } },
+  };
+  var THEME_ORDER = ["sumi", "koyo", "indigo", "neon"];
+  var DEFAULT_THEME = "sumi";
+  var THEME = (function () {
+    try { var t = localStorage.getItem("jp-theme"); if (t && THEMES[t]) return t; } catch (e) {}
+    return DEFAULT_THEME;
+  })();
+  var CARD_STYLES = { burst: "Burst", tilt: "Tilt", minimal: "Minimal" };
+  var CARD_ORDER = ["burst", "tilt", "minimal"];
+  var CARDS = (function () {
+    try { var c = localStorage.getItem("jp-cards"); if (c && CARD_STYLES[c]) return c; } catch (e) {}
+    return "burst";
+  })();
+  var ACCENTS = THEMES[THEME].accents;
+  var ACCENT_DEFAULT = THEMES[THEME].def;
+  var MAP_STYLE = THEMES[THEME].map === "dark" ? DARK_MAP_STYLE : LIGHT_MAP_STYLE;
+  function accentOf(id) { return ACCENTS[id] || ACCENT_DEFAULT; }
 
   var MAPS_TO_INIT = [];
 
@@ -96,18 +131,18 @@
     home.href = "index.html"; nav.appendChild(home);
     TRIP.cities.forEach(function (c) {
       var a = el("a", "topnav__chip" + (c.id === currentId ? " is-active" : ""), c.flag + " " + esc(c.name));
-      a.href = c.id + ".html"; a.style.setProperty("--accent", c.accent); nav.appendChild(a);
+      a.href = c.id + ".html"; a.style.setProperty("--accent", accentOf(c.id)); nav.appendChild(a);
     });
     return nav;
   }
 
   function card(c) {
+    var k = KIND[c.kind] || ["・", ""];
     var href = c.url || mapsSearch(c.query || c.name);
     var a = el("a", "card"); a.href = href; a.target = "_blank"; a.rel = "noopener";
-    var top = el("div", "card__top");
-    top.appendChild(el("div", "card__kind", KIND_EMOJI[c.kind] || "📍"));
-    top.appendChild(el("div", "card__name", esc(c.name)));
-    a.appendChild(top);
+    a.appendChild(el("span", "card__kanji", k[0]));
+    if (k[1]) a.appendChild(el("div", "card__cat", k[1]));
+    a.appendChild(el("div", "card__name", esc(c.name)));
     if (c.blurb) a.appendChild(el("div", "card__blurb", esc(c.blurb)));
     if (c.tags && c.tags.length) { var t = el("div", "card__tags"); c.tags.forEach(function (x) { t.appendChild(el("span", "card__tag", esc(x))); }); a.appendChild(t); }
     var go = c.url ? (/airbnb/.test(c.url) ? "Airbnb" : /booking\.com/.test(c.url) ? "Booking" : /klook/.test(c.url) ? "Klook" : "Open link") : "Maps";
@@ -135,16 +170,27 @@
     hero.appendChild(el("p", "hero__summary", esc(TRIP.summary)));
     app.appendChild(hero);
 
-    // book ahead
+    // book ahead — tear-off tickets
     var ba = el("section", "section reveal");
-    ba.appendChild(el("h2", "section__title", "⚡ Book Ahead"));
-    var bag = el("div", "ba-grid");
-    TRIP.bookAhead.forEach(function (b) {
-      var d = el("div", "ba ba--" + b.level);
-      d.appendChild(el("div", "ba__level", LEVEL[b.level] || ""));
-      d.appendChild(el("div", "ba__name", esc(b.name)));
-      d.appendChild(el("div", "ba__note", esc(b.note)));
-      bag.appendChild(d);
+    ba.appendChild(el("h2", "section__title", "🎫 Book Ahead"));
+    var bag = el("div", "ticket-grid");
+    TRIP.bookAhead.forEach(function (b, i) {
+      var num = ("0" + (i + 1)).slice(-2);
+      var t = el("div", "ticket ticket--" + b.level);
+      var main = el("div", "ticket__main");
+      var head = el("div", "ticket__head");
+      head.appendChild(el("span", "ticket__class", LEVEL[b.level] || ""));
+      head.appendChild(el("span", "ticket__sub", "PRIORITY · 優先"));
+      main.appendChild(head);
+      main.appendChild(el("div", "ticket__title", esc(b.name)));
+      main.appendChild(el("div", "ticket__note", esc(b.note)));
+      main.appendChild(el("div", "ticket__barcode"));
+      main.appendChild(el("div", "ticket__code", "JP–26–" + ("00" + (i + 1)).slice(-3) + "  ·  NRT"));
+      var stub = el("div", "ticket__stub");
+      stub.appendChild(el("div", "ticket__admit", "ADMIT ONE"));
+      stub.appendChild(el("div", "ticket__no", "NO." + num));
+      t.appendChild(main); t.appendChild(stub);
+      bag.appendChild(t);
     });
     ba.appendChild(bag); app.appendChild(ba);
 
@@ -155,7 +201,7 @@
       var co = (window.COORDS || {})["city_" + id] || {}; var c = cityById(id);
       return { name: c.name, lat: co.lat, lng: co.lng, cityId: id, q: c.name };
     });
-    ms.appendChild(mapBlock(stops, "#ff2d95", { legend: true, linkToCity: true }));
+    ms.appendChild(mapBlock(stops, ACCENT_DEFAULT, { legend: true, linkToCity: true }));
     app.appendChild(ms);
 
     // timeline
@@ -164,7 +210,7 @@
     var box = el("div", "timeline");
     TRIP.timeline.forEach(function (t) {
       var ci = cityById(t.city); var r = el("a", "tl-row"); r.href = t.city + ".html";
-      if (ci) r.style.setProperty("--accent", ci.accent);
+      if (ci) r.style.setProperty("--accent", accentOf(ci.id));
       r.appendChild(el("span", "tl-date", esc(t.date)));
       r.appendChild(el("span", "tl-text", esc(t.text)));
       r.appendChild(el("span", "tl-flag", ci ? ci.flag : ""));
@@ -177,9 +223,9 @@
     cs.appendChild(el("h2", "section__title", "📖 The Legs"));
     var grid = el("div", "city-grid");
     TRIP.cities.forEach(function (c) {
-      var a = el("a", "city-card"); a.href = c.id + ".html"; a.style.setProperty("--accent", c.accent);
+      var a = el("a", "city-card"); a.href = c.id + ".html"; a.style.setProperty("--accent", accentOf(c.id));
       a.appendChild(el("div", "city-card__flag", c.flag));
-      a.appendChild(el("div", "city-card__jp", esc(c.jp || "")));
+      var jp = el("div", "city-card__jp", esc(c.jp || "")); jp.style.viewTransitionName = "k-" + c.id; a.appendChild(jp);
       a.appendChild(el("div", "city-card__name", esc(c.name)));
       a.appendChild(el("div", "city-card__meta", esc(c.dates) + (c.nights ? " · " + c.nights + (c.nights === 1 ? " night" : " nights") : "")));
       a.appendChild(el("div", "city-card__blurb", esc(c.blurb)));
@@ -193,10 +239,10 @@
   // ---- City -------------------------------------------------
   function buildCity(app, city) {
     app.appendChild(topnav(city.id));
-    app.style.setProperty("--accent", city.accent);
+    app.style.setProperty("--accent", accentOf(city.id));
     var hero = el("header", "hero hero--city reveal");
-    hero.style.setProperty("--accent", city.accent);
-    hero.appendChild(el("div", "hero__jp", esc(city.jp || "")));
+    hero.style.setProperty("--accent", accentOf(city.id));
+    var hjp = el("div", "hero__jp", esc(city.jp || "")); hjp.style.viewTransitionName = "k-" + city.id; hero.appendChild(hjp);
     hero.appendChild(el("p", "hero__kicker", city.flag + " " + esc(city.dates)));
     hero.appendChild(el("h1", "hero__title", esc(city.name)));
     hero.appendChild(el("p", "hero__summary", esc(city.blurb)));
@@ -206,7 +252,7 @@
     if (city.map) {
       var ms = el("section", "section reveal");
       ms.appendChild(el("h2", "section__title", "🗺️ The Map"));
-      ms.appendChild(mapBlock(city.map.stops, city.accent, { legend: true }));
+      ms.appendChild(mapBlock(city.map.stops, accentOf(city.id), { legend: true }));
       app.appendChild(ms);
     }
 
@@ -254,13 +300,59 @@
     document.querySelectorAll(".reveal").forEach(function (n) { io.observe(n); });
   }
 
+  function applyTheme() {
+    document.documentElement.dataset.theme = THEME;
+    document.documentElement.dataset.cards = CARDS;
+    var link = document.getElementById("theme-css");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=4");
+  }
+
+  function switchRow(label, order, labels, current, storeKey) {
+    var row = el("div", "theme-switch__row");
+    row.appendChild(el("span", "theme-switch__label", label));
+    order.forEach(function (k) {
+      var b = el("button", "theme-switch__btn" + (k === current ? " is-active" : ""), labels[k]);
+      b.type = "button";
+      b.addEventListener("click", function () {
+        if (k === current) return;
+        try { localStorage.setItem(storeKey, k); } catch (e) {}
+        location.reload();
+      });
+      row.appendChild(b);
+    });
+    return row;
+  }
+
+  // pointer-reactive cards: glow follows cursor, tilt rotates toward it
+  function enhanceCards() {
+    if (CARDS !== "tilt") return;
+    document.querySelectorAll(".card").forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        var r = card.getBoundingClientRect();
+        var rx = ((e.clientY - r.top) / r.height - 0.5) * -9;
+        var ry = ((e.clientX - r.left) / r.width - 0.5) * 9;
+        card.style.transform = "perspective(720px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-6px)";
+      });
+      card.addEventListener("pointerleave", function () { card.style.transform = ""; });
+    });
+  }
+
+  function buildSwitcher() {
+    var bar = el("div", "theme-switch");
+    var themeLabels = {}; THEME_ORDER.forEach(function (t) { themeLabels[t] = THEMES[t].label; });
+    bar.appendChild(switchRow("Theme", THEME_ORDER, themeLabels, THEME, "jp-theme"));
+    bar.appendChild(switchRow("Cards", CARD_ORDER, CARD_STYLES, CARDS, "jp-cards"));
+    document.body.appendChild(bar);
+  }
+
   function init() {
+    applyTheme();
     var app = document.getElementById("app");
     if (document.body.dataset.page === "city") {
       var c = cityById(document.body.dataset.city);
       if (c) { document.title = c.name + " · Japan 2026"; buildCity(app, c); }
     } else { document.title = "Japan 2026 · Nov 19 – Dec 4"; buildIndex(app); }
-    wireReveals(); loadMaps();
+    enhanceCards(); wireReveals(); loadMaps();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
