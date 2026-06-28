@@ -376,7 +376,7 @@
     tl.appendChild(el("h2", "section__title", "📅 Day by Day"));
     var box = el("div", "timeline");
     TRIP.timeline.forEach(function (t) {
-      var ci = cityById(t.city); var r = el("a", "tl-row"); r.href = t.city + ".html";
+      var ci = cityById(t.city); var r = el("a", "tl-row"); r.href = t.city + ".html#" + encodeURIComponent(t.date);
       if (ci) r.style.setProperty("--accent", accentOf(ci.id));
       r.appendChild(el("span", "tl-date", esc(t.date)));
       r.appendChild(el("span", "tl-text", esc(t.text)));
@@ -467,8 +467,11 @@
       });
 
       ds.appendChild(tabs); ds.appendChild(panels); app.appendChild(ds);
-      var start = 0;
-      try { var s = parseInt(localStorage.getItem("jp-day-" + city.id), 10); if (!isNaN(s) && s >= 0 && s < dayEls.length) start = s; } catch (e) {}
+      var start = -1;
+      var hash = ""; try { hash = decodeURIComponent((location.hash || "").replace(/^#/, "")); } catch (e) { hash = (location.hash || "").replace(/^#/, ""); }
+      if (hash) for (var hi = 0; hi < dayObjs.length; hi++) { if (dayObjs[hi].date === hash) { start = hi; break; } }
+      if (start < 0) { try { var s = parseInt(localStorage.getItem("jp-day-" + city.id), 10); if (!isNaN(s) && s >= 0 && s < dayEls.length) start = s; } catch (e) {} }
+      if (start < 0) start = 0;
       if (dayEls.length) selectDay(start);
     }
 
@@ -499,7 +502,7 @@
     document.documentElement.dataset.theme = THEME;
     document.documentElement.dataset.cards = CARDS;
     var link = document.getElementById("theme-css");
-    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=12");
+    if (link) link.setAttribute("href", "themes/" + THEME + ".css?v=13");
   }
 
   function switchRow(label, order, labels, current, storeKey) {
