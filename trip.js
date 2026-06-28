@@ -70,6 +70,7 @@ window.TRIP = {
           { kind: "activity", name: "Ki-Re-I ID Photo Booth (Kitasando)", blurb: "Your retro ID-photo-booth stop near Kitasando.", query: "Ki-Re-I photo booth Kitasando Tokyo" },
           { kind: "sight", name: "Cat Street", blurb: "The walkable shopping spine between Harajuku and Shibuya.", query: "Cat Street Harajuku Tokyo" },
           { kind: "sight", name: "Hachiko + Miyashita Park", blurb: "The famous statue, then the rooftop park-on-a-mall with a rooftop bar.", query: "Hachiko Statue Shibuya" },
+          { kind: "activity", name: "Shibuya Sky", blurb: "Open-air rooftop over the Crossing — go for sunset. Book ahead.", tags: ["~¥2,500"], url: "https://www.shibuya-scramble-square.com/sky/" },
           { kind: "shop", name: "Vivienne Westwood Red Label", blurb: "LaForet Harajuku 1F, 1-11-6 Jingumae.", tags: ["your pick"], query: "Vivienne Westwood LaForet Harajuku" },
           { kind: "shop", name: "Closet Child (Harajuku)", blurb: "Used/secondhand brand pieces — strong for archive Vivienne. 1-7-6 Jingumae.", tags: ["vintage"], query: "Closet Child Harajuku" },
           { kind: "shop", name: "LaForet Harajuku", blurb: "The fashion building itself — floors of indie & designer labels.", query: "LaForet Harajuku" },
@@ -107,7 +108,10 @@ window.TRIP = {
           { kind: "bar", name: "Bar Trench / Bar Martha (Ebisu)", blurb: "Dark intimate cocktails / vinyl & whisky next door.", tags: ["cocktails"], query: "Bar Trench Ebisu" },
         ] },
         { bridge: { to: "kyoto", text: "Wed 11/25 – Fri 11/27 · Kyoto leg →" } },
-        { date: "Fri 11/27", area: "Back to Tokyo (out with JP)", note: "Easy re-entry — drop bags, low-key Shimokita or Shibuya evening; let JP pick the bar.", cards: [
+        { date: "Fri 11/27", area: "Back to Tokyo (out with JP)", note: "Easy re-entry — drop bags. Optional activities below if you have energy, then a low-key Shimokita/Shibuya evening; let JP pick the bar.", cards: [
+          { kind: "activity", name: "teamLab Planets (Toyosu)", blurb: "Immersive digital-art + water rooms on the bay. Timed tickets, book online. Open late.", tags: ["~¥3,800", "optional"], url: "https://www.teamlab.art/e/planets/" },
+          { kind: "activity", name: "Tokyo Bay Bike Tour", blurb: "Saved Airbnb experience — bayside ride. Reserve a few weeks out.", tags: ["optional"], url: "https://www.airbnb.com/experiences/6763380?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
+          { kind: "activity", name: "'Weird Tokyo' Bike Tour", blurb: "Saved Airbnb experience.", tags: ["optional"], url: "https://www.airbnb.com/experiences/92154?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
           { kind: "eat", name: "Low-key Shimokita izakaya / Shibuya yakitori", blurb: "Keep dinner relaxed after the train back.", tags: ["dinner"], query: "Shimokitazawa izakaya" },
           { kind: "bar", name: "Bar Benfiddich", blurb: "Open Fri (Tue–Sat) if you want a heavy hitter. Reserve via their Instagram drop.", tags: ["★ bar"], query: "Bar Benfiddich Shinjuku" },
         ] },
@@ -156,21 +160,7 @@ window.TRIP = {
           { kind: "shop", name: "Depachika souvenirs", blurb: "Ginza Mitsukoshi or Tokyo Station's Daimaru food hall for the last gifts.", query: "Daimaru Tokyo Station depachika" },
         ] },
       ],
-      sections: [
-        { title: "Shopping (the full set)", icon: "🛍️", cards: [
-          { kind: "shop", name: "Harajuku / Shibuya (Sat)", blurb: "Vivienne Westwood (LaForet 1F), Closet Child, LaForet, Kensscratch, OAO (appt). Nearby: BERBERJIN, RAGTAG, Kindal.", query: "Harajuku vintage shopping" },
-          { kind: "shop", name: "Shinjuku / Nakano (Mon)", blurb: "BEAMS JAPAN flagship, The Four Eyed (Kabukicho). Nearby: Disk Union, Isetan, Mandarake + Nakano watch dealers.", query: "BEAMS JAPAN Shinjuku" },
-          { kind: "shop", name: "Daikanyama / Nakameguro (Tue)", blurb: "Daikanyama T-Site. Nearby: Okura, Bonjour Records, A.P.C.", query: "Daikanyama T-Site" },
-          { kind: "shop", name: "Ueno / Asakusa (Sun)", blurb: "Marukichiya Mizutani (vintage watches). Nearby: Ameyoko dealers, Kappabashi Kitchen Town.", query: "Ameyoko Ueno" },
-          { kind: "shop", name: "Ginza (Thu)", blurb: "Vin-Time, Watch CTI. Nearby: Quark, Commit, Komehyo, Ginza Six, Dover Street Market.", query: "Ginza watch shops" },
-        ] },
-        { title: "Activities", icon: "🎟️", cards: [
-          { kind: "activity", name: "teamLab Planets (Toyosu)", blurb: "Immersive digital-art + water rooms. Timed tickets, book online.", tags: ["~¥3,800"], url: "https://www.teamlab.art/e/planets/" },
-          { kind: "activity", name: "Shibuya Sky", blurb: "Open-air rooftop over the Crossing. Sunset slots sell out — book ahead.", tags: ["~¥2,500"], url: "https://www.shibuya-scramble-square.com/sky/" },
-          { kind: "activity", name: "Tokyo Bay Bike Tour", blurb: "Your saved Airbnb experience — reserve a few weeks out.", url: "https://www.airbnb.com/experiences/6763380?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
-          { kind: "activity", name: "'Weird Tokyo' Bike Tour", blurb: "Your saved Airbnb experience.", url: "https://www.airbnb.com/experiences/92154?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
-        ] },
-      ],
+      sections: [],
     },
 
     // ===================================================== KYOTO
