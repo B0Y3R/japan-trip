@@ -37,6 +37,45 @@ window.TRIP = {
         { title: "Sasha", items: ["Parents", "Siblings", "Coworkers", "Friends"] },
       ],
     },
+    watches: {
+      key: "watches", title: "Watch Shopping", jp: "時計", flag: "⌚",
+      kicker: "Where to actually buy — by day", accent: "#7d8fd1",
+      blurb: "Every shop from our planning where you can walk in and buy, grouped by trip day with hours and closed days. Try-on-only salons, museums, and sold-out ateliers are at the bottom so you know what's intentionally left off.",
+      sections: [
+        { title: "Tokyo · Sat 11/21 — Omotesando / Aoyama", cards: [
+          { kind: "shop", name: "HºM'S\" WatchStore (Omotesando)", blurb: "Curated microbrands and indies (Baltic, Corniche, Nivada Grenchen) plus Japan's Fukushima Watch. Jingumae 4-4-9 1F, 2 min from Omotesando Station.", tags: ["11:00a–7:30p"], url: "https://www.hms-watchstore.com/" },
+          { kind: "shop", name: "Ishida Omotesando", blurb: "High-end independents: Ressence, Speake Marin, Moritz Grossmann, Glashütte Original, plus Grand Seiko. Basement at Jingumae 4-25-15 B1F (stairs by the police box off the Jingumae crossing).", tags: ["Sat 11:00a–7:00p", "weekdays from noon"], url: "https://ishida-watch.com/i/shop/ishida-omotesando/" },
+          { kind: "shop", name: "Dazzling (Aoyama)", blurb: "Tiny antique shop for rare European vintage. Small with irregular hours — check before trekking over.", query: "Dazzling vintage watches Aoyama Tokyo" },
+        ] },
+        { title: "Tokyo · Tue 12/1 — Asakusa hop", cards: [
+          { kind: "shop", name: "Kiwame Tokyo Asakusa Salon & Workshop", blurb: "Small Tokyo microbrand you can buy from on the spot, no reservation, and watch the assembly in the adjoining workshop. 2F, 4-12-7 Kotobuki, Taito, 3 min from Asakusa Stn Exit A1.", tags: ["Mon–Fri 10:30a–5:30p", "closed weekends"], url: "https://kiwametokyo.com/en/pages/salon" },
+        ] },
+        { title: "Tokyo · Thu 12/3 — Ginza", cards: [
+          { kind: "shop", name: "Grand Seiko Flagship Boutique Ginza", blurb: "The big one — largest GS boutique in Japan, boutique-exclusive models, an archive display, and a 2F lounge. 6-6-5 Ginza (Namiki Street).", tags: ["Mon–Sat 11a–8p", "Sun/hol 11a–7p"], query: "Grand Seiko Flagship Boutique Ginza" },
+          { kind: "shop", name: "Citizen Flagship Store Tokyo", blurb: "Optional, mass-market, in Ginza.", query: "Citizen Flagship Store Tokyo Ginza" },
+        ] },
+        { title: "Kyoto · Wed 11/25", cards: [
+          { kind: "shop", name: "Kuoe Kyoto", blurb: "The Kyoto microbrand: hand-assembled vintage-style pieces, every watch out to handle, and buying in person in yen runs ~20–30% under the online USD price. 224 Eirakucho, Nakagyo (down a staircase in the Teramachi arcade).", tags: ["11:00a–5:30p", "closed Tue"], url: "https://www.kuoe-en.com/" },
+          { kind: "shop", name: "BIG MOON Kyoto", blurb: "The secondhand hunt: 300+ pieces, one of Kyoto's best, including used Kurono Tokyo and Minase. Karasuma/Shijo, by Daimaru and Nishiki.", tags: ["10:30a–7:00p", "closed Thu", "tax-free"], url: "https://bigmoon-kyoto.com/" },
+        ] },
+        { title: "Kyoto · Thu 11/26", cards: [
+          { kind: "shop", name: "Oomiya Kyoto", blurb: "Mechanical-watch dealer on Shijo-dori by Daimaru: Grand Seiko, Tudor, IWC, Panerai, Blancpain, Girard-Perregaux, with their own coffee poured while you browse.", tags: ["11:00a–7:00p", "closed Wed"], url: "https://www.jw-oomiya.co.jp/pages/kyoto" },
+        ] },
+        { title: "Yokohama · Wed 12/2 (optional)", cards: [
+          { kind: "shop", name: "Komehyo Yokohama", blurb: "The best local hunt: secondhand Rolex / Omega / Grand Seiko, tax-free, near Yokohama Station.", query: "Komehyo Yokohama watches" },
+        ] },
+        { title: "Suwa day trip (optional, alt for Wed 12/2)", cards: [
+          { kind: "sight", name: "Gishodo Suwako Watch & Clock Museum (Shimosuwa)", blurb: "A museum with a ground-floor watch shop and a build-your-own-watch workshop. ¥800 entry; watchmaking ¥2,160–8,000, book ~2 weeks ahead. Roughly 2h45 from Shinjuku on the Limited Express Azusa.", url: "https://www.unique-nagano.com/detail.php?l=en&id=280" },
+        ] },
+        { title: "Discussed, but not walk-in-and-buy", cards: [
+          { kind: "shop", name: "Kurono Tokyo Aoyama Salon", blurb: "Try-on and experience only; releases sell out online, and only a handful of boutique-only 'salon editions' are ever buyable in person. Still a great visit on Sat 11/21.", query: "Kurono Tokyo Aoyama Salon" },
+          { kind: "shop", name: "Naoya Hida (Tsukiji)", blurb: "Friday viewing by reservation, but everything is sold out and orders open just once a year.", query: "Naoya Hida Tsukiji" },
+          { kind: "shop", name: "Kikuchi Nakagawa · Otsuka Lotec · Masahiro Kikuno · Hajime Asaoka", blurb: "Private/appointment ateliers, mostly sold out or paused, contact-via-site only." },
+          { kind: "shop", name: "KNIS Kyoto", blurb: "Online-only microbrand, no walk-in shop." },
+          { kind: "shop", name: "Seiko Museum Ginza · Matsumoto Timepiece Museum", blurb: "Museums, not shops." },
+        ] },
+      ],
+    },
   },
 
   timeline: [

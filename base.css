@@ -135,8 +135,7 @@ a { color: inherit; }
 .logi-card__go { flex: none; font-family: var(--ticket-mono); font-weight: 700; font-size: 0.82rem; color: var(--accent); }
 
 /* BANNER CARDS — Konbini / Gift, whole card is the tap target */
-.banners { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
-@media (max-width: 620px) { .banners { grid-template-columns: 1fr; } }
+.banners { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%,240px),1fr)); }
 .banner { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; gap: 0.85rem; min-height: 104px; text-decoration: none; color: var(--ink); border-radius: 16px; padding: 1.35rem 1.5rem; background: color-mix(in srgb, var(--accent) 13%, var(--card)); border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line)); transition: border-color 0.14s ease, background 0.14s ease; }
 .banner:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 20%, var(--card)); }
 .banner > *:not(.banner__jp) { position: relative; z-index: 1; }

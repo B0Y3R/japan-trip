@@ -377,7 +377,7 @@
     if (TRIP.pages) {
       var bsec = el("section", "section reveal");
       var bgrid = el("div", "banners");
-      [TRIP.pages.konbini, TRIP.pages.gift].forEach(function (page) {
+      [TRIP.pages.konbini, TRIP.pages.gift, TRIP.pages.watches].forEach(function (page) {
         if (!page) return;
         var a = el("a", "banner"); a.href = page.key + ".html";
         a.style.setProperty("--accent", page.accent || ACCENT_DEFAULT);
@@ -578,7 +578,15 @@
     hero.appendChild(el("div", "hero__jp", esc(page.jp || "")));
     if (page.kicker || page.flag) hero.appendChild(el("p", "hero__kicker", (page.flag ? page.flag + " " : "") + esc(page.kicker || "")));
     hero.appendChild(el("h1", "hero__title", esc(page.title)));
+    if (page.blurb) hero.appendChild(el("p", "hero__summary", esc(page.blurb)));
     app.appendChild(hero);
+
+    (page.sections || []).forEach(function (sec) {
+      var s = el("section", "section reveal");
+      s.appendChild(el("h2", "section__title", esc(sec.title)));
+      s.appendChild(cardsGrid(sec.cards));
+      app.appendChild(s);
+    });
 
     (page.groups || []).forEach(function (grp) {
       var sec = el("section", "section reveal");
