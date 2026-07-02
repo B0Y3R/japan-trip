@@ -134,6 +134,16 @@ a { color: inherit; }
 .logi-card__sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.2rem; line-height: 1.4; }
 .logi-card__go { flex: none; font-family: var(--ticket-mono); font-weight: 700; font-size: 0.82rem; color: var(--accent); }
 
+/* BANNER CARDS — Konbini / Gift, whole card is the tap target */
+.banners { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+@media (max-width: 620px) { .banners { grid-template-columns: 1fr; } }
+.banner { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; gap: 0.85rem; min-height: 104px; text-decoration: none; color: var(--ink); border-radius: 16px; padding: 1.35rem 1.5rem; background: color-mix(in srgb, var(--accent) 13%, var(--card)); border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line)); transition: border-color 0.14s ease, background 0.14s ease; }
+.banner:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 20%, var(--card)); }
+.banner > *:not(.banner__jp) { position: relative; z-index: 1; }
+.banner__jp { position: absolute; right: -0.06em; bottom: -0.34em; z-index: 0; font-family: var(--body); font-weight: 900; line-height: 0.7; font-size: clamp(3.4rem, 9vw, 5.2rem); color: color-mix(in srgb, var(--accent) 17%, transparent); pointer-events: none; user-select: none; }
+.banner__flag { flex: none; font-size: 2rem; line-height: 1; }
+.banner__title { font-family: var(--disp); font-weight: 700; font-size: clamp(1.25rem, 3.2vw, 1.65rem); letter-spacing: 0.01em; line-height: 1.1; }
+
 /* DAYS — one day at a time, selected from the tab strip */
 .daytabs { display: flex; gap: 0.45rem; overflow-x: auto; padding: 0.1rem 0.1rem 0.7rem; margin-bottom: 1.1rem; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
 .daytab { flex: none; font-family: var(--disp); font-weight: 700; font-size: 0.82rem; padding: 0.45rem 0.85rem; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink-soft); cursor: pointer; white-space: nowrap; transition: background 0.12s, color 0.12s, border-color 0.12s; }
@@ -187,6 +197,7 @@ a { color: inherit; }
 .ditem__tag--now { color: #fff; background: var(--c-now, var(--accent)); }
 .ditem__tag--soon { color: #fff; background: var(--c-soon, var(--accent)); }
 .ditem__tag--before { color: #fff; background: var(--c-before, var(--accent)); }
+.ditem__tag--booked { color: #062b12; background: #3ddc84; }
 .bridge { display: block; text-decoration: none; margin: 0.4rem 0 1.4rem; padding: 0.8rem 1rem; border: 1px dashed var(--accent); border-radius: var(--radius); background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); font-family: var(--disp); font-weight: 700; letter-spacing: 0.04em; transition: background 0.15s; }
 .bridge:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
 
@@ -226,6 +237,19 @@ a { color: inherit; }
 .card__tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .card__tag { font-family: var(--disp); font-size: 0.66rem; font-weight: 600; padding: 0.18rem 0.5rem; border-radius: 999px; background: color-mix(in srgb, var(--accent) 13%, transparent); color: color-mix(in srgb, var(--ink) 78%, var(--accent)); }
 .card__go { font-family: var(--disp); font-weight: 700; font-size: 0.74rem; color: var(--accent); margin-top: 0.15rem; }
+
+/* LODGING — booked-stay detail block, no card enclosure */
+.lodging { display: flex; flex-direction: column; gap: 0.9rem; max-width: 58ch; }
+.lodging__name { font-family: var(--disp); font-weight: 700; font-size: clamp(1.5rem, 4.5vw, 2.1rem); line-height: 1.08; color: var(--ink); }
+.lodging__desc { margin: 0; font-size: 0.96rem; line-height: 1.55; color: var(--ink-soft); }
+.lodging__rows { display: grid; grid-template-columns: max-content 1fr; gap: 0.55rem 1.4rem; margin: 0.15rem 0 0; }
+.lodging__label { font-family: var(--ticket-mono); font-weight: 500; font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding-top: 0.14rem; }
+.lodging__val { margin: 0; font-size: 0.94rem; line-height: 1.45; color: var(--ink); }
+.lodging__inline { color: var(--ink); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+.lodging__inline:hover { color: var(--accent); border-color: var(--accent); }
+.lodging__arrow { font-family: var(--disp); font-weight: 600; font-size: 0.72rem; color: var(--accent); white-space: nowrap; border-bottom: 0; }
+.lodging__link { align-self: flex-start; margin-top: 0.5rem; font-family: var(--disp); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.02em; text-decoration: none; color: var(--bg); background: var(--accent); padding: 0.55rem 1.1rem; border-radius: 999px; transition: background 0.15s; }
+.lodging__link:hover { background: color-mix(in srgb, var(--ink) 20%, var(--accent)); }
 
 /* TILT — adds 3D rotation toward the cursor (app.js sets transform) */
 [data-cards="tilt"] .card { transform-style: preserve-3d; will-change: transform; }

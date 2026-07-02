@@ -14,7 +14,7 @@
     stay: ["宿", "Stay"], sight: ["観", "See"], transit: ["駅", "Transit"],
     activity: ["遊", "Do"], shop: ["買", "Shop"],
   };
-  var LEVEL = { now: "BOOK NOW", soon: "BOOK SOON", before: "BEFORE YOU FLY" };
+  var LEVEL = { now: "BOOK NOW", soon: "BOOK SOON", before: "BEFORE YOU FLY", booked: "BOOKED ✓" };
 
   var DARK_MAP_STYLE = [
     { elementType: "geometry", stylers: [{ color: "#10121a" }] },
@@ -254,6 +254,32 @@
 
   function cardsGrid(list) { var g = el("div", "cards"); list.forEach(function (c) { g.appendChild(card(c)); }); return g; }
 
+  function lodgingBlock(l) {
+    var b = el("div", "lodging");
+    b.appendChild(el("div", "lodging__name", esc(l.name)));
+    if (l.desc) b.appendChild(el("p", "lodging__desc", esc(l.desc)));
+    var rows = el("dl", "lodging__rows");
+    function row(label, valHtml) {
+      rows.appendChild(el("dt", "lodging__label", esc(label)));
+      rows.appendChild(el("dd", "lodging__val", valHtml));
+    }
+    if (l.address) {
+      var addr = esc(l.address);
+      if (l.mapUrl) addr = '<a class="lodging__inline" href="' + esc(l.mapUrl) + '" target="_blank" rel="noopener">' + addr + ' <span class="lodging__arrow">Map ↗</span></a>';
+      row("Address", addr);
+    }
+    if (l.checkin) row("Check-in", esc(l.checkin));
+    if (l.checkout) row("Check-out", esc(l.checkout));
+    if (l.phone) row("Phone", '<a class="lodging__inline" href="tel:' + esc(l.phone.replace(/[^0-9+]/g, "")) + '">' + esc(l.phone) + '</a>');
+    b.appendChild(rows);
+    if (l.url) {
+      var link = el("a", "lodging__link", "Open ryokan site ↗");
+      link.href = l.url; link.target = "_blank"; link.rel = "noopener";
+      b.appendChild(link);
+    }
+    return b;
+  }
+
   // Compact list row for day-by-day itinerary items.
   function listItem(c, doneId) {
     var href = c.url || mapsSearch(c.query || c.name);
@@ -298,11 +324,12 @@
     hero.appendChild(el("h1", "hero__title", esc(TRIP.title)));
     hero.appendChild(el("p", "hero__kicker", esc(TRIP.subtitle)));
     hero.appendChild(el("p", "hero__dates", esc(TRIP.dateRange)));
+    if (TRIP.currency) hero.appendChild(el("p", "hero__cur", "💱 " + esc(TRIP.currency)));
     app.appendChild(hero);
 
     // book ahead — scannable checklist
     var ba = el("section", "section reveal");
-    var baTitle = el("h2", "section__title", "🎫 Book Ahead · ");
+    var baTitle = el("h2", "section__title", "Book Ahead · ");
     var baChip = el("span", "section__sub", ""); baTitle.appendChild(baChip);
     ba.appendChild(baTitle);
     var baList = el("div", "ditems");
@@ -337,43 +364,47 @@
     var logi = cityById("logistics");
     if (logi) {
       var lsec = el("section", "section reveal");
-      lsec.appendChild(el("h2", "section__title", "🧳 Logistics"));
+      lsec.appendChild(el("h2", "section__title", "Logistics"));
       var la = el("a", "logi-card"); la.href = "logistics.html"; la.style.setProperty("--accent", accentOf("logistics"));
       var lb = el("div", "logi-card__body");
       lb.appendChild(el("div", "logi-card__title", "Trains · eSIM · Yen · Visit Japan Web · Apps"));
       lb.appendChild(el("div", "logi-card__sub", esc(logi.blurb)));
       la.appendChild(lb);
-      la.appendChild(el("span", "logi-card__go", "Open →"));
       lsec.appendChild(la); app.appendChild(lsec);
+    }
+
+    // konbini hacks + gift checklist — banner cards linking to their pages
+    if (TRIP.pages) {
+      var bsec = el("section", "section reveal");
+      var bgrid = el("div", "banners");
+      [TRIP.pages.konbini, TRIP.pages.gift].forEach(function (page) {
+        if (!page) return;
+        var a = el("a", "banner"); a.href = page.key + ".html";
+        a.style.setProperty("--accent", page.accent || ACCENT_DEFAULT);
+        if (page.jp) a.appendChild(el("span", "banner__jp", esc(page.jp)));
+        if (page.flag) a.appendChild(el("span", "banner__flag", page.flag));
+        a.appendChild(el("span", "banner__title", esc(page.title)));
+        bgrid.appendChild(a);
+      });
+      bsec.appendChild(bgrid); app.appendChild(bsec);
     }
 
     // the legs — Tokyo / Kyoto / Hakone in one row
     var cs = el("section", "section reveal");
-    cs.appendChild(el("h2", "section__title", "📖 The Legs"));
+    cs.appendChild(el("h2", "section__title", "The Legs"));
     var grid = el("div", "city-grid city-grid--legs");
     TRIP.cities.filter(function (c) { return !c.info; }).forEach(function (c) {
       var a = el("a", "city-card"); a.href = c.id + ".html"; a.style.setProperty("--accent", accentOf(c.id));
       a.appendChild(el("div", "city-card__flag", c.flag));
       a.appendChild(el("div", "city-card__name", esc(c.name)));
       a.appendChild(el("div", "city-card__meta", esc(c.dates) + (c.nights ? " · " + c.nights + (c.nights === 1 ? " night" : " nights") : "")));
-      a.appendChild(el("div", "city-card__go", "Open →"));
       grid.appendChild(a);
     });
     cs.appendChild(grid); app.appendChild(cs);
 
-    // map
-    var ms = el("section", "section reveal");
-    ms.appendChild(el("h2", "section__title", "🗺️ Every Stop"));
-    var stops = ["tokyo", "kyoto", "hakone"].map(function (id) {
-      var co = (window.COORDS || {})["city_" + id] || {}; var c = cityById(id);
-      return { name: c.name, lat: co.lat, lng: co.lng, cityId: id, q: c.name };
-    });
-    ms.appendChild(mapBlock(stops, ACCENT_DEFAULT, { legend: true, linkToCity: true }));
-    app.appendChild(ms);
-
     // day by day (timeline)
     var tl = el("section", "section reveal");
-    tl.appendChild(el("h2", "section__title", "📅 Day by Day"));
+    tl.appendChild(el("h2", "section__title", "Day by Day"));
     var box = el("div", "timeline");
     TRIP.timeline.forEach(function (t) {
       var ci = cityById(t.city); var r = el("a", "tl-row"); r.href = t.city + ".html#" + encodeURIComponent(t.date);
@@ -396,29 +427,23 @@
     var hjp = el("div", "hero__jp", esc(city.jp || "")); hjp.style.viewTransitionName = "k-" + city.id; hero.appendChild(hjp);
     hero.appendChild(el("p", "hero__kicker", city.flag + " " + esc(city.dates)));
     hero.appendChild(el("h1", "hero__title", esc(city.name)));
-    hero.appendChild(el("p", "hero__summary", esc(city.blurb)));
-    if (city.currency) hero.appendChild(el("p", "hero__cur", "💱 " + esc(city.currency)));
+    if (city.info && city.blurb) hero.appendChild(el("p", "hero__summary", esc(city.blurb)));
     app.appendChild(hero);
 
     var dayMapLabel = null;
     if (city.days) {
       var ms = el("section", "section reveal");
-      var mtitle = el("h2", "section__title", "🗺️ Map · ");
-      dayMapLabel = el("span", "section__sub", ""); mtitle.appendChild(dayMapLabel);
-      ms.appendChild(mtitle);
       var center = (window.COORDS || {})["city_" + city.id];
       ms.appendChild(mapBlock([], accentOf(city.id), { dayMap: true, legend: true, center: center }));
       app.appendChild(ms);
     } else if (city.map) {
       var ms2 = el("section", "section reveal");
-      ms2.appendChild(el("h2", "section__title", "🗺️ The Map"));
       ms2.appendChild(mapBlock(city.map.stops, accentOf(city.id), { legend: true }));
       app.appendChild(ms2);
     }
 
     if (city.days) {
       var ds = el("section", "section reveal");
-      ds.appendChild(el("h2", "section__title", "🗓️ Day by Day"));
       var tabs = el("div", "daytabs");
       var panels = el("div", "daypanels");
       var dayEls = [], tabEls = [], dayObjs = [];
@@ -477,8 +502,8 @@
 
     (city.sections || []).forEach(function (sec) {
       var s = el("section", "section reveal");
-      s.appendChild(el("h2", "section__title", (sec.icon ? sec.icon + " " : "") + esc(sec.title)));
-      s.appendChild(cardsGrid(sec.cards));
+      s.appendChild(el("h2", "section__title", esc(sec.title)));
+      s.appendChild(sec.lodging ? lodgingBlock(sec.lodging) : cardsGrid(sec.cards));
       app.appendChild(s);
     });
 
@@ -488,7 +513,7 @@
     var idx = TRIP.cities.indexOf(city);
     var pn = el("div", "prevnext");
     if (idx > 0) { var p = el("a", "prevnext__a", "← " + TRIP.cities[idx - 1].flag + " " + esc(TRIP.cities[idx - 1].name)); p.href = TRIP.cities[idx - 1].id + ".html"; pn.appendChild(p); } else pn.appendChild(el("span"));
-    if (idx < TRIP.cities.length - 1) { var n = el("a", "prevnext__a prevnext__a--next", esc(TRIP.cities[idx + 1].name) + " " + TRIP.cities[idx + 1].flag + " →"); n.href = TRIP.cities[idx + 1].id + ".html"; pn.appendChild(n); }
+    if (idx < TRIP.cities.length - 1 && !TRIP.cities[idx + 1].info) { var n = el("a", "prevnext__a prevnext__a--next", esc(TRIP.cities[idx + 1].name) + " " + TRIP.cities[idx + 1].flag + " →"); n.href = TRIP.cities[idx + 1].id + ".html"; pn.appendChild(n); }
     app.appendChild(pn);
     app.appendChild(footer());
   }
@@ -543,12 +568,62 @@
     document.body.appendChild(bar);
   }
 
+  // ---- Standalone page (Konbini, Gift) ----------------------
+  function buildPage(app, page) {
+    app.appendChild(topnav(page.key));
+    var accent = page.accent || ACCENT_DEFAULT;
+    app.style.setProperty("--accent", accent);
+    var hero = el("header", "hero hero--city reveal");
+    hero.style.setProperty("--accent", accent);
+    hero.appendChild(el("div", "hero__jp", esc(page.jp || "")));
+    if (page.kicker || page.flag) hero.appendChild(el("p", "hero__kicker", (page.flag ? page.flag + " " : "") + esc(page.kicker || "")));
+    hero.appendChild(el("h1", "hero__title", esc(page.title)));
+    app.appendChild(hero);
+
+    (page.groups || []).forEach(function (grp) {
+      var sec = el("section", "section reveal");
+      var title = el("h2", "section__title", esc(grp.title) + " · ");
+      var chip = el("span", "section__sub", ""); title.appendChild(chip);
+      sec.appendChild(title);
+      var list = el("div", "ditems");
+      function upd() {
+        var t = list.querySelectorAll("[data-done-id]").length;
+        var dn = list.querySelectorAll("[data-done-id].is-done").length;
+        chip.textContent = dn + " / " + t + " done";
+      }
+      (grp.items || []).forEach(function (item) {
+        var id = "chk|" + slug(page.key + "-" + grp.title + "-" + item);
+        var row = el("div", "ditem ditem--task" + (DONE[id] ? " is-done" : ""));
+        row.setAttribute("data-done-id", id);
+        row.appendChild(el("button", "ditem__check", "✓"));
+        var body = el("div", "ditem__body");
+        var line = el("div", "ditem__line");
+        line.appendChild(el("span", "ditem__name", esc(item)));
+        body.appendChild(line);
+        row.appendChild(body);
+        row.addEventListener("click", function () {
+          var on = !row.classList.contains("is-done");
+          row.classList.toggle("is-done", on);
+          if (on) DONE[id] = 1; else delete DONE[id];
+          saveDone(); upd();
+        });
+        list.appendChild(row);
+      });
+      sec.appendChild(list); app.appendChild(sec); upd();
+    });
+
+    app.appendChild(footer());
+  }
+
   function init() {
     applyTheme();
     var app = document.getElementById("app");
     if (document.body.dataset.page === "city") {
       var c = cityById(document.body.dataset.city);
       if (c) { document.title = c.name + " · Japan 2026"; buildCity(app, c); }
+    } else if (document.body.dataset.page === "page") {
+      var pg = (TRIP.pages || {})[document.body.dataset.key];
+      if (pg) { document.title = pg.title + " · Japan 2026"; buildPage(app, pg); }
     } else { document.title = "Japan 2026 · Nov 19 – Dec 4"; buildIndex(app); }
     enhanceCards(); wireReveals(); loadMaps();
   }

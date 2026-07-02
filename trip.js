@@ -11,19 +11,33 @@ window.TRIP = {
   title: "JAPAN ’26",
   subtitle: "Tokyo · Kyoto · Hakone",
   dateRange: "Nov 19 – Dec 4, 2026",
+  currency: "¥ yen · $1 ≈ ¥162",
   summary:
     "James + Sasha · 15 nights · Tokyo as home base with a Kyoto leg and a Hakone onsen night. " +
     "Late November = peak autumn leaves (kōyō), crisp clear days, and the best of the city after dark.",
   notionUrl: "https://app.notion.com/p/38d8319b49c181838efec05155afc495",
 
   bookAhead: [
-    { name: "Hakone ryokan (11/30)", note: "Book NOW — the best onsen ryokan fill 2–3 months out, peak foliage.", level: "now" },
     { name: "Airbnbs ×3", note: "Tokyo #1, Kyoto, Tokyo #2. Fall is high season.", level: "now" },
     { name: "Shinkansen", note: "Reserved seats open exactly 1 month before — set reminders Oct 25 & Oct 27 (SmartEX).", level: "soon" },
     { name: "Muscle Girls Bar", note: "Klook, a few weeks out. Closed Tue → go Sat 11/28.", level: "soon" },
-    { name: "Bar Benfiddich + SG Club", note: "Reservations drop ~monthly. Benfiddich closed Sun/Mon; SG closed Mon.", level: "soon" },
     { name: "Visit Japan Web", note: "Immigration + customs QR, done ≥6h before landing 11/20.", level: "before" },
   ],
+
+  pages: {
+    konbini: {
+      key: "konbini", title: "Konbini Hacks", jp: "コンビニ", flag: "🏪",
+      kicker: "Convenience-store survival", accent: "#3ab7c6",
+    },
+    gift: {
+      key: "gift", title: "Gift Checklist", jp: "土産", flag: "🎁",
+      kicker: "Omiyage — who to buy for", accent: "#e0a33a",
+      groups: [
+        { title: "James", items: ["Parents", "Siblings", "Coworkers", "Friends"] },
+        { title: "Sasha", items: ["Parents", "Siblings", "Coworkers", "Friends"] },
+      ],
+    },
+  },
 
   timeline: [
     { date: "Thu 11/19", text: "Fly NYC → Toronto → Haneda", city: "tokyo" },
@@ -132,7 +146,7 @@ window.TRIP = {
           { kind: "sight", name: "Yanaka Ginza (Yanesen)", blurb: "Old shotengai for menchi-katsu and pre-war Tokyo. Great late-afternoon before Ueno.", query: "Yanaka Ginza" },
         ] },
         { bridge: { to: "hakone", text: "Mon 11/30 · Hakone onsen night →" } },
-        { date: "Tue 12/1", area: "Akihabara · Kagurazaka", note: "(Muscle Girls Bar is closed Tuesdays — it's on 11/28. Tuesday is the perfect Benfiddich night.)", cards: [
+        { date: "Tue 12/1", area: "Akihabara · Kagurazaka", note: "Check out of Yama-no-chaya by 10 AM and Romancecar back to Shinjuku, then into the city. (Muscle Girls Bar is closed Tuesdays — it's on 11/28. Tuesday is the perfect Benfiddich night.)", cards: [
           { kind: "sight", name: "Akihabara", blurb: "Electronics, retro games, gachapon.", query: "Akihabara Tokyo" },
           { kind: "eat", name: "Kanda Matsuya", blurb: "Historic hand-cut soba near Akihabara for a real lunch.", tags: ["lunch"], query: "Kanda Matsuya soba Tokyo" },
           { kind: "sight", name: "Kagurazaka", blurb: "Cobblestone 'little Paris' — hidden lanes, teahouses, French bistros.", query: "Kagurazaka Tokyo" },
@@ -209,28 +223,32 @@ window.TRIP = {
       id: "hakone", flag: "♨️", name: "Hakone", jp: "箱根",
       dates: "Nov 30 (1 night)", nights: 1, accent: "#b96bff",
       currency: "¥ yen · $1 ≈ ¥162",
-      blurb: "The ryokan + onsen splurge. A light loop on the way in — sculpture park, a steaming volcanic valley, a torii in a lake — then check in mid-afternoon and surrender to the bath.",
+      blurb: "The ryokan + onsen splurge. Ease in through Hakone-Yumoto — a stroll and a soba lunch — then check in at Yama-no-chaya (3 PM) and surrender to the bath.",
       map: { stops: [
         S("Hakone Open-Air Museum", "hk_openair"), S("Owakudani", "hk_owakudani"),
         S("Lake Ashi", "hk_ashi"), S("Hakone Shrine", "hk_shrine"),
         S("Hakone-Yumoto Station", "hk_yumoto"), S("Gora", "hk_gora"),
+        S("Yama-no-chaya (ryokan)", "hk_ryokan"),
       ] },
       days: [
-        { date: "Mon 11/30", area: "The loop, then the onsen", note: "One night — light loop in, check in mid-afternoon, do nothing but soak. Forward big bags from Tokyo by takkyubin (~¥2,000/bag) and carry only an overnight bag.", cards: [
-          { kind: "transit", name: "Get there: Odakyu Romancecar", blurb: "Shinjuku → Hakone-Yumoto (~85 min, reserve a seat). Buy a Hakone Free Pass for the loop transport.", tags: ["Free Pass"], url: "https://www.odakyu.jp/english/passes/hakone/" },
-          { kind: "sight", name: "Hakone Open-Air Museum", blurb: "Hillside sculpture park (Henry Moore, a Picasso pavilion) with a hot-spring foot bath. The standout stop.", tags: ["★", "~¥2,000"], url: "https://www.hakone-oam.or.jp/en/" },
-          { kind: "sight", name: "Owakudani", blurb: "Steaming volcanic valley — ride the ropeway up, eat a black egg (adds 7 years), Fuji views on a clear day.", query: "Owakudani Hakone" },
-          { kind: "sight", name: "Lake Ashi + Hakone Shrine torii", blurb: "The 'pirate ship' cruise to the red torii standing in the water. Best Fuji views if skies are clear.", query: "Lake Ashi Hakone" },
+        { date: "Mon 11/30", area: "Yumoto, then the onsen", note: "One night — ease into Hakone-Yumoto, grab lunch, then check in at Yama-no-chaya (3 PM) and do nothing but soak. Forward big bags from Tokyo by takkyubin (~¥2,000/bag) and carry only an overnight bag.", cards: [
+          { kind: "transit", name: "Get there: Odakyu Romancecar", blurb: "Shinjuku → Hakone-Yumoto (~85 min, reserve a seat), then the Hakone Tozan line one stop to Tonosawa for the ryokan (~5 min taxi from Yumoto also works).", tags: ["reserve seat"], url: "https://www.odakyu.jp/english/romancecar/" },
+          { kind: "sight", name: "Walk around Hakone-Yumoto", blurb: "The gateway town right by the station — a strollable main street of onsen-manju stalls, hot-spring foot baths, and souvenir shops. Ease into Hakone before you check in.", tags: ["stroll"], query: "Hakone-Yumoto Station" },
+          { kind: "eat", name: "Lunch: Hatsuhana soba", blurb: "Yumoto institution for handmade jinenjo (mountain-yam) soba — the seiro set is the move. Riverside, a short walk from the station.", tags: ["lunch"], query: "Hatsuhana Soba Hakone Yumoto" },
         ] },
       ],
       sections: [
-        { title: "The ryokan — book NOW", icon: "🏯", cards: [
-          { kind: "stay", name: "Ryokan Hakone Ginyu", blurb: "Clifftop — every room has a private open-air onsen over the gorge. The sunrise soak is the whole experience. Romantic pick.", tags: ["★ romantic", "~$370–555"], url: "https://www.hakoneginyu.co.jp/en/" },
-          { kind: "stay", name: "Gora Kadan", blurb: "Former imperial-family retreat, one of Japan's most celebrated ryokan. Impeccable service. Book a private-onsen room.", tags: ["icon / splurge", "~$555–925"], url: "https://www.gorakadan.com/hakone/?lang=en" },
-          { kind: "stay", name: "Odakyu Hotel Hatsuhana", blurb: "Modern ryokan-hotel with a rooftop infinity onsen + in-room open-air baths, excellent kaiseki. Best value of the three.", tags: ["value", "~$250–370"], url: "https://www.hakone-hotelhatsuhana.jp/en/" },
-        ] },
+        { title: "The Ryokan", icon: "🏯", lodging: {
+          name: "Yama-no-chaya",
+          desc: "Small luxury ryokan in Tonosawa, at the end of a suspension bridge over the Hayakawa gorge — private open-air baths, kaiseki dinner + breakfast.",
+          address: "171 Tonosawa, Hakone-machi, Ashigarashimo-gun, Kanagawa 250-0315",
+          mapUrl: "https://goo.gl/maps/1oNS3qKUMZaypV3F8",
+          checkin: "3:00 PM · Mon 11/30",
+          checkout: "10:00 AM · Tue 12/1",
+          phone: "0460-85-5493",
+          url: "https://luxury-ryokan.com/",
+        } },
       ],
-      tipNote: "Tattoo note: communal baths often restrict tattoos — a room with a private onsen sidesteps it entirely.",
     },
 
     // ===================================================== LOGISTICS
