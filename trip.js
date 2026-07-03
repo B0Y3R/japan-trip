@@ -182,7 +182,7 @@ window.TRIP = {
           { kind: "shop", name: "Marukichiya Mizutani (Ueno)", blurb: "Vintage watches — your pick.", tags: ["watches"], query: "Marukichiya Mizutani Ueno" },
           { kind: "shop", name: "Nearby: Ameyoko · Kappabashi", blurb: "Ameyoko market watch/jewelry dealers; Kappabashi Kitchen Town for knives & plastic food samples.", query: "Ameyoko Ueno" },
           { kind: "eat", name: "Asakusa Imahan", blurb: "Historic sukiyaki/shabu-shabu, a proper old-Tokyo sit-down. (Imahan or Aoi-Marushin > touristy Daikokuya.)", tags: ["lunch"], query: "Asakusa Imahan" },
-          { kind: "eat", name: "Tonpachi-tei (Ueno)", blurb: "Your Ueno pick — an easy bite while working the Ameyoko / Ueno stretch.", tags: ["your pick"], query: "Tonpachi-tei Ueno Tokyo" },
+          { kind: "eat", name: "Tonpachi-tei (Ueno)", blurb: "Your Ueno pick — pork tonkatsu near the Ameyoko / Ueno stretch. Note: a pork specialist, so likely not a Sasha-friendly spot.", tags: ["your pick", "pork-heavy"], query: "Tonpachi-tei Ueno Tokyo" },
           { kind: "bar", name: "Hoppy Street (Asakusa)", blurb: "Daytime-drinking alley of motsu-nikomi and hoppy. Cheap and fun.", tags: ["day drink"], query: "Hoppy Street Asakusa" },
           { kind: "sight", name: "Yanaka Ginza (Yanesen)", blurb: "Old shotengai for menchi-katsu and pre-war Tokyo. Great late-afternoon before Ueno.", query: "Yanaka Ginza" },
         ] },
