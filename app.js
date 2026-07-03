@@ -110,9 +110,19 @@
   var DAY_GROUPS = [
     { title: "Activities", kinds: ["sight", "activity", "transit"] },
     { title: "Shop", kinds: ["shop"] },
-    { title: "Food", kinds: ["eat", "coffee"] },
+    { title: "Food options", kinds: ["eat", "coffee"], meals: ["breakfast", "lunch", "dinner", "coffee"] },
     { title: "Bars", kinds: ["bar", "drink"] },
   ];
+  var MEAL_LABEL = { breakfast: "Breakfast", lunch: "Lunch", dinner: "Dinner", coffee: "Coffee" };
+  // Bucket a food card into a meal subsection. Coffee-kind → coffee; otherwise read the meal from its tags (default dinner).
+  function mealOf(c) {
+    if (c.kind === "coffee") return "coffee";
+    var t = (c.tags || []).join(" ").toLowerCase();
+    if (/breakfast|bakery/.test(t)) return "breakfast";
+    if (/lunch/.test(t)) return "lunch";
+    if (/dinner/.test(t)) return "dinner";
+    return "dinner";
+  }
 
   // ---- Maps -------------------------------------------------
   function renderMap(canvas, stops, accent, link) {
@@ -483,9 +493,24 @@
           if (!items.length) return;
           var grp = el("details", "day__group"); grp.setAttribute("open", "");
           grp.appendChild(el("summary", "day__grouptitle", g.title + ' <span class="day__groupcount">' + items.length + "</span>"));
-          var list = el("div", "ditems");
-          items.forEach(function (c) { list.appendChild(listItem(c, doneIdFor(city.id, d.date, c.name))); });
-          grp.appendChild(list);
+          if (g.meals) {
+            var subs = el("div", "day__subgroups");
+            g.meals.forEach(function (meal) {
+              var mi = items.filter(function (c) { return mealOf(c) === meal; });
+              if (!mi.length) return;
+              var sub = el("div", "day__subgroup");
+              sub.appendChild(el("div", "day__subtitle", MEAL_LABEL[meal] + ' <span class="day__groupcount">' + mi.length + "</span>"));
+              var slist = el("div", "ditems");
+              mi.forEach(function (c) { slist.appendChild(listItem(c, doneIdFor(city.id, d.date, c.name))); });
+              sub.appendChild(slist);
+              subs.appendChild(sub);
+            });
+            grp.appendChild(subs);
+          } else {
+            var list = el("div", "ditems");
+            items.forEach(function (c) { list.appendChild(listItem(c, doneIdFor(city.id, d.date, c.name))); });
+            grp.appendChild(list);
+          }
           grouped.appendChild(grp);
         });
         blk.appendChild(grouped);
