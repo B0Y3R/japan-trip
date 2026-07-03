@@ -152,7 +152,7 @@ window.TRIP = {
           { kind: "eat", name: "Nakano Broadway basement", blurb: "Grab the famous steamed dumplings, then dig the watch & Mandarake floors.", tags: ["lunch"], query: "Nakano Broadway" },
           { kind: "eat", name: "Omoide Yokocho (Memory Lane)", blurb: "Smoky lantern-lit yakitori alley by Shinjuku station. Bounce between counters.", tags: ["dinner"], query: "Omoide Yokocho Shinjuku" },
           { kind: "eat", name: "Oden Bar Su-II (Golden Gai)", blurb: "Tiny oden counter tucked in Golden Gai — simmered daikon, egg, and skewers with a drink. A warm bite before the bar crawl.", tags: ["dinner"], query: "Oden Bar Su-II Golden Gai Shinjuku" },
-          { kind: "bar", name: "Shinjuku Golden Gai", blurb: "200+ tiny themed bars in six alleys, small covers. (SG & Benfiddich closed Mon.)", tags: ["★ bars"], query: "Shinjuku Golden Gai" },
+          { kind: "bar", name: "Shinjuku Golden Gai", blurb: "200+ tiny themed bars in six alleys, small covers. Pick a door that looks welcoming and squeeze in.", tags: ["★ bars"], query: "Shinjuku Golden Gai" },
         ] },
         { date: "Tue 11/24", area: "Nakameguro · Ebisu", cards: [
           { kind: "shop", name: "Daikanyama T-Site (Tsutaya Books)", blurb: "The architectural bookstore complex — magazines, design titles, a café.", tags: ["your pick"], query: "Daikanyama T-Site" },
@@ -168,7 +168,6 @@ window.TRIP = {
           { kind: "activity", name: "Tokyo Bay Bike Tour", blurb: "Saved Airbnb experience — bayside ride. Reserve a few weeks out.", tags: ["optional"], url: "https://www.airbnb.com/experiences/6763380?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
           { kind: "activity", name: "'Weird Tokyo' Bike Tour", blurb: "Saved Airbnb experience.", tags: ["optional"], url: "https://www.airbnb.com/experiences/92154?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
           { kind: "eat", name: "Low-key Shimokita izakaya / Shibuya yakitori", blurb: "Keep dinner relaxed after the train back.", tags: ["dinner"], query: "Shimokitazawa izakaya" },
-          { kind: "bar", name: "Bar Benfiddich", blurb: "Open Fri (Tue–Sat) if you want a heavy hitter. Reserve via their Instagram drop.", tags: ["★ bar"], query: "Bar Benfiddich Shinjuku" },
         ] },
         { date: "Sat 11/28", area: "Kichijoji · Koganei", cards: [
           { kind: "sight", name: "Edo-Tokyo Open Air Architectural Museum", blurb: "Relocated historic buildings (the inspiration for Spirited Away's bathhouse street). Koganei.", tags: ["~¥400"], url: "https://www.tatemonoen.jp/english/" },
@@ -187,12 +186,11 @@ window.TRIP = {
           { kind: "sight", name: "Yanaka Ginza (Yanesen)", blurb: "Old shotengai for menchi-katsu and pre-war Tokyo. Great late-afternoon before Ueno.", query: "Yanaka Ginza" },
         ] },
         { bridge: { to: "hakone", text: "Mon 11/30 · Hakone onsen night →" } },
-        { date: "Tue 12/1", area: "Akihabara · Kagurazaka", note: "Check out of Yama-no-chaya by 10 AM and Romancecar back to Shinjuku, then into the city. (Muscle Girls Bar is closed Tuesdays — it's on 11/28. Tuesday is the perfect Benfiddich night.)", cards: [
+        { date: "Tue 12/1", area: "Akihabara · Kagurazaka", note: "Check out of Yama-no-chaya by 10 AM and Romancecar back to Shinjuku, then into the city. (Muscle Girls Bar is closed Tuesdays — it's on 11/28.)", cards: [
           { kind: "sight", name: "Akihabara", blurb: "Electronics, retro games, gachapon.", query: "Akihabara Tokyo" },
           { kind: "eat", name: "Kanda Matsuya", blurb: "Historic hand-cut soba near Akihabara for a real lunch.", tags: ["lunch"], query: "Kanda Matsuya soba Tokyo" },
           { kind: "sight", name: "Kagurazaka", blurb: "Cobblestone 'little Paris' — hidden lanes, teahouses, French bistros.", query: "Kagurazaka Tokyo" },
           { kind: "eat", name: "Le Bretagne (Kagurazaka)", blurb: "Galettes and cider, or a Kagurazaka izakaya for dinner.", tags: ["dinner"], query: "Le Bretagne Kagurazaka Tokyo" },
-          { kind: "bar", name: "Bar Benfiddich", blurb: "Open Tue — Hiroyasu Kayama grinds herbs at the bar, top-20 in the world. Reserve.", tags: ["★ bar"], query: "Bar Benfiddich Shinjuku" },
         ] },
         { date: "Wed 12/2", area: "Yokohama day trip", cards: [
           { kind: "eat", name: "Yokohama Chinatown", blurb: "Japan's biggest — dim sum and street snacks (Manchinro for a sit-down).", tags: ["lunch"], query: "Yokohama Chinatown" },
