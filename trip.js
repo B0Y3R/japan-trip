@@ -203,6 +203,7 @@ window.TRIP = {
           { kind: "shop", name: "Watch CTI (Ginza)", blurb: "Ginza watch dealer.", tags: ["watches"], query: "Watch CTI Ginza" },
           { kind: "shop", name: "Nearby: Quark · Commit · Komehyo · DSM", blurb: "Vintage Rolex (Quark/Commit), luxury secondhand (Komehyo), Ginza Six & Dover Street Market — all minutes apart.", query: "Quark Ginza watches" },
           { kind: "eat", name: "Tsujihan (Nihonbashi)", blurb: "Legendary kaisendon — seafood over rice finished with sea-bream dashi. Queue 45–60 min, cheap. Steps from the pillow shop.", tags: ["★ lunch"], query: "Tsujihan Nihonbashi" },
+          { kind: "eat", name: "Nanba Sennichimae Kamatake Udon (Marunouchi)", blurb: "Osaka Namba udon institution — this Marunouchi branch by Tokyo Station is a quick, great-value alternate lunch.", tags: ["alt lunch"], query: "Kamatake Udon Marunouchi Tokyo" },
           { kind: "sight", name: "Tokyo Tower at sunset", blurb: "The classic red-and-white icon — go up around dusk for day-to-night views.", url: "https://www.tokyotower.co.jp/en/" },
           { kind: "eat", name: "Dinner: Bird Land / Kagari", blurb: "Michelin yakitori (Bird Land) or simple, great Kagari ramen; or graze the Mitsukoshi depachika.", tags: ["dinner"], query: "Kagari ramen Ginza" },
           { kind: "eat", name: "Yukimura (Shimbashi)", blurb: "Shimbashi spot, a short walk south of Ginza — an easy add before or after Tokyo Tower. 6-13-13 Shimbashi, Minato (G Plus Shimbashi 1F).", tags: ["dinner"], query: "Yukimura Shimbashi Minato Tokyo" },
