@@ -130,10 +130,11 @@ window.TRIP = {
           { kind: "shop", name: "Kensscratch Jewelry", blurb: "5-28-7 Jingumae.", query: "Kensscratch Jewelry Jingumae" },
           { kind: "shop", name: "OAO Footwear", blurb: "14-23 Sarugakucho 3F — appointment only, book before you go.", tags: ["★ appt only"], query: "OAO Footwear Sarugakucho Tokyo" },
           { kind: "shop", name: "Nearby: BERBERJIN · RAGTAG · Kindal", blurb: "Top-tier vintage, designer secondhand & archive — all walkable off Cat Street.", tags: ["vintage lane"], query: "BERBERJIN Harajuku" },
+          { kind: "shop", name: "Los Papelotes", blurb: "Your pick — worth a browse while working the Harajuku shops.", tags: ["your pick"], query: "Los Papelotes Tokyo" },
+          { kind: "eat", name: "Main Mano (bakery)", blurb: "Bakery stop for a morning pastry between Harajuku browsing.", tags: ["bakery"], query: "Main Mano bakery Tokyo" },
           { kind: "eat", name: "AFURI Harajuku", blurb: "Famous yuzu-shio ramen, bright and clean, kiosk ordering.", tags: ["lunch", "~¥1,500"], url: "https://afuri.com/" },
           { kind: "eat", name: "Gyukatsu Motomura", blurb: "Rare beef cutlet you finish on a hot stone. ★4.9, tiny — go at open.", tags: ["alt lunch"], query: "Gyukatsu Motomura Shibuya" },
           { kind: "eat", name: "d47 Shokudo", blurb: "Regional teishoku from all 47 prefectures, big windows over the Shibuya tracks (Hikarie).", tags: ["dinner"], query: "d47 Shokudo Shibuya Hikarie" },
-          { kind: "bar", name: "The SG Club", blurb: "Shingo Gokan's World's-50-Best bar — two floors. Reserve. Closed Mon (Sat is fine).", tags: ["★ bar"], url: "https://sg-management.jp/" },
         ] },
         { date: "Sun 11/22", area: "Shimokitazawa · Sangenjaya", cards: [
           { kind: "sight", name: "Gorilla building (Sangenjaya)", blurb: "The quirky Sangenjaya landmark on your list.", query: "Gorilla building Sangenjaya Tokyo" },
@@ -150,6 +151,7 @@ window.TRIP = {
           { kind: "shop", name: "Nearby: Disk Union · Isetan Shinjuku", blurb: "Records by genre floor; Isetan depachika + designer.", query: "Disk Union Shinjuku" },
           { kind: "eat", name: "Nakano Broadway basement", blurb: "Grab the famous steamed dumplings, then dig the watch & Mandarake floors.", tags: ["lunch"], query: "Nakano Broadway" },
           { kind: "eat", name: "Omoide Yokocho (Memory Lane)", blurb: "Smoky lantern-lit yakitori alley by Shinjuku station. Bounce between counters.", tags: ["dinner"], query: "Omoide Yokocho Shinjuku" },
+          { kind: "eat", name: "Oden Bar Su-II (Golden Gai)", blurb: "Tiny oden counter tucked in Golden Gai — simmered daikon, egg, and skewers with a drink. A warm bite before the bar crawl.", tags: ["dinner"], query: "Oden Bar Su-II Golden Gai Shinjuku" },
           { kind: "bar", name: "Shinjuku Golden Gai", blurb: "200+ tiny themed bars in six alleys, small covers. (SG & Benfiddich closed Mon.)", tags: ["★ bars"], query: "Shinjuku Golden Gai" },
         ] },
         { date: "Tue 11/24", area: "Nakameguro · Ebisu", cards: [
