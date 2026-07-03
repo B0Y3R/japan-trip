@@ -197,6 +197,7 @@ a { color: inherit; }
 .ditem__tag--soon { color: #fff; background: var(--c-soon, var(--accent)); }
 .ditem__tag--before { color: #fff; background: var(--c-before, var(--accent)); }
 .ditem__tag--booked { color: #062b12; background: #3ddc84; }
+.ditem__tag--pick { color: #fff; background: #2f6bff; }
 .bridge { display: block; text-decoration: none; margin: 0.4rem 0 1.4rem; padding: 0.8rem 1rem; border: 1px dashed var(--accent); border-radius: var(--radius); background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--accent); font-family: var(--disp); font-weight: 700; letter-spacing: 0.04em; transition: background 0.15s; }
 .bridge:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
 
@@ -235,6 +236,7 @@ a { color: inherit; }
 .card__blurb { font-size: 0.88rem; line-height: 1.45; color: var(--ink-soft); flex: 1; }
 .card__tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .card__tag { font-family: var(--disp); font-size: 0.66rem; font-weight: 600; padding: 0.18rem 0.5rem; border-radius: 999px; background: color-mix(in srgb, var(--accent) 13%, transparent); color: color-mix(in srgb, var(--ink) 78%, var(--accent)); }
+.card__tag--pick { color: #fff; background: #2f6bff; }
 .card__go { font-family: var(--disp); font-weight: 700; font-size: 0.74rem; color: var(--accent); margin-top: 0.15rem; }
 
 /* LODGING — booked-stay detail block, no card enclosure */

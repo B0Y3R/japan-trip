@@ -246,7 +246,7 @@
     if (k[1]) a.appendChild(el("div", "card__cat", k[1]));
     a.appendChild(el("div", "card__name", esc(c.name)));
     if (c.blurb) a.appendChild(el("div", "card__blurb", esc(c.blurb)));
-    if (c.tags && c.tags.length) { var t = el("div", "card__tags"); c.tags.forEach(function (x) { t.appendChild(el("span", "card__tag", esc(x))); }); a.appendChild(t); }
+    if (c.tags && c.tags.length) { var t = el("div", "card__tags"); c.tags.forEach(function (x) { t.appendChild(el("span", "card__tag" + (x.toLowerCase() === "our pick" ? " card__tag--pick" : ""), esc(x))); }); a.appendChild(t); }
     var go = c.url ? (/airbnb/.test(c.url) ? "Airbnb" : /booking\.com/.test(c.url) ? "Booking" : /klook/.test(c.url) ? "Klook" : "Open link") : "Maps";
     a.appendChild(el("div", "card__go", go + " ↗"));
     return a;
@@ -301,7 +301,7 @@
     var body = el("div", "ditem__body");
     var line = el("div", "ditem__line");
     line.appendChild(el("span", "ditem__name", esc(c.name)));
-    if (c.tags && c.tags.length) c.tags.forEach(function (t) { line.appendChild(el("span", "ditem__tag", esc(t))); });
+    if (c.tags && c.tags.length) c.tags.forEach(function (t) { line.appendChild(el("span", "ditem__tag" + (t.toLowerCase() === "our pick" ? " ditem__tag--pick" : ""), esc(t))); });
     body.appendChild(line);
     if (c.blurb) body.appendChild(el("div", "ditem__blurb", esc(c.blurb)));
     a.appendChild(body);
