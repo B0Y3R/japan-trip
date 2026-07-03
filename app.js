@@ -69,6 +69,13 @@
   function el(t, c, h) { var n = document.createElement(t); if (c) n.className = c; if (h != null) n.innerHTML = h; return n; }
   // Map special badge tags to a color modifier: blue "our pick", green "veg-friendly", brown "decaf+matcha".
   function tagCls(base, x) { var k = String(x).toLowerCase(); var m = k === "our pick" ? "pick" : k === "veg-friendly" ? "veg" : k === "decaf+matcha" ? "decafmatcha" : ""; return base + (m ? " " + base + "--" + m : ""); }
+  // Meal/kind labels are now shown by the Food subsections, so drop those chips; strip the redundant
+  // meal word from combined tags ("alt lunch" → "alt", "★ dinner" → "★"). Returns "" to hide the chip.
+  function displayTag(x) {
+    var k = String(x).toLowerCase().trim();
+    if (k === "backup" || /^(breakfast|lunch|dinner|coffee|bakery)$/.test(k)) return "";
+    return String(x).replace(/\b(breakfast|lunch|dinner|coffee|bakery)\b/gi, "").replace(/\s+/g, " ").trim();
+  }
   function enc(s) { return encodeURIComponent(s); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function mapsSearch(q) { return "https://www.google.com/maps/search/?api=1&query=" + enc(q); }
@@ -258,7 +265,7 @@
     if (k[1]) a.appendChild(el("div", "card__cat", k[1]));
     a.appendChild(el("div", "card__name", esc(c.name)));
     if (c.blurb) a.appendChild(el("div", "card__blurb", esc(c.blurb)));
-    if (c.tags && c.tags.length) { var t = el("div", "card__tags"); c.tags.forEach(function (x) { t.appendChild(el("span", tagCls("card__tag", x), esc(x))); }); a.appendChild(t); }
+    if (c.tags && c.tags.length) { var t = el("div", "card__tags"); c.tags.forEach(function (x) { var dt = displayTag(x); if (dt) t.appendChild(el("span", tagCls("card__tag", dt), esc(dt))); }); if (t.childNodes.length) a.appendChild(t); }
     var go = c.url ? (/airbnb/.test(c.url) ? "Airbnb" : /booking\.com/.test(c.url) ? "Booking" : /klook/.test(c.url) ? "Klook" : "Open link") : "Maps";
     a.appendChild(el("div", "card__go", go + " ↗"));
     return a;
@@ -313,7 +320,7 @@
     var body = el("div", "ditem__body");
     var line = el("div", "ditem__line");
     line.appendChild(el("span", "ditem__name", esc(c.name)));
-    if (c.tags && c.tags.length) c.tags.forEach(function (t) { line.appendChild(el("span", tagCls("ditem__tag", t), esc(t))); });
+    if (c.tags && c.tags.length) c.tags.forEach(function (t) { var dt = displayTag(t); if (dt) line.appendChild(el("span", tagCls("ditem__tag", dt), esc(dt))); });
     body.appendChild(line);
     if (c.blurb) body.appendChild(el("div", "ditem__blurb", esc(c.blurb)));
     a.appendChild(body);
