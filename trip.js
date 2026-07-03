@@ -162,7 +162,7 @@ window.TRIP = {
           { kind: "bar", name: "LIVE HAUS", blurb: "Live venue, B1F 2-14-2 Kitazawa — catch a show, then graze the tiny natural-wine bars.", tags: ["live"], query: "LIVE HAUS Shimokitazawa" },
         ] },
         { date: "Mon 11/23", area: "Shinjuku · Nakano", cards: [
-          { kind: "shop", name: "BEAMS JAPAN (Shinjuku)", blurb: "The flagship — floors of BEAMS lines plus Japanese craft & souvenirs. 3-32-6 Shinjuku.", tags: ["★ pick"], query: "BEAMS JAPAN Shinjuku" },
+          { kind: "shop", name: "BEAMS JAPAN (Shinjuku)", blurb: "The flagship — floors of BEAMS lines plus Japanese craft & souvenirs. 3-32-6 Shinjuku.", tags: ["our pick"], query: "BEAMS JAPAN Shinjuku" },
           { kind: "shop", name: "The Four Eyed (Kabukicho)", blurb: "Clothes + photo booth, Palais Dor 1F, 2-8-2 Kabukicho.", tags: ["our pick"], query: "The Four Eyed Kabukicho" },
           { kind: "shop", name: "Custom pillow fitting", blurb: "Main fitting is Nishikawa (Thu 12/3); or do it here at Tokyu Hands / Bic Camera Shinjuku.", query: "Tokyu Hands Shinjuku" },
           { kind: "shop", name: "Nakano Broadway", blurb: "Mandarake floors + vintage-watch dealers (Jackroad / Betty Road). Steamed dumplings at the east entrance.", query: "Nakano Broadway" },
