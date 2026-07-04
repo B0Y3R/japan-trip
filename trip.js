@@ -270,32 +270,46 @@ window.TRIP = {
         S("Kamo River", "ky_kamo"),
       ] },
       days: [
-        { date: "Wed 11/25", area: "Arrive · Nishiki · Pontocho · Gion", note: "Check out of the Tokyo Airbnb (Tokyo #1) by 11:00 AM first. Early Shinkansen out (book Oct 25), drop bags, then ease in.", cards: [
+        { date: "Wed 11/25", area: "Arrive · Nishiki · Pontocho · Gion", note: "Check out of the Tokyo Airbnb (Tokyo #1) by 11:00 AM first. Early Shinkansen out (book Oct 25), drop bags, then ease in. Kyoto Airbnb check-in from 3:00 PM (central Nakagyō).", cards: [
           { kind: "eat", name: "Nishiki Market grazing", blurb: "'Kyoto's Kitchen' — soy-milk donuts, tamagoyaki, wagyu skewers. Eat at each stall (it's the rule).", tags: ["lunch"], query: "Nishiki Market Kyoto" },
-          { kind: "shop", name: "Kuoe Watches", blurb: "Downtown watch shop — your pick, easy to fold in after Nishiki.", tags: ["watches"], query: "Kuoe Kyoto" },
+          { kind: "shop", name: "Kuoe Watches", blurb: "Kyoto microbrand down a staircase in the Teramachi arcade off Nishiki — hand-assembled vintage-style pieces, all out to handle; in-person yen prices run ~20–30% under online USD. Closed Tue.", tags: ["watches"], url: "https://www.kuoe-en.com/" },
+          { kind: "shop", name: "BIG MOON Kyoto (watches)", blurb: "The secondhand hunt — a 300+ collection (used Kurono Tokyo & Minase among the Rolex/Omega). Karasuma/Shijo by Daimaru. Closed Thu → Wed or Fri only. Tax-free.", tags: ["watches", "closed Thu"], url: "https://bigmoon-kyoto.com/" },
+          { kind: "shop", name: "Face House", blurb: "On your Kyoto list — downtown, near the Nishiki / Teramachi arcades.", query: "Face House Kyoto" },
           { kind: "shop", name: "Teramachi & Shinkyogoku arcades", blurb: "Covered shopping arcades off Nishiki — vintage, secondhand watches, records, kimono.", query: "Teramachi shopping street Kyoto" },
           { kind: "shop", name: "Daimaru Kyoto (depachika)", blurb: "Department-store food hall for Kyoto food gifts.", query: "Daimaru Kyoto" },
           { kind: "sight", name: "Fushimi Inari Taisha", blurb: "The endless vermilion torii. Open 24h — arrive late afternoon and climb past the crowds as light goes gold.", tags: ["★ free"], url: "https://inari.jp/en/" },
           { kind: "sight", name: "Pontocho + Kamo River", blurb: "Lantern-lit alley one block off the river (indoor dining in Nov). Dinner at a Pontocho izakaya.", query: "Pontocho Alley Kyoto" },
           { kind: "sight", name: "Gion (evening)", blurb: "Stroll Hanamikoji and Shirakawa — stick to main streets (Kyoto fines tourists in private alleys).", query: "Gion Kyoto" },
+          { kind: "sight", name: "Saihoji (Kokedera moss temple)", blurb: "Maybe — the famous moss temple, ~11am if you can get in. Reservation-only: book by end of Sept / early Oct. West Kyoto (Arashiyama side).", tags: ["optional", "★ reserve"], query: "Saihoji Temple Kyoto" },
           { kind: "bar", name: "Bee's Knees", blurb: "Hidden, consistently rated Kyoto's best cocktail bar — downtown.", tags: ["★ cocktails"], query: "Bees Knees bar Kyoto" },
           { kind: "bar", name: "L'Escamoteur", blurb: "Theatrical, candle-lit French-run cocktail den near Shijo.", query: "L'Escamoteur Kyoto" },
           { kind: "bar", name: "Sake bar Yoramu", blurb: "Tiny, expert-led sake flights for the obsessive — central.", tags: ["sake"], query: "Yoramu sake Kyoto" },
         ] },
         { date: "Thu 11/26", area: "E-bike · Higashiyama · Kamo sunset", cards: [
+          { kind: "eat", name: "Vermillion Cafe (Fushimi Inari)", blurb: "Breakfast by Fushimi Inari — get there 7:30–8am to put your name down. Espresso-bar vibe.", tags: ["breakfast", "veg-friendly"], query: "Vermillion Cafe Fushimi Inari Kyoto" },
           { kind: "activity", name: "Kyoto e-bike tour", blurb: "Great for the spread-out sights — many run through Arashiyama or a temple loop. Book ahead.", tags: ["~¥10,000"], query: "Kyoto ebike tour" },
+          { kind: "shop", name: "Oomiya Kyoto (watches)", blurb: "Mechanical-watch dealer on Shijo-dori by Daimaru — Grand Seiko, Tudor, IWC, Panerai, Blancpain, GP; coffee poured while you browse. Closed Wed → Thu works. Pairs with a downtown lunch.", tags: ["watches", "closed Wed"], url: "https://www.jw-oomiya.co.jp/pages/kyoto" },
           { kind: "sight", name: "Arashiyama Bamboo Grove", blurb: "The bamboo grove + Togetsukyo bridge — often part of the e-bike loop.", query: "Arashiyama Bamboo Grove Kyoto" },
           { kind: "eat", name: "Kyogoku Kaneyo", blurb: "100-year unagi house — eel over rice under a giant fluffy omelette. Closed Wed → Thu lunch.", tags: ["lunch"], query: "Kyogoku Kaneyo Kyoto" },
           { kind: "sight", name: "Higashiyama foliage walk", blurb: "Kiyomizu-dera → Sannenzaka/Ninenzaka → Kodai-ji. Peak color — go before 10am.", tags: ["★", "~¥500"], url: "https://www.kiyomizudera.or.jp/en/" },
           { kind: "sight", name: "Kamo River at sunset", blurb: "Walk the riverbank as the light drops; locals sit spaced along the water. Free.", query: "Kamo River Kyoto" },
           { kind: "eat", name: "Roan Kikunoi (kaiseki)", blurb: "The relaxed sister of 3-Michelin-star Kikunoi — exquisite seasonal Kyoto kaiseki. Book 2–4 weeks out.", tags: ["★ dinner"], query: "Roan Kikunoi Kyoto" },
         ] },
-        { date: "Fri 11/27", area: "Morning, then Shinkansen back", cards: [
+        { date: "Fri 11/27", area: "Morning, then Shinkansen back", note: "Check out of the Kyoto Airbnb by 10:00 AM, then coffee + ekiben at Kyoto Station before the train.", cards: [
           { kind: "coffee", name: "% Arabica / Weekenders Coffee", blurb: "Riverside coffee in Higashiyama, or the hidden Weekenders downtown (behind a parking lot, worth it).", query: "Weekenders Coffee Tominokoji Kyoto" },
           { kind: "transit", name: "Shinkansen Kyoto → Tokyo", blurb: "Book the early train (reservation opens Oct 27). ~2h15 to Tokyo.", tags: ["SmartEX"], query: "Kyoto Station" },
         ] },
       ],
-      sections: [],
+      sections: [
+        { title: "Where We're Staying", icon: "🏠", lodging: {
+          name: "Airbnb — Kyoto machiya (Kyoto Love Golden House)",
+          desc: "BOOKED. Central Nakagyō town house, 2 guests — bed with heating, panoramic bath. Contact host for check-in method.",
+          address: "652-42 Yakushichō, Nakagyo Ward, Kyoto 604-0062",
+          mapUrl: "https://www.google.com/maps/search/?api=1&query=652-42+Yakushicho+Nakagyo+Kyoto",
+          checkin: "3:00 PM · Wed 11/25",
+          checkout: "10:00 AM · Fri 11/27",
+        } },
+      ],
     },
 
     // ===================================================== HAKONE
