@@ -290,8 +290,10 @@
       if (l.mapUrl) addr = '<a class="lodging__inline" href="' + esc(l.mapUrl) + '" target="_blank" rel="noopener">' + addr + '</a>';
       row("Address", addr);
     }
-    if (l.checkin) row("Check-in", esc(l.checkin));
-    if (l.checkout) row("Check-out", esc(l.checkout));
+    // Stored as "time · date"; show the date bold, then the time.
+    function stayLine(s) { var p = String(s).split(" · "); return p.length === 2 ? "<strong>" + esc(p[1]) + "</strong> " + esc(p[0]) : esc(s); }
+    if (l.checkin) row("Check-in", stayLine(l.checkin));
+    if (l.checkout) row("Check-out", stayLine(l.checkout));
     if (l.phone) row("Phone", '<a class="lodging__inline" href="tel:' + esc(l.phone.replace(/[^0-9+]/g, "")) + '">' + esc(l.phone) + '</a>');
     b.appendChild(rows);
     if (l.url) {
