@@ -275,12 +275,8 @@ window.TRIP = {
           { kind: "shop", name: "BIG MOON Kyoto (watches)", blurb: "The secondhand hunt — a 300+ collection (used Kurono Tokyo & Minase among the Rolex/Omega). Karasuma/Shijo by Daimaru. Closed Thu → Wed or Fri only. Tax-free.", tags: ["watches", "closed Thu"], url: "https://bigmoon-kyoto.com/" },
           { kind: "shop", name: "Face House", blurb: "On your Kyoto list — downtown, near the Nishiki / Teramachi arcades.", query: "Face House Kyoto" },
           { kind: "shop", name: "Teramachi & Shinkyogoku arcades", blurb: "Covered shopping arcades off Nishiki — vintage, secondhand watches, records, kimono.", query: "Teramachi shopping street Kyoto" },
-          { kind: "shop", name: "Daimaru Kyoto (depachika)", blurb: "Department-store food hall for Kyoto food gifts.", query: "Daimaru Kyoto" },
           { kind: "sight", name: "Kamo River Noryo-Yuka (early evening)", blurb: "Lantern-lit dining decks one block off the river. Grab konbini snacks and drinks and hang on the riverbank for sunset.", query: "Pontocho Alley Kyoto" },
           { kind: "sight", name: "Gion (evening) + dinner", blurb: "Stroll Hanamikoji and Shirakawa — stick to main streets (Kyoto fines tourists in private alleys) — then dinner nearby.", query: "Gion Kyoto" },
-          { kind: "bar", name: "Bee's Knees", blurb: "Hidden, consistently rated Kyoto's best cocktail bar — downtown.", tags: ["★ cocktails"], query: "Bees Knees bar Kyoto" },
-          { kind: "bar", name: "L'Escamoteur", blurb: "Theatrical, candle-lit French-run cocktail den near Shijo.", query: "L'Escamoteur Kyoto" },
-          { kind: "bar", name: "Sake bar Yoramu", blurb: "Tiny, expert-led sake flights for the obsessive — central.", tags: ["sake"], query: "Yoramu sake Kyoto" },
         ] },
         { date: "Thu 11/26", area: "Fushimi Inari · E-bike", cards: [
           { kind: "eat", name: "Vermillion Cafe (Fushimi Inari)", blurb: "Breakfast by Fushimi Inari — get there 7:30–8am to put your name down. Espresso-bar vibe.", tags: ["breakfast", "veg-friendly"], query: "Vermillion Cafe Fushimi Inari Kyoto" },
