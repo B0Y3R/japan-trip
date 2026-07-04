@@ -18,7 +18,7 @@ window.TRIP = {
   notionUrl: "https://app.notion.com/p/38d8319b49c181838efec05155afc495",
 
   bookAhead: [
-    { name: "Airbnbs ×3", note: "Tokyo #1, Kyoto, Tokyo #2. Fall is high season.", level: "now" },
+    { name: "Airbnbs ×3", note: "Tokyo #1 BOOKED (Ōkubo). Still to book: Kyoto + Tokyo #2. Fall is high season.", level: "now" },
     { name: "Shinkansen", note: "Reserved seats open exactly 1 month before — set reminders Oct 25 & Oct 27 (SmartEX).", level: "soon" },
     { name: "Muscle Girls Bar", note: "Klook, a few weeks out. Closed Tue → go Sat 11/28.", level: "soon" },
     { name: "Visit Japan Web", note: "Immigration + customs QR, done ≥6h before landing 11/20.", level: "before" },
@@ -115,7 +115,7 @@ window.TRIP = {
         S("Tokyo Tower", "tk_tokyotower"), S("Inokashira Park (Kichijoji)", "tk_kichijoji"),
       ] },
       days: [
-        { date: "Fri 11/20", area: "Arrival · Haneda 4:40p", note: "Land, clear immigration with the Visit Japan Web QR, grab a Suica/Welcome Suica + a pocket of cash. First-night ritual: a konbini run (7-Eleven egg sando, FamilyMart famichiki, a Strong Zero) on the way to the apartment.", cards: [
+        { date: "Fri 11/20", area: "Arrival · Haneda 4:40p", note: "Land, clear immigration with the Visit Japan Web QR, grab a Suica/Welcome Suica + a pocket of cash. Airbnb check-in (Tokyo #1) from 4:00 PM — 2-32-6 Ōkubo, Shinjuku (self check-in via lockbox; host sends directions). First-night ritual: a konbini run (7-Eleven egg sando, FamilyMart famichiki, a Strong Zero) on the way to the apartment.", cards: [
           { kind: "eat", name: "Coco Ichibanya", blurb: "Warm customizable curry, open late, zero decision fatigue after 20h of travel.", tags: ["our pick", "dinner", "veg-friendly"], query: "Coco Ichibanya Tokyo" },
         ] },
         { date: "Sat 11/21", area: "Yoyogi · Harajuku · Shibuya", cards: [
@@ -229,6 +229,7 @@ window.TRIP = {
           { kind: "activity", name: "Nishikawa custom pillow (Nihonbashi)", blurb: "Your dedicated custom-pillow fitting — appointment only.", tags: ["★ appt"], query: "Nishikawa Nihonbashi Tokyo" },
           { kind: "shop", name: "Vin-Time (Ginza)", blurb: "Vintage watches inside Hankyu Men's Tokyo, 2-5-1 Yurakucho.", tags: ["watches"], query: "Vin-Time Hankyu Mens Ginza" },
           { kind: "shop", name: "Watch CTI (Ginza)", blurb: "Ginza watch dealer.", tags: ["watches"], query: "Watch CTI Ginza" },
+          { kind: "shop", name: "Grand Seiko Flagship (Ginza)", blurb: "The Grand Seiko flagship boutique in Ginza — the full current lineup in the metal.", tags: ["watches"], query: "Grand Seiko Flagship Boutique Ginza" },
           { kind: "shop", name: "Nearby: Quark · Commit · Komehyo · DSM", blurb: "Vintage Rolex (Quark/Commit), luxury secondhand (Komehyo), Ginza Six & Dover Street Market — all minutes apart.", query: "Quark Ginza watches" },
           { kind: "eat", name: "Tsujihan (Nihonbashi)", blurb: "Legendary kaisendon — seafood over rice finished with sea-bream dashi. Queue 45–60 min, cheap. Steps from the pillow shop.", tags: ["★ lunch"], query: "Tsujihan Nihonbashi" },
           { kind: "eat", name: "Nanba Sennichimae Kamatake Udon (Marunouchi)", blurb: "Osaka Namba udon institution — this Marunouchi branch by Tokyo Station is a quick, great-value alternate lunch.", tags: ["our pick", "alt lunch", "veg-friendly"], query: "Kamatake Udon Marunouchi Tokyo" },
@@ -244,7 +245,16 @@ window.TRIP = {
           { kind: "shop", name: "Depachika souvenirs", blurb: "Ginza Mitsukoshi or Tokyo Station's Daimaru food hall for the last gifts.", query: "Daimaru Tokyo Station depachika" },
         ] },
       ],
-      sections: [],
+      sections: [
+        { title: "Where We're Staying", icon: "🏠", lodging: {
+          name: "Airbnb — Tokyo #1 (Japandi house near Shinjuku)",
+          desc: "BOOKED. Japandi-style 93㎡ private house, 2 guests, self check-in via lockbox. Near Shin-Ōkubo / Ōkubo, ~10–15 min walk to Shinjuku Stn. (Tokyo #2, 11/27–12/4, is still to be booked.)",
+          address: "2-chōme-32-6 Ōkubo, Shinjuku City, Tokyo 169-0072",
+          mapUrl: "https://www.google.com/maps/search/?api=1&query=2-32-6+Okubo+Shinjuku+Tokyo",
+          checkin: "4:00 PM · Fri 11/20",
+          checkout: "11:00 AM · Wed 11/25",
+        } },
+      ],
     },
 
     // ===================================================== KYOTO
@@ -260,7 +270,7 @@ window.TRIP = {
         S("Kamo River", "ky_kamo"),
       ] },
       days: [
-        { date: "Wed 11/25", area: "Arrive · Nishiki · Pontocho · Gion", note: "Early Shinkansen out (book Oct 25), drop bags, then ease in.", cards: [
+        { date: "Wed 11/25", area: "Arrive · Nishiki · Pontocho · Gion", note: "Check out of the Tokyo Airbnb (Tokyo #1) by 11:00 AM first. Early Shinkansen out (book Oct 25), drop bags, then ease in.", cards: [
           { kind: "eat", name: "Nishiki Market grazing", blurb: "'Kyoto's Kitchen' — soy-milk donuts, tamagoyaki, wagyu skewers. Eat at each stall (it's the rule).", tags: ["lunch"], query: "Nishiki Market Kyoto" },
           { kind: "shop", name: "Kuoe Watches", blurb: "Downtown watch shop — your pick, easy to fold in after Nishiki.", tags: ["watches"], query: "Kuoe Kyoto" },
           { kind: "shop", name: "Teramachi & Shinkyogoku arcades", blurb: "Covered shopping arcades off Nishiki — vintage, secondhand watches, records, kimono.", query: "Teramachi shopping street Kyoto" },
