@@ -154,7 +154,7 @@ a { color: inherit; }
 .day.is-active { display: block; }
 .day__head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.4rem; }
 .day__date { font-family: var(--disp); font-weight: 700; font-size: 0.92rem; color: var(--accent); }
-.day__area { font-family: var(--disp); font-weight: 600; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.day__area { font-family: var(--disp); font-weight: 700; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 0.02em; }
 .day__note { font-size: 0.9rem; line-height: 1.5; color: var(--ink-soft); margin: 0 0 0.8rem; max-width: 70ch; }
 .day .cards { margin-top: 0; }
 .day__head { align-items: center; }

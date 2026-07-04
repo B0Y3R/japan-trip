@@ -491,7 +491,6 @@
 
         var blk = el("div", "day");
         var head = el("div", "day__head");
-        head.appendChild(el("span", "day__date", esc(d.date)));
         if (d.area) head.appendChild(el("span", "day__area", esc(d.area)));
         if (d.cards && d.cards.length) head.appendChild(el("span", "day__progress", ""));
         blk.appendChild(head);
