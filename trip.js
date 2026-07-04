@@ -247,8 +247,8 @@ window.TRIP = {
       ],
       sections: [
         { title: "Where We're Staying", icon: "🏠", lodging: {
-          name: "Airbnb — Tokyo #1 (Japandi house near Shinjuku)",
-          desc: "BOOKED. Japandi-style 93㎡ private house, 2 guests, self check-in via lockbox. Near Shin-Ōkubo / Ōkubo, ~10–15 min walk to Shinjuku Stn. (Tokyo #2, 11/27–12/4, is still to be booked.)",
+          name: "Airbnb - Shin-Okubo",
+          desc: "Remember to complete the pre-check-in forms.",
           address: "2-chōme-32-6 Ōkubo, Shinjuku City, Tokyo 169-0072",
           mapUrl: "https://www.google.com/maps/search/?api=1&query=2-32-6+Okubo+Shinjuku+Tokyo",
           checkin: "4:00 PM · Fri 11/20",
@@ -291,8 +291,8 @@ window.TRIP = {
       ],
       sections: [
         { title: "Where We're Staying", icon: "🏠", lodging: {
-          name: "Airbnb — Kyoto machiya (Kyoto Love Golden House)",
-          desc: "BOOKED. Central Nakagyō town house, 2 guests — bed with heating, panoramic bath. Contact host for check-in method.",
+          name: "Airbnb - Nakagyo",
+          desc: "Remember to complete the pre-check-in forms.",
           address: "652-42 Yakushichō, Nakagyo Ward, Kyoto 604-0062",
           mapUrl: "https://www.google.com/maps/search/?api=1&query=652-42+Yakushicho+Nakagyo+Kyoto",
           checkin: "3:00 PM · Wed 11/25",
