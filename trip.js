@@ -18,7 +18,7 @@ window.TRIP = {
   notionUrl: "https://app.notion.com/p/38d8319b49c181838efec05155afc495",
 
   bookAhead: [
-    { name: "Airbnbs ×3", note: "Tokyo #1 BOOKED (Ōkubo). Still to book: Kyoto + Tokyo #2. Fall is high season.", level: "now" },
+    { name: "Tokyo #2 Airbnb", note: "The last stay to book — 11/27–12/4 (keep it through the Hakone night). Fall is high season.", level: "now" },
     { name: "Shinkansen", note: "Reserved seats open exactly 1 month before — set reminders Oct 25 & Oct 27 (SmartEX).", level: "soon" },
     { name: "Muscle Girls Bar", note: "Klook, a few weeks out. Closed Tue → go Sat 11/28.", level: "soon" },
     { name: "Visit Japan Web", note: "Immigration + customs QR, done ≥6h before landing 11/20.", level: "before" },

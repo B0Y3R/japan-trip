@@ -403,7 +403,6 @@
         if (!page) return;
         var a = el("a", "banner"); a.href = page.key + ".html";
         a.style.setProperty("--accent", page.accent || ACCENT_DEFAULT);
-        if (page.jp) a.appendChild(el("span", "banner__jp", esc(page.jp)));
         if (page.flag) a.appendChild(el("span", "banner__flag", page.flag));
         a.appendChild(el("span", "banner__title", esc(page.title)));
         bgrid.appendChild(a);
