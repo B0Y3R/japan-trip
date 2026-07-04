@@ -74,7 +74,10 @@
   function displayTag(x) {
     var k = String(x).toLowerCase().trim();
     if (k === "backup" || /^(breakfast|lunch|dinner|coffee|bakery)$/.test(k)) return "";
-    return String(x).replace(/\b(breakfast|lunch|dinner|coffee|bakery)\b/gi, "").replace(/\s+/g, " ").trim();
+    if (/vintage|cocktail/.test(k) || /\bbars?\b/.test(k)) return "";
+    var out = String(x).replace(/\b(breakfast|lunch|dinner|coffee|bakery)\b/gi, "").replace(/\s+/g, " ").trim();
+    if (out.toLowerCase() === "alt") return "";
+    return out;
   }
   function enc(s) { return encodeURIComponent(s); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
