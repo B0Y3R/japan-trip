@@ -20,7 +20,7 @@ window.TRIP = {
   bookAhead: [
     { name: "Tokyo #2 Airbnb", note: "The last stay to book — 11/27–12/4 (keep it through the Hakone night). Fall is high season.", level: "now" },
     { name: "Shinkansen", note: "Reserved seats open exactly 1 month before — set reminders Oct 25 & Oct 27 (SmartEX).", level: "soon" },
-    { name: "Odakyu Romancecar", note: "Reserved seats Shinjuku → Hakone-Yumoto for the 11/30 onsen night. Book ahead.", level: "soon" },
+    { name: "Odakyu Romancecar", note: "Book BOTH ways — Shinjuku → Hakone-Yumoto (11/30) and the return (12/1). Reserved seats open one month ahead: book the outbound on 10/30 and the return on 10/31.", level: "soon" },
     { name: "Muscle Girls Bar", note: "Klook, a few weeks out. Closed Tue → go Sat 11/28.", level: "soon" },
     { name: "Visit Japan Web", note: "Immigration + customs QR, done ≥6h before landing 11/20.", level: "before" },
   ],
