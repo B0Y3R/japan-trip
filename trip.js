@@ -33,7 +33,7 @@ window.TRIP = {
       key: "gift", title: "Gift Checklist", jp: "土産", flag: "🎁",
       kicker: "Omiyage — who to buy for", accent: "#e0a33a",
       groups: [
-        { title: "James", items: ["Mom + Tige", "Bubby + Parker", "Ethan + Drew", "Tanner", "Amier + Precious", "Vinny + Sherif"] },
+        { title: "James", items: ["Mom + Tige", "Bubby + Parker", "Ethan + Drew", "Tanner", "Amier + Precious", "Vinny + Sherif", "Will + Kainon"] },
         { title: "Sasha", items: ["Mom + Mike", "John + Jenny", "Bri + Maija", "Luli + Jazmin", "Lea + Danny", "Dom + Kareem", "Ellyn + Mike", "Megan + Sarah", "SJ?"] },
       ],
     },
