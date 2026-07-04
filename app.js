@@ -287,7 +287,7 @@
     }
     if (l.address) {
       var addr = esc(l.address);
-      if (l.mapUrl) addr = '<a class="lodging__inline" href="' + esc(l.mapUrl) + '" target="_blank" rel="noopener">' + addr + ' <span class="lodging__arrow">Map ↗</span></a>';
+      if (l.mapUrl) addr = '<a class="lodging__inline" href="' + esc(l.mapUrl) + '" target="_blank" rel="noopener">' + addr + '</a>';
       row("Address", addr);
     }
     if (l.checkin) row("Check-in", esc(l.checkin));
