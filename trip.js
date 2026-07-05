@@ -87,7 +87,7 @@ window.TRIP = {
     { date: "Mon 11/23", text: "Shinjuku · Nakano", city: "tokyo" },
     { date: "Tue 11/24", text: "Nakameguro · Ebisu", city: "tokyo" },
     { date: "Wed 11/25", text: "Shinkansen → Kyoto", city: "kyoto" },
-    { date: "Thu 11/26", text: "Kyoto — Higashiyama + kaiseki", city: "kyoto" },
+    { date: "Thu 11/26", text: "Kyoto — Fushimi Inari + e-bike", city: "kyoto" },
     { date: "Fri 11/27", text: "Kyoto AM → back to Tokyo", city: "kyoto" },
     { date: "Sat 11/28", text: "Kichijoji · Muscle Girls Bar", city: "tokyo" },
     { date: "Sun 11/29", text: "Asakusa · Ueno · Yanesen", city: "tokyo" },
