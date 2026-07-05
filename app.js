@@ -236,8 +236,8 @@
   // ---- Pieces -----------------------------------------------
   function topnav(currentId) {
     var nav = el("nav", "topnav");
-    var home = el("a", "topnav__home" + (currentId ? "" : " is-active"), "日本 HOME");
-    home.href = "index.html"; nav.appendChild(home);
+    var home = el("a", "topnav__home" + (currentId ? "" : " is-active"), '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>');
+    home.href = "index.html"; home.setAttribute("aria-label", "Home"); home.title = "Home"; nav.appendChild(home);
     TRIP.cities.forEach(function (c) {
       if (c.info) return; // skip Logistics in the header
       var a = el("a", "topnav__chip" + (c.id === currentId ? " is-active" : ""), c.flag + " " + esc(c.name));
@@ -432,7 +432,7 @@
     TRIP.timeline.forEach(function (t) {
       var ci = cityById(t.city); var r = el("a", "tl-row"); r.href = t.city + ".html#" + encodeURIComponent(t.date);
       if (ci) r.style.setProperty("--accent", accentOf(ci.id));
-      r.appendChild(el("span", "tl-date", esc(t.date)));
+      r.appendChild(el("span", "tl-date" + (/^(Sat|Sun)\b/.test(t.date) ? " tl-date--weekend" : ""), esc(t.date)));
       r.appendChild(el("span", "tl-text", esc(t.text)));
       r.appendChild(el("span", "tl-flag", ci ? ci.flag : ""));
       box.appendChild(r);
