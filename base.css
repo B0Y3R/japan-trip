@@ -190,8 +190,11 @@ a { color: inherit; }
 .ditem__body { flex: 1; min-width: 0; }
 .ditem__line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.35rem 0.55rem; }
 .ditem__name { font-family: var(--disp); font-weight: 700; font-size: 0.98rem; line-height: 1.2; }
+.ditem__time { display: inline-block; font-family: var(--ticket-mono); font-size: 0.68rem; color: var(--ink-soft); white-space: nowrap; min-width: 6.5em; }
 .ditem__tag { font-family: var(--ticket-mono); font-size: 0.6rem; font-weight: 500; letter-spacing: 0.03em; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 0.08rem 0.4rem; border-radius: 999px; }
 .ditem__blurb { font-size: 0.8rem; line-height: 1.38; color: var(--ink-soft); margin-top: 0.15rem; }
+.ditem__link { display: inline-block; margin-top: 0.25rem; font-size: 0.76rem; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+.ditem__link:hover { text-decoration: underline; border-color: var(--accent); }
 .ditem__go { flex: none; align-self: center; color: var(--ink-soft); font-family: var(--ticket-mono); font-size: 0.85rem; }
 .ditem.is-done { opacity: 0.5; }
 .ditem.is-done .ditem__name { text-decoration: line-through; }

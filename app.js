@@ -276,6 +276,32 @@
 
   function cardsGrid(list) { var g = el("div", "cards"); list.forEach(function (c) { g.appendChild(card(c)); }); return g; }
 
+  // "Fri 11/27" or "11/27" -> 1127, for ordering days and checking stay ranges.
+  function dayNum(s) { var m = String(s).match(/(\d+)\/(\d+)/); return m ? +m[1] * 100 + +m[2] : 0; }
+  // Where we sleep the night of `date`. The shortest covering stay wins, so the
+  // Hakone ryokan night beats a Tokyo booking that spans it.
+  function stayFor(date) {
+    var n = dayNum(date), best = null;
+    TRIP.cities.forEach(function (c) {
+      (c.stays || []).forEach(function (s) {
+        var a = dayNum(s.from), b = dayNum(s.to);
+        if (n >= a && n < b && (!best || b - a < best.span)) best = { lodging: s.lodging, cityId: c.id, span: b - a };
+      });
+    });
+    return best;
+  }
+  // Every day across the city pages in calendar order. A travel day shows up on
+  // both pages (Kyoto AM, Tokyo PM); the page you're leaving comes first.
+  function allDays() {
+    var out = [];
+    TRIP.cities.forEach(function (c) { (c.days || []).forEach(function (d) { if (!d.bridge) out.push({ city: c, date: d.date }); }); });
+    return out.sort(function (a, b) {
+      var d = dayNum(a.date) - dayNum(b.date); if (d) return d;
+      var s = stayFor(a.date), sc = s ? s.cityId : "";
+      return (a.city.id === sc) - (b.city.id === sc);
+    });
+  }
+
   function lodgingBlock(l) {
     var b = el("div", "lodging");
     b.appendChild(el("div", "lodging__name", esc(l.name)));
@@ -324,6 +350,7 @@
     }
     var body = el("div", "ditem__body");
     var line = el("div", "ditem__line");
+    if (c.time) line.appendChild(el("span", "ditem__time", esc(c.time)));
     line.appendChild(el("span", "ditem__name", esc(c.name)));
     if (c.tags && c.tags.length) c.tags.forEach(function (t) { var dt = displayTag(t); if (dt) line.appendChild(el("span", tagCls("ditem__tag", dt), esc(dt))); });
     body.appendChild(line);
@@ -351,38 +378,50 @@
     if (TRIP.currency) hero.appendChild(el("p", "hero__cur", "💱 " + esc(TRIP.currency)));
     app.appendChild(hero);
 
-    // book ahead — scannable checklist
-    var ba = el("section", "section reveal");
-    var baTitle = el("h2", "section__title", "Book Ahead · ");
-    var baChip = el("span", "section__sub", ""); baTitle.appendChild(baChip);
-    ba.appendChild(baTitle);
-    var baList = el("div", "ditems");
-    function baUpdate() {
-      var t = baList.querySelectorAll("[data-done-id]").length;
-      var dn = baList.querySelectorAll("[data-done-id].is-done").length;
-      baChip.textContent = dn + " / " + t + " booked";
-    }
-    TRIP.bookAhead.forEach(function (b) {
-      var id = "book|" + slug(b.name);
-      var row = el("div", "ditem ditem--task" + (DONE[id] ? " is-done" : ""));
-      row.setAttribute("data-done-id", id);
-      row.appendChild(el("button", "ditem__check", "✓"));
-      var body = el("div", "ditem__body");
-      var line = el("div", "ditem__line");
-      line.appendChild(el("span", "ditem__name", esc(b.name)));
-      line.appendChild(el("span", "ditem__tag ditem__tag--" + b.level, LEVEL[b.level] || ""));
-      body.appendChild(line);
-      if (b.note) body.appendChild(el("div", "ditem__blurb", esc(b.note)));
-      row.appendChild(body);
-      row.addEventListener("click", function () {
-        var on = !row.classList.contains("is-done");
-        row.classList.toggle("is-done", on);
-        if (on) DONE[id] = 1; else delete DONE[id];
-        saveDone(); baUpdate();
+    // scannable checklists — shared by To Do and On Arrival
+    function checklistSection(title, items, idPrefix) {
+      var sec = el("section", "section reveal");
+      var secTitle = el("h2", "section__title", title);
+      var chip = el("span", "section__sub", ""); secTitle.appendChild(chip);
+      sec.appendChild(secTitle);
+      var list = el("div", "ditems");
+      function update() {
+        var t = list.querySelectorAll("[data-done-id]").length;
+        var dn = list.querySelectorAll("[data-done-id].is-done").length;
+        chip.textContent = dn + " / " + t + " done";
+      }
+      items.forEach(function (b) {
+        var id = idPrefix + slug(b.name);
+        var row = el("div", "ditem ditem--task" + (DONE[id] ? " is-done" : ""));
+        row.setAttribute("data-done-id", id);
+        row.appendChild(el("button", "ditem__check", "✓"));
+        var body = el("div", "ditem__body");
+        var line = el("div", "ditem__line");
+        line.appendChild(el("span", "ditem__name", esc(b.name)));
+        if (b.level) line.appendChild(el("span", "ditem__tag ditem__tag--" + b.level, LEVEL[b.level] || ""));
+        body.appendChild(line);
+        if (b.note) body.appendChild(el("div", "ditem__blurb", esc(b.note)));
+        if (b.url) {
+          var blink = el("a", "ditem__link", b.linkText ? esc(b.linkText) : "Open ↗");
+          blink.href = b.url;
+          blink.target = "_blank";
+          blink.rel = "noopener";
+          blink.addEventListener("click", function (e) { e.stopPropagation(); });
+          body.appendChild(blink);
+        }
+        row.appendChild(body);
+        row.addEventListener("click", function () {
+          var on = !row.classList.contains("is-done");
+          row.classList.toggle("is-done", on);
+          if (on) DONE[id] = 1; else delete DONE[id];
+          saveDone(); update();
+        });
+        list.appendChild(row);
       });
-      baList.appendChild(row);
-    });
-    ba.appendChild(baList); app.appendChild(ba); baUpdate();
+      sec.appendChild(list); app.appendChild(sec); update();
+    }
+    checklistSection("To Do · ", TRIP.bookAhead, "book|");
+    checklistSection("On Arrival · ", TRIP.onArrival, "arrive|");
 
     // logistics — its own section, below Book Ahead
     var logi = cityById("logistics");
@@ -465,6 +504,23 @@
       app.appendChild(ms2);
     }
 
+    // prev / next day, following the calendar across pages. Filled in by selectDay.
+    var pn = el("div", "prevnext"), DAYS = allDays(), jumpTo = null;
+    function dayNav(date) {
+      pn.innerHTML = "";
+      var i = -1;
+      DAYS.forEach(function (x, j) { if (x.city === city && x.date === date) i = j; });
+      [DAYS[i - 1], DAYS[i + 1]].forEach(function (t, k) {
+        if (!t) { pn.appendChild(el("span")); return; }
+        var other = t.city !== city;
+        var label = (other ? t.city.flag + " " + esc(t.city.name) + " · " : "") + esc(t.date);
+        var a = el("a", "prevnext__a" + (k ? " prevnext__a--next" : ""), k ? label + " →" : "← " + label);
+        a.href = t.city.id + ".html#" + enc(t.date);
+        if (!other) a.addEventListener("click", function (e) { e.preventDefault(); jumpTo(t.date); });
+        pn.appendChild(a);
+      });
+    }
+
     if (city.days) {
       var ds = el("section", "section reveal");
       var tabs = el("div", "daytabs");
@@ -475,7 +531,7 @@
         dayEls.forEach(function (p, j) { p.classList.toggle("is-active", j === i); });
         tabEls.forEach(function (t, j) { t.classList.toggle("is-active", j === i); });
         if (tabEls[i] && tabEls[i].scrollIntoView) tabEls[i].scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
-        if (dayObjs[i]) { if (dayMapLabel) dayMapLabel.textContent = dayObjs[i].date + (dayObjs[i].area ? " · " + dayObjs[i].area : ""); showDayOnMap(dayObjs[i]); }
+        if (dayObjs[i]) { if (dayMapLabel) dayMapLabel.textContent = dayObjs[i].date + (dayObjs[i].area ? " · " + dayObjs[i].area : ""); showDayOnMap(dayObjs[i]); dayNav(dayObjs[i].date); }
         try { localStorage.setItem("jp-day-" + city.id, String(i)); } catch (e) {}
       }
 
@@ -523,6 +579,13 @@
           }
           grouped.appendChild(grp);
         });
+        var st = stayFor(d.date);
+        if (st) {
+          var sg = el("details", "day__group"); sg.setAttribute("open", "");
+          sg.appendChild(el("summary", "day__grouptitle", "Where We're Staying"));
+          sg.appendChild(lodgingBlock(st.lodging));
+          grouped.appendChild(sg);
+        }
         blk.appendChild(grouped);
         panels.appendChild(blk); dayEls.push(blk);
         dayProgress(blk);
@@ -534,6 +597,9 @@
       if (hash) for (var hi = 0; hi < dayObjs.length; hi++) { if (dayObjs[hi].date === hash) { start = hi; break; } }
       if (start < 0) { try { var s = parseInt(localStorage.getItem("jp-day-" + city.id), 10); if (!isNaN(s) && s >= 0 && s < dayEls.length) start = s; } catch (e) {} }
       if (start < 0) start = 0;
+      jumpTo = function (date) {
+        for (var j = 0; j < dayObjs.length; j++) if (dayObjs[j].date === date) { selectDay(j); ds.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+      };
       if (dayEls.length) selectDay(start);
     }
 
@@ -546,12 +612,7 @@
 
     if (city.tipNote) { var tn = el("p", "tipnote reveal", "💡 " + esc(city.tipNote)); app.appendChild(tn); }
 
-    // prev / next
-    var idx = TRIP.cities.indexOf(city);
-    var pn = el("div", "prevnext");
-    if (idx > 0) { var p = el("a", "prevnext__a", "← " + TRIP.cities[idx - 1].flag + " " + esc(TRIP.cities[idx - 1].name)); p.href = TRIP.cities[idx - 1].id + ".html"; pn.appendChild(p); } else pn.appendChild(el("span"));
-    if (idx < TRIP.cities.length - 1 && !TRIP.cities[idx + 1].info) { var n = el("a", "prevnext__a prevnext__a--next", esc(TRIP.cities[idx + 1].name) + " " + TRIP.cities[idx + 1].flag + " →"); n.href = TRIP.cities[idx + 1].id + ".html"; pn.appendChild(n); }
-    app.appendChild(pn);
+    if (city.days) app.appendChild(pn);
     app.appendChild(footer());
   }
 

@@ -18,11 +18,18 @@ window.TRIP = {
   notionUrl: "https://app.notion.com/p/38d8319b49c181838efec05155afc495",
 
   bookAhead: [
-    { name: "Tokyo #2 Airbnb", note: "The last stay to book — 11/27–12/4 (keep it through the Hakone night). Fall is high season.", level: "now" },
-    { name: "Shinkansen", note: "Reserved seats open exactly 1 month before — set reminders Oct 25 & Oct 27 (SmartEX).", level: "soon" },
-    { name: "Odakyu Romancecar", note: "Book BOTH ways — Shinjuku → Hakone-Yumoto (11/30) and the return (12/1). Reserved seats open one month ahead: book the outbound on 10/30 and the return on 10/31.", level: "soon" },
-    { name: "Muscle Girls Bar", note: "Klook, a few weeks out. Closed Tue → go Sat 11/28.", level: "soon" },
+    { name: "Shinkansen", note: "Reserved seats open exactly 1 month before — set reminders Oct 25 & Oct 27 (SmartEX).", level: "soon", url: "https://smart-ex.jp/en/index.php", linkText: "Book on SmartEX ↗" },
+    { name: "Order yen", note: "200 each. Order on 10/29.", level: "before" },
+    { name: "Odakyu Romancecar", note: "Book BOTH ways — Shinjuku → Hakone-Yumoto (11/30) and the return (12/1). Both tickets should be for a departure around 9:30 AM. Reserved seats open one month ahead: book the outbound on 10/30 and the return on 10/31.", level: "soon", url: "https://www.web-odakyu.com/e-romancecar/", linkText: "Book on Odakyu e-Romancecar ↗" },
+    { name: "Muscle Girls Bar", note: "Klook, a few weeks out. Closed Tue → go Sat 11/28.", level: "soon", url: "https://www.klook.com/activity/168642-muscle-women-bar-strong-women-and-high-energy-interactions/", linkText: "Book on Klook ↗" },
+    { name: "Buy film stock", level: "before" },
+    { name: "Book pocket wifi", note: "Book via Klook. Pick up at Haneda Terminal 3 on 11/20; drop off at Narita Terminal 1 on 12/4.", level: "before" },
     { name: "Visit Japan Web", note: "Immigration + customs QR, done ≥6h before landing 11/20.", level: "before" },
+  ],
+
+  onArrival: [
+    { name: "Pick up pocket wifi", note: "Haneda Terminal 3, booked via Klook." },
+    { name: "Buy a physical Suica card", note: "Has to be a physical card: our Visa cards can't add Suica to Apple Wallet, and Welcome Suica is out because it expired." },
   ],
 
   pages: {
@@ -115,7 +122,7 @@ window.TRIP = {
         S("Tokyo Tower", "tk_tokyotower"), S("Inokashira Park (Kichijoji)", "tk_kichijoji"),
       ] },
       days: [
-        { date: "Fri 11/20", area: "Arrival · Haneda 4:40p", note: "Land, clear immigration with the Visit Japan Web QR, grab a Suica/Welcome Suica + a pocket of cash. Airbnb check-in (Tokyo #1) from 4:00 PM — 2-32-6 Ōkubo, Shinjuku (self check-in via lockbox; host sends directions). First-night ritual: a konbini run (7-Eleven egg sando, FamilyMart famichiki, a Strong Zero) on the way to the apartment.", cards: [
+        { date: "Fri 11/20", area: "Arrival · Haneda 4:40p", note: "Land, clear immigration with the Visit Japan Web QR, pick up the pocket wifi (Terminal 3), buy a physical Suica card + get a pocket of cash. Airbnb check-in (Tokyo #1) from 4:00 PM — 2-32-6 Ōkubo, Shinjuku (self check-in via lockbox; host sends directions). First-night ritual: a konbini run (7-Eleven egg sando, FamilyMart famichiki, a Strong Zero) on the way to the apartment.", cards: [
           { kind: "eat", name: "Coco Ichibanya", blurb: "Warm customizable curry, open late, zero decision fatigue after 20h of travel.", tags: ["our pick", "dinner", "veg-friendly"], query: "Coco Ichibanya Tokyo" },
         ] },
         { date: "Sat 11/21", area: "Yoyogi · Harajuku · Shibuya", cards: [
@@ -187,7 +194,7 @@ window.TRIP = {
           { kind: "bar", name: "Bar Trench / Bar Martha (Ebisu)", blurb: "Dark intimate cocktails / vinyl & whisky next door.", tags: ["cocktails"], query: "Bar Trench Ebisu" },
         ] },
         { bridge: { to: "kyoto", text: "Wed 11/25 – Fri 11/27 · Kyoto leg →" } },
-        { date: "Fri 11/27", area: "Back to Tokyo (out with JP)", note: "Easy re-entry — drop bags. Optional activities below if you have energy, then a low-key Shimokita/Shibuya evening; let JP pick the bar.", cards: [
+        { date: "Fri 11/27", area: "Back to Tokyo (out with JP)", note: "Easy re-entry — back to the same Shin-Okubo Airbnb (check-in from 4:00 PM), drop bags. Optional activities below if you have energy, then a low-key Shimokita/Shibuya evening; let JP pick the bar.", cards: [
           { kind: "activity", name: "Tokyo Bay Bike Tour", blurb: "Saved Airbnb experience — bayside ride. Reserve a few weeks out.", tags: ["optional"], url: "https://www.airbnb.com/experiences/6763380?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
           { kind: "activity", name: "'Weird Tokyo' Bike Tour", blurb: "Saved Airbnb experience.", tags: ["optional"], url: "https://www.airbnb.com/experiences/92154?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
           { kind: "eat", name: "Low-key Shimokita izakaya / Shibuya yakitori", blurb: "Keep dinner relaxed after the train back.", tags: ["dinner"], query: "Shimokitazawa izakaya" },
@@ -241,14 +248,23 @@ window.TRIP = {
           { kind: "shop", name: "Depachika souvenirs", blurb: "Ginza Mitsukoshi or Tokyo Station's Daimaru food hall for the last gifts.", query: "Daimaru Tokyo Station depachika" },
         ] },
       ],
-      sections: [
-        { title: "Where We're Staying", icon: "🏠", lodging: {
+      // Where we sleep, by night: `from` is the first night, `to` the checkout date.
+      stays: [
+        { from: "11/20", to: "11/25", lodging: {
           name: "Airbnb - Shin-Okubo",
           desc: "Remember to complete the pre-check-in forms.",
           address: "2-chōme-32-6 Ōkubo, Shinjuku City, Tokyo 169-0072",
           mapUrl: "https://www.google.com/maps/search/?api=1&query=2-32-6+Okubo+Shinjuku+Tokyo",
           checkin: "4:00 PM · Fri 11/20",
           checkout: "11:00 AM · Wed 11/25",
+        } },
+        { from: "11/27", to: "12/4", lodging: {
+          name: "Airbnb - Shin-Okubo",
+          desc: "Same apartment as the first Tokyo leg (second booking).",
+          address: "2-chōme-32-6 Ōkubo, Shinjuku City, Tokyo 169-0072",
+          mapUrl: "https://www.google.com/maps/search/?api=1&query=2-32-6+Okubo+Shinjuku+Tokyo",
+          checkin: "4:00 PM · Fri 11/27",
+          checkout: "11:00 AM · Fri 12/4",
         } },
       ],
     },
@@ -266,16 +282,17 @@ window.TRIP = {
       ] },
       days: [
         { date: "Wed 11/25", area: "Arrive · Watch shopping · Kamo · Gion", note: "Check out of the Tokyo Airbnb (Tokyo #1) by 11:00 AM first. Early Shinkansen out (book Oct 25), drop bags, then ease in. Kyoto Airbnb check-in from 3:00 PM (central Nakagyō).", cards: [
-          { kind: "sight", name: "Saihoji (Kokedera moss temple)", blurb: "Maybe — the famous moss temple, ~11am if you can get in. Reservation-only: book by end of Sept / early Oct. West Kyoto (Arashiyama side).", tags: ["optional", "★ reserve"], query: "Saihoji Temple Kyoto" },
           { kind: "shop", name: "Kuoe Watches", blurb: "Kyoto microbrand down a staircase in the Teramachi arcade off Nishiki — hand-assembled vintage-style pieces, all out to handle; in-person yen prices run ~20–30% under online USD. Closed Tue.", tags: ["watches"], url: "https://www.kuoe-en.com/" },
           { kind: "shop", name: "BIG MOON Kyoto (watches)", blurb: "The secondhand hunt — a 300+ collection (used Kurono Tokyo & Minase among the Rolex/Omega). Karasuma/Shijo by Daimaru. Closed Thu → Wed or Fri only. Tax-free.", tags: ["watches", "closed Thu"], url: "https://bigmoon-kyoto.com/" },
-          { kind: "shop", name: "Face House", blurb: "On your Kyoto list — downtown, near the Nishiki / Teramachi arcades.", query: "Face House Kyoto" },
+          { kind: "activity", name: "Face House", blurb: "On your Kyoto list — downtown, near the Nishiki / Teramachi arcades.", query: "Face House Kyoto" },
           { kind: "shop", name: "Teramachi & Shinkyogoku arcades", blurb: "Covered shopping arcades off Nishiki — vintage, secondhand watches, records, kimono.", query: "Teramachi shopping street Kyoto" },
           { kind: "sight", name: "Kamo River Noryo-Yuka (early evening)", blurb: "Lantern-lit dining decks one block off the river. Grab konbini snacks and drinks and hang on the riverbank for sunset.", query: "Pontocho Alley Kyoto" },
           { kind: "sight", name: "Gion (evening) + dinner", blurb: "Stroll Hanamikoji and Shirakawa — stick to main streets (Kyoto fines tourists in private alleys) — then dinner nearby.", query: "Gion Kyoto" },
         ] },
-        { date: "Thu 11/26", area: "Fushimi Inari · E-bike", cards: [
+        { date: "Thu 11/26", area: "Moss temple · Fushimi Inari · E-bike", cards: [
           { kind: "eat", name: "Vermillion Cafe (Fushimi Inari)", blurb: "Breakfast by Fushimi Inari — get there 7:30–8am to put your name down. Espresso-bar vibe.", tags: ["breakfast", "veg-friendly"], query: "Vermillion Cafe Fushimi Inari Kyoto" },
+          { kind: "transit", time: "9:15 AM", name: "Airbnb → Saihoji (about 55 min)", blurb: "Walk 15 min south to Hankyu Karasuma Station (Shijo-Karasuma), or ride the subway one stop from Karasuma Oike to Shijo. Hankyu Kyoto Line toward Osaka-Umeda, get off at Katsura (about 8 min). Change to the Hankyu Arashiyama Line, one stop to Kamikatsura. Walk 15 to 20 min west to the temple, or take Kyoto Bus 73 three stops to Kokedera/Suzumushidera, then 3 min on foot. Easy backup: taxi from Katsura Station, about 12 min and ¥1,500. A taxi the whole way from the Airbnb takes roughly 25 to 30 min.", tags: ["Suica OK"], url: "https://www.google.com/maps/dir/?api=1&origin=652-42+Yakushicho+Nakagyo+Kyoto&destination=Saihoji+Temple+Kyoto&travelmode=transit" },
+          { kind: "sight", time: "10:30 AM", name: "Saihoji (Kokedera moss temple)", blurb: "The famous moss temple, 10:30 AM slot. Reservation-only, so be at the gate a few minutes early. West Kyoto (Arashiyama side).", tags: ["optional", "★ reserve"], query: "Saihoji Temple Kyoto" },
           { kind: "activity", name: "Kyoto e-bike tour", blurb: "Great for the spread-out sights — many run near Fushimi Inari or a temple loop. Book ahead.", tags: ["~¥10,000"], query: "Kyoto ebike tour" },
           { kind: "shop", name: "Oomiya Kyoto (watches)", blurb: "Mechanical-watch dealer on Shijo-dori by Daimaru — Grand Seiko, Tudor, IWC, Panerai, Blancpain, GP; coffee poured while you browse. Closed Wed → Thu works. Pairs with a downtown lunch.", tags: ["watches", "closed Wed"], url: "https://www.jw-oomiya.co.jp/pages/kyoto" },
           { kind: "sight", name: "Fushimi Inari @ 5pm", blurb: "The endless vermilion torii — arrive late afternoon (~5pm) and climb past the first crowds as the light goes gold. Open 24h, free.", tags: ["★ free"], url: "https://inari.jp/en/" },
@@ -285,8 +302,9 @@ window.TRIP = {
           { kind: "transit", name: "Shinkansen Kyoto → Tokyo", blurb: "Book the early train (reservation opens Oct 27). ~2h15 to Tokyo.", tags: ["SmartEX"], query: "Kyoto Station" },
         ] },
       ],
-      sections: [
-        { title: "Where We're Staying", icon: "🏠", lodging: {
+      // Where we sleep, by night: `from` is the first night, `to` the checkout date.
+      stays: [
+        { from: "11/25", to: "11/27", lodging: {
           name: "Airbnb - Nakagyo",
           desc: "Remember to complete the pre-check-in forms.",
           address: "652-42 Yakushichō, Nakagyo Ward, Kyoto 604-0062",
@@ -310,14 +328,21 @@ window.TRIP = {
         S("Yama-no-chaya (ryokan)", "hk_ryokan"),
       ] },
       days: [
-        { date: "Mon 11/30", area: "Yumoto, then the onsen", note: "One night — ease into Hakone-Yumoto, grab lunch, then check in at Yama-no-chaya (3 PM) and do nothing but soak. Forward big bags from Tokyo by takkyubin (~¥2,000/bag) and carry only an overnight bag.", cards: [
-          { kind: "transit", name: "Get there: Odakyu Romancecar", blurb: "Shinjuku → Hakone-Yumoto (~85 min, reserve a seat), then the Hakone Tozan line one stop to Tonosawa for the ryokan (~5 min taxi from Yumoto also works).", tags: ["reserve seat"], url: "https://www.odakyu.jp/english/romancecar/" },
-          { kind: "sight", name: "Walk around Hakone-Yumoto", blurb: "The gateway town right by the station — a strollable main street of onsen-manju stalls, hot-spring foot baths, and souvenir shops. Ease into Hakone before you check in.", tags: ["stroll"], query: "Hakone-Yumoto Station" },
+        { date: "Mon 11/30", area: "Yumoto, then the onsen", note: "Romancecar at 9:30 AM, then Yumoto on foot: shopping street, lunch at noon, Soun-ji and Tamadare Falls for the foliage, a foot bath, and the walk up to Yama-no-chaya for check-in. Forward big bags from Tokyo by takkyubin (~¥2,000/bag) and carry only an overnight bag.", cards: [
+          { kind: "transit", time: "9:30 AM", name: "Romancecar from Shinjuku", blurb: "About 80 min direct to Hakone-Yumoto. Reserve seats.", tags: ["reserve seat"], url: "https://www.odakyu.jp/english/romancecar/" },
+          { kind: "sight", time: "11:00 AM", name: "Yumoto shopping street", blurb: "Graze the snack shops; grab yumochi at Chimoto.", query: "Chimoto Hakone Yumoto" },
+          { kind: "activity", time: "12:00 PM", name: "Lunch in Yumoto", blurb: "Soba or tai (sea bream) ramen near the station. Picks under Food options.", query: "Hakone-Yumoto Station" },
+          { kind: "sight", time: "1:00 PM", name: "Soun-ji Temple", blurb: "15-min uphill walk; peak foliage. Closes ~4 PM.", query: "Sounji Temple Hakone" },
+          { kind: "sight", time: "2:00 PM", name: "Tamadare Falls & Shrine", blurb: "Short walk from the temple area; best leaves in town.", query: "Tamadare Falls Hakone Yumoto" },
+          { kind: "activity", time: "2:45 PM", name: "Kappa Tengoku foot bath", blurb: "Free quick soak on the way back past the station.", query: "Kappa Tengoku Hakone Yumoto" },
+          { kind: "transit", time: "3:15 PM", name: "Walk to Yama-no-chaya", blurb: "About 20 min uphill; check in.", query: "Yama-no-chaya Tonosawa Hakone" },
+          { kind: "activity", time: "Evening", name: "Onsen + ryokan dinner", blurb: "Book a private bath slot at check-in.", query: "Yama-no-chaya Tonosawa Hakone" },
           { kind: "eat", name: "Lunch: Hatsuhana soba", blurb: "Yumoto institution for handmade jinenjo (mountain-yam) soba — the seiro set is the move. Riverside, a short walk from the station.", tags: ["lunch"], query: "Hatsuhana Soba Hakone Yumoto" },
         ] },
       ],
-      sections: [
-        { title: "The Ryokan", icon: "🏯", lodging: {
+      // Where we sleep, by night: `from` is the first night, `to` the checkout date.
+      stays: [
+        { from: "11/30", to: "12/1", lodging: {
           name: "Yama-no-chaya",
           desc: "Small luxury ryokan in Tonosawa, at the end of a suspension bridge over the Hayakawa gorge — private open-air baths, kaiseki dinner + breakfast.",
           address: "171 Tonosawa, Hakone-machi, Ashigarashimo-gun, Kanagawa 250-0315",
@@ -338,7 +363,7 @@ window.TRIP = {
       blurb: "Everything operational: trains, connectivity, money, entry, and the apps to grab before you fly.",
       sections: [
         { title: "Getting around", icon: "🚇", cards: [
-          { kind: "transit", name: "Suica in Apple Wallet", blurb: "Add before you go, top up with your card, tap on every train/subway/bus/konbini. Welcome Suica is the paper backup.", tags: ["★ do first"] },
+          { kind: "transit", name: "Physical Suica card", blurb: "Buy one at the airport on arrival and top it up with cash at any station machine. Tap on every train/subway/bus/konbini. Apple Wallet Suica doesn't work with our Visa cards, and Welcome Suica is expired.", tags: ["★ do first"] },
           { kind: "transit", name: "Navigation", blurb: "Google Maps is excellent for Tokyo transit; Navitime / Japan Travel is the backup for platforms and transfers.", tags: ["apps"] },
           { kind: "transit", name: "Skip the JR Pass", blurb: "For this trip (in-city + two Tokyo–Kyoto runs) the nationwide pass isn't worth it post-2023. Buy single Shinkansen tickets.", tags: ["money-saver"] },
         ] },
@@ -348,13 +373,13 @@ window.TRIP = {
           { kind: "transit", name: "Oversized luggage", blurb: "Bags 160–250cm need an oversized-baggage seat or risk a fine. Better: forward big bags by takkyubin and travel light.", tags: ["takkyubin"] },
         ] },
         { title: "Connectivity & money", icon: "💴", cards: [
-          { kind: "transit", name: "eSIM (Airalo / Ubigi)", blurb: "~10–20GB for two weeks. Install before you fly, switch on when you land. Cheaper than pocket wifi for two phones.", url: "https://www.airalo.com/japan-esim" },
+          { kind: "transit", name: "Pocket wifi", blurb: "James's phone is carrier-locked, so no eSIM. One pocket wifi covers both phones. Book ahead for pickup at Haneda on 11/20. You fly out of Narita, so pick a rental that allows return at Narita or by mail." },
           { kind: "transit", name: "Yen", blurb: "Don't pre-order at home. Withdraw on arrival from 7-Eleven (7Bank) or Japan Post ATMs (24/7, take foreign cards). Carry ¥10–20k cash.", tags: ["7Bank ATM"] },
           { kind: "transit", name: "Tax-free (changing Nov 2026)", blurb: "Moving to refund-at-departure at more stores. Keep receipts, claim at the airport. No tipping.", tags: ["keep receipts"] },
         ] },
         { title: "Entry & apps", icon: "🛂", cards: [
           { kind: "transit", name: "Visit Japan Web", blurb: "One QR for immigration + customs — fill BOTH sections (skipping customs is the #1 mistake). Done ≥6h before landing. Screenshot the QR.", tags: ["★ before 11/20"], url: "https://www.vjw.digital.go.jp/" },
-          { kind: "transit", name: "Apps to download", blurb: "Suica · SmartEX · Google Maps + Navitime · Google Translate (offline JP) · Tabelog (3.5+ is good) · Klook · Ecbo Cloak · Airalo · FLUSH · Yurekuru Call.", tags: ["checklist"] },
+          { kind: "transit", name: "Apps to download", blurb: "SmartEX · Google Maps + Navitime · Google Translate (offline JP) · Tabelog (3.5+ is good) · Klook · Ecbo Cloak · FLUSH · Yurekuru Call.", tags: ["checklist"] },
           { kind: "transit", name: "Good to know (late 2026)", blurb: "No using power banks in-flight (charge before boarding). Kyoto fines tourists in Gion's private alleys. Cold, crisp, clear — pack warm layers + broken-in shoes.", tags: ["heads up"] },
         ] },
       ],
