@@ -42,10 +42,10 @@
 
   // Theme registry: map mode + per-city accent palette. CSS lives in /themes.
   var THEMES = {
-    sumi:   { label: "Sumi-e", map: "light", def: "#c4382b", accents: { tokyo: "#c4382b", kyoto: "#4f6f54", hakone: "#7a5a44", logistics: "#6b6357" } },
-    koyo:   { label: "Kōyō",   map: "light", def: "#b3402a", accents: { tokyo: "#b3402a", kyoto: "#c8741f", hakone: "#9a6b2e", logistics: "#6b7a3a" } },
-    indigo: { label: "Ai",     map: "light", def: "#20407a", accents: { tokyo: "#20407a", kyoto: "#2f6f5e", hakone: "#5b4a8f", logistics: "#7a6a3a" } },
-    neon:   { label: "Neon",   map: "dark",  def: "#ff2d95", accents: { tokyo: "#ff2d95", kyoto: "#19e3ff", hakone: "#b96bff", logistics: "#9dff3c" } },
+    sumi:   { label: "Sumi-e", map: "light", def: "#c4382b", accents: { tokyo: "#c4382b", kyoto: "#4f6f54", hakone: "#7a5a44" } },
+    koyo:   { label: "Kōyō",   map: "light", def: "#b3402a", accents: { tokyo: "#b3402a", kyoto: "#c8741f", hakone: "#9a6b2e" } },
+    indigo: { label: "Ai",     map: "light", def: "#20407a", accents: { tokyo: "#20407a", kyoto: "#2f6f5e", hakone: "#5b4a8f" } },
+    neon:   { label: "Neon",   map: "dark",  def: "#ff2d95", accents: { tokyo: "#ff2d95", kyoto: "#19e3ff", hakone: "#b96bff" } },
   };
   var THEME_ORDER = ["sumi", "koyo", "indigo", "neon"];
   var DEFAULT_THEME = "sumi";
@@ -239,7 +239,7 @@
     var home = el("a", "topnav__home" + (currentId ? "" : " is-active"), '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>');
     home.href = "index.html"; home.setAttribute("aria-label", "Home"); home.title = "Home"; nav.appendChild(home);
     TRIP.cities.forEach(function (c) {
-      if (c.info) return; // skip Logistics in the header
+      if (c.info) return; // skip info-only entries in the header
       var a = el("a", "topnav__chip" + (c.id === currentId ? " is-active" : ""), c.flag + " " + esc(c.name));
       a.href = c.id + ".html"; a.style.setProperty("--accent", accentOf(c.id)); nav.appendChild(a);
     });
@@ -423,24 +423,11 @@
     checklistSection("To Do · ", TRIP.bookAhead, "book|");
     checklistSection("Before 11/25 · ", TRIP.onArrival, "arrive|");
 
-    // logistics — its own section, below Book Ahead
-    var logi = cityById("logistics");
-    if (logi) {
-      var lsec = el("section", "section reveal");
-      lsec.appendChild(el("h2", "section__title", "Logistics"));
-      var la = el("a", "logi-card"); la.href = "logistics.html"; la.style.setProperty("--accent", accentOf("logistics"));
-      var lb = el("div", "logi-card__body");
-      lb.appendChild(el("div", "logi-card__title", "Trains · eSIM · Yen · Visit Japan Web · Apps"));
-      lb.appendChild(el("div", "logi-card__sub", esc(logi.blurb)));
-      la.appendChild(lb);
-      lsec.appendChild(la); app.appendChild(lsec);
-    }
-
-    // konbini hacks + gift checklist — banner cards linking to their pages
+    // gift checklist + watch shopping — banner cards linking to their pages
     if (TRIP.pages) {
       var bsec = el("section", "section reveal");
       var bgrid = el("div", "banners");
-      [TRIP.pages.konbini, TRIP.pages.gift, TRIP.pages.watches].forEach(function (page) {
+      [TRIP.pages.gift, TRIP.pages.watches].forEach(function (page) {
         if (!page) return;
         var a = el("a", "banner"); a.href = page.key + ".html";
         a.style.setProperty("--accent", page.accent || ACCENT_DEFAULT);
@@ -666,7 +653,7 @@
     document.body.appendChild(bar);
   }
 
-  // ---- Standalone page (Konbini, Gift) ----------------------
+  // ---- Standalone page (Gift, Watches) ----------------------
   function buildPage(app, page) {
     app.appendChild(topnav(page.key));
     var accent = page.accent || ACCENT_DEFAULT;

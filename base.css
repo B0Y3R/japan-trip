@@ -128,14 +128,7 @@ a { color: inherit; }
 .city-grid--legs .city-card__name { font-size: clamp(1rem, 3.4vw, 1.35rem); }
 .city-grid--legs .city-card__meta { font-size: 0.68rem; }
 
-/* Logistics banner card */
-.logi-card { display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 1rem 1.2rem; transition: border-color 0.12s ease; }
-.logi-card:hover { border-color: var(--accent); }
-.logi-card__title { font-family: var(--disp); font-weight: 700; font-size: 1.02rem; }
-.logi-card__sub { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.2rem; line-height: 1.4; }
-.logi-card__go { flex: none; font-family: var(--ticket-mono); font-weight: 700; font-size: 0.82rem; color: var(--accent); }
-
-/* BANNER CARDS — Konbini / Gift, whole card is the tap target */
+/* BANNER CARDS — Gift / Watches, whole card is the tap target */
 .banners { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%,240px),1fr)); }
 .banner { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; gap: 0.85rem; min-height: 104px; text-decoration: none; color: var(--ink); border-radius: 16px; padding: 1.35rem 1.5rem; background: color-mix(in srgb, var(--accent) 13%, var(--card)); border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line)); transition: border-color 0.14s ease, background 0.14s ease; }
 .banner:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 20%, var(--card)); }

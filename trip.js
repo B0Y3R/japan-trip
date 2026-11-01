@@ -18,7 +18,7 @@ window.TRIP = {
   notionUrl: "https://app.notion.com/p/38d8319b49c181838efec05155afc495",
 
   bookAhead: [
-    { name: "Visit Japan Web", note: "Immigration + customs QR, done ≥6h before landing 11/20.", level: "before" },
+    { name: "Visit Japan Web", note: "Immigration + customs QR. Sasha and James both need to fill it out separately.", level: "before" },
   ],
 
   onArrival: [
@@ -26,10 +26,6 @@ window.TRIP = {
   ],
 
   pages: {
-    konbini: {
-      key: "konbini", title: "Konbini Hacks", jp: "コンビニ", flag: "🏪",
-      kicker: "Convenience-store survival", accent: "#3ab7c6",
-    },
     gift: {
       key: "gift", title: "Gift Checklist", jp: "土産", flag: "🎁",
       kicker: "Omiyage — who to buy for", accent: "#e0a33a",
@@ -345,36 +341,6 @@ window.TRIP = {
           phone: "0460-85-5493",
           url: "https://luxury-ryokan.com/",
         } },
-      ],
-    },
-
-    // ===================================================== LOGISTICS
-    {
-      id: "logistics", flag: "🧳", name: "Logistics", jp: "手配",
-      dates: "Before you fly", nights: 0, accent: "#9dff3c", info: true,
-      currency: "",
-      blurb: "Everything operational: trains, connectivity, money, entry, and the apps to grab before you fly.",
-      sections: [
-        { title: "Getting around", icon: "🚇", cards: [
-          { kind: "transit", name: "Physical Suica card", blurb: "Buy one at the airport on arrival and top it up with cash at any station machine. Tap on every train/subway/bus/konbini. Apple Wallet Suica doesn't work with our Visa cards, and Welcome Suica is expired.", tags: ["★ do first"] },
-          { kind: "transit", name: "Navigation", blurb: "Google Maps is excellent for Tokyo transit; Navitime / Japan Travel is the backup for platforms and transfers.", tags: ["apps"] },
-          { kind: "transit", name: "Skip the JR Pass", blurb: "For this trip (in-city + two Tokyo–Kyoto runs) the nationwide pass isn't worth it post-2023. Buy single Shinkansen tickets.", tags: ["money-saver"] },
-        ] },
-        { title: "Shinkansen (Tokyo ↔ Kyoto)", icon: "🚄", cards: [
-          { kind: "transit", name: "Route + fare", blurb: "Tokaido Shinkansen, ~2h15 each way. Reserved Nozomi ~¥14,170 (~$88) one way.", tags: ["~$88"] },
-          { kind: "transit", name: "Book on SmartEX", blurb: "Reserved seats open EXACTLY 1 month before — set reminders Oct 25 (for 11/25) and Oct 27 (for 11/27). Reserve in peak foliage.", tags: ["★ Oct 25 & 27"] },
-          { kind: "transit", name: "Oversized luggage", blurb: "Bags 160–250cm need an oversized-baggage seat or risk a fine. Better: forward big bags by takkyubin and travel light.", tags: ["takkyubin"] },
-        ] },
-        { title: "Connectivity & money", icon: "💴", cards: [
-          { kind: "transit", name: "Pocket wifi", blurb: "James's phone is carrier-locked, so no eSIM. One pocket wifi covers both phones. Book ahead for pickup at Haneda on 11/20. You fly out of Narita, so pick a rental that allows return at Narita or by mail." },
-          { kind: "transit", name: "Yen", blurb: "Don't pre-order at home. Withdraw on arrival from 7-Eleven (7Bank) or Japan Post ATMs (24/7, take foreign cards). Carry ¥10–20k cash.", tags: ["7Bank ATM"] },
-          { kind: "transit", name: "Tax-free (changing Nov 2026)", blurb: "Moving to refund-at-departure at more stores. Keep receipts, claim at the airport. No tipping.", tags: ["keep receipts"] },
-        ] },
-        { title: "Entry & apps", icon: "🛂", cards: [
-          { kind: "transit", name: "Visit Japan Web", blurb: "One QR for immigration + customs — fill BOTH sections (skipping customs is the #1 mistake). Done ≥6h before landing. Screenshot the QR.", tags: ["★ before 11/20"], url: "https://www.vjw.digital.go.jp/" },
-          { kind: "transit", name: "Apps to download", blurb: "SmartEX · Google Maps + Navitime · Google Translate (offline JP) · Tabelog (3.5+ is good) · Klook · Ecbo Cloak · FLUSH · Yurekuru Call.", tags: ["checklist"] },
-          { kind: "transit", name: "Good to know (late 2026)", blurb: "No using power banks in-flight (charge before boarding). Kyoto fines tourists in Gion's private alleys. Cold, crisp, clear — pack warm layers + broken-in shoes.", tags: ["heads up"] },
-        ] },
       ],
     },
   ],
