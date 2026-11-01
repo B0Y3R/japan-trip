@@ -84,12 +84,12 @@ window.TRIP = {
     { date: "Tue 11/24", text: "Shinjuku · Nakano", city: "tokyo" },
     { date: "Wed 11/25", text: "Shinkansen → Kyoto", city: "kyoto" },
     { date: "Thu 11/26", text: "Kyoto — Fushimi Inari + e-bike", city: "kyoto" },
-    { date: "Fri 11/27", text: "Kyoto AM → back to Tokyo", city: "kyoto" },
+    { date: "Fri 11/27", text: "Kyoto AM → back to Tokyo", city: "tokyo" },
     { date: "Sat 11/28", text: "Kichijoji · Muscle Girls Bar", city: "tokyo" },
     { date: "Sun 11/29", text: "Asakusa · Ueno · Yanesen", city: "tokyo" },
     { date: "Mon 11/30", text: "Hakone — ryokan + onsen", city: "hakone" },
     { date: "Tue 12/1", text: "Back to Tokyo · Akihabara · Kagurazaka", city: "tokyo" },
-    { date: "Wed 12/2", text: "Yokohama day trip", city: "tokyo" },
+    { date: "Wed 12/2", text: "Open day", city: "tokyo" },
     { date: "Thu 12/3", text: "Ginza · Nihonbashi", city: "tokyo" },
     { date: "Fri 12/4", text: "Depart Narita ~3p → Vancouver", city: "tokyo" },
   ],
@@ -183,11 +183,8 @@ window.TRIP = {
           { kind: "bar", name: "Shinjuku Golden Gai", blurb: "200+ tiny themed bars in six alleys, small covers. Pick a door that looks welcoming and squeeze in.", tags: ["★ bars"], query: "Shinjuku Golden Gai" },
         ] },
         { bridge: { to: "kyoto", text: "Wed 11/25 – Fri 11/27 · Kyoto leg →" } },
-        { date: "Fri 11/27", area: "Back to Tokyo (out with JP)", note: "Easy re-entry — back to the same Shin-Okubo Airbnb (check-in from 4:00 PM), drop bags. Optional activities below if you have energy, then a low-key Shimokita/Shibuya evening; let JP pick the bar.", cards: [
-          { kind: "activity", name: "Tokyo Bay Bike Tour", blurb: "Saved Airbnb experience — bayside ride. Reserve a few weeks out.", tags: ["optional"], url: "https://www.airbnb.com/experiences/6763380?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
-          { kind: "activity", name: "'Weird Tokyo' Bike Tour", blurb: "Saved Airbnb experience.", tags: ["optional"], url: "https://www.airbnb.com/experiences/92154?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
+        { date: "Fri 11/27", area: "Back to Tokyo", note: "Airbnb check-in isn't until 4:00 PM. Ask the host about checking in early, or stash the bags in a coin locker (Shinjuku Station has plenty) and head out.", cards: [
           { kind: "activity", name: "Park Hyatt New York Bar", blurb: "No reservations. Dress somewhat nice. Arrive at 5:30pm: live jazz and the cover charge start at 6:30pm.", query: "New York Bar Park Hyatt Tokyo" },
-          { kind: "eat", name: "Low-key Shimokita izakaya / Shibuya yakitori", blurb: "Keep dinner relaxed after the train back.", tags: ["dinner"], query: "Shimokitazawa izakaya" },
         ] },
         { date: "Sat 11/28", area: "Kichijoji · Koganei", cards: [
           { kind: "sight", name: "Edo-Tokyo Open Air Architectural Museum", blurb: "Relocated historic buildings (the inspiration for Spirited Away's bathhouse street). Koganei.", tags: ["~¥400"], url: "https://www.tatemonoen.jp/english/" },
@@ -214,11 +211,7 @@ window.TRIP = {
           { kind: "sight", name: "Kagurazaka", blurb: "Cobblestone 'little Paris' — hidden lanes, teahouses, French bistros.", query: "Kagurazaka Tokyo" },
           { kind: "eat", name: "Le Bretagne (Kagurazaka)", blurb: "Galettes and cider, or a Kagurazaka izakaya for dinner.", tags: ["dinner", "veg-friendly"], query: "Le Bretagne Kagurazaka Tokyo" },
         ] },
-        { date: "Wed 12/2", area: "Yokohama day trip", cards: [
-          { kind: "eat", name: "Yokohama Chinatown", blurb: "Japan's biggest — dim sum and street snacks (Manchinro for a sit-down).", tags: ["lunch", "veg-friendly"], query: "Yokohama Chinatown" },
-          { kind: "activity", name: "CupNoodles Museum", blurb: "Design your own custom Cup Noodle. Genuinely fun.", tags: ["~¥500"], url: "https://www.cupnoodles-museum.jp/en/yokohama/" },
-          { kind: "sight", name: "Minato Mirai + Red Brick Warehouse", blurb: "Waterfront, the Air Cabin gondola, craft beer — great at night with the Ferris wheel lit.", query: "Yokohama Red Brick Warehouse" },
-        ] },
+        { date: "Wed 12/2", area: "Open day", note: "No fixed plan. Shopping, revisiting favorite areas, and anything we missed.", cards: [] },
         { date: "Thu 12/3", area: "Ginza · Chuo · Nihonbashi", cards: [
           { kind: "activity", name: "Nishikawa custom pillow (Nihonbashi)", blurb: "Your dedicated custom-pillow fitting — appointment only.", tags: ["★ appt"], query: "Nishikawa Nihonbashi Tokyo" },
           { kind: "shop", name: "Vin-Time (Ginza)", blurb: "Vintage watches inside Hankyu Men's Tokyo, 2-5-1 Yurakucho.", tags: ["watches"], query: "Vin-Time Hankyu Mens Ginza" },
@@ -287,10 +280,6 @@ window.TRIP = {
           { kind: "activity", name: "Kyoto e-bike tour", blurb: "Great for the spread-out sights — many run near Fushimi Inari or a temple loop. Book ahead.", tags: ["~¥10,000"], query: "Kyoto ebike tour" },
           { kind: "shop", name: "Oomiya Kyoto (watches)", blurb: "Mechanical-watch dealer on Shijo-dori by Daimaru — Grand Seiko, Tudor, IWC, Panerai, Blancpain, GP; coffee poured while you browse. Closed Wed → Thu works. Pairs with a downtown lunch.", tags: ["watches", "closed Wed"], url: "https://www.jw-oomiya.co.jp/pages/kyoto" },
           { kind: "sight", name: "Fushimi Inari @ 5pm", blurb: "The endless vermilion torii — arrive late afternoon (~5pm) and climb past the first crowds as the light goes gold. Open 24h, free.", tags: ["★ free"], url: "https://inari.jp/en/" },
-        ] },
-        { date: "Fri 11/27", area: "Morning, then Shinkansen back", note: "Check out of the Kyoto Airbnb by 10:00 AM, then coffee + ekiben at Kyoto Station before the train.", cards: [
-          { kind: "coffee", name: "Coffee + ekiben at Kyoto Station", blurb: "Grab a coffee and pick up ekiben for the ride before the Shinkansen home.", query: "Kyoto Station ekiben" },
-          { kind: "transit", name: "Shinkansen Kyoto → Tokyo", blurb: "Book the early train (reservation opens Oct 27). ~2h15 to Tokyo.", tags: ["SmartEX"], query: "Kyoto Station" },
         ] },
       ],
       // Where we sleep, by night: `from` is the first night, `to` the checkout date.
