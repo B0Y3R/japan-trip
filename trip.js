@@ -171,7 +171,8 @@ window.TRIP = {
           { kind: "coffee", name: "PostCoffee (Shimokita)", blurb: "Explicitly does decaf specialty coffee — the guaranteed-decaf backup.", tags: ["coffee", "backup"], query: "PostCoffee Shimokitazawa" },
           { kind: "bar", name: "LIVE HAUS", blurb: "Live venue, B1F 2-14-2 Kitazawa — catch a show, then graze the tiny natural-wine bars.", tags: ["live"], query: "LIVE HAUS Shimokitazawa" },
         ] },
-        { date: "Tue 11/24", area: "Shinjuku · Nakano", cards: [
+        { date: "Tue 11/24", area: "Shinjuku · Nakano", note: "Start with the 11am Sushi Tokyo Ten reservation in Shinjuku, then head to Nakano Broadway. Leave early for lunch: the restaurant is hard to find.", cards: [
+          { kind: "eat", name: "Sushi Tokyo Ten (Shinjuku)", blurb: "Reservation at 11am. Hard to find, so give yourselves extra time to get there.", tags: ["★ 11am reservation", "lunch", "pescatarian"], query: "Sushi Tokyo Ten Shinjuku" },
           { kind: "shop", name: "BEAMS JAPAN (Shinjuku)", blurb: "The flagship — floors of BEAMS lines plus Japanese craft & souvenirs. 3-32-6 Shinjuku.", tags: ["our pick"], query: "BEAMS JAPAN Shinjuku" },
           { kind: "shop", name: "The Four Eyed (Kabukicho)", blurb: "Clothes + photo booth, Palais Dor 1F, 2-8-2 Kabukicho.", tags: ["our pick"], query: "The Four Eyed Kabukicho" },
           { kind: "shop", name: "Custom pillow fitting", blurb: "Main fitting is Nishikawa (Thu 12/3); or do it here at Tokyu Hands / Bic Camera Shinjuku.", query: "Tokyu Hands Shinjuku" },
