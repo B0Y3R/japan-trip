@@ -421,7 +421,7 @@
       sec.appendChild(list); app.appendChild(sec); update();
     }
     checklistSection("To Do · ", TRIP.bookAhead, "book|");
-    checklistSection("On Arrival · ", TRIP.onArrival, "arrive|");
+    checklistSection("Before 11/25 · ", TRIP.onArrival, "arrive|");
 
     // logistics — its own section, below Book Ahead
     var logi = cityById("logistics");

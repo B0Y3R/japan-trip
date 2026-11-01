@@ -18,18 +18,11 @@ window.TRIP = {
   notionUrl: "https://app.notion.com/p/38d8319b49c181838efec05155afc495",
 
   bookAhead: [
-    { name: "Shinkansen", note: "Reserved seats open exactly 1 month before — set reminders Oct 25 & Oct 27 (SmartEX).", level: "soon", url: "https://smart-ex.jp/en/index.php", linkText: "Book on SmartEX ↗" },
-    { name: "Order yen", note: "200 each. Order on 10/29.", level: "before" },
-    { name: "Odakyu Romancecar", note: "Book BOTH ways — Shinjuku → Hakone-Yumoto (11/30) and the return (12/1). Both tickets should be for a departure around 9:30 AM. Reserved seats open one month ahead: book the outbound on 10/30 and the return on 10/31.", level: "soon", url: "https://www.web-odakyu.com/e-romancecar/", linkText: "Book on Odakyu e-Romancecar ↗" },
-    { name: "Muscle Girls Bar", note: "Klook, a few weeks out. Closed Tue → go Sat 11/28.", level: "soon", url: "https://www.klook.com/activity/168642-muscle-women-bar-strong-women-and-high-energy-interactions/", linkText: "Book on Klook ↗" },
-    { name: "Buy film stock", level: "before" },
-    { name: "Book pocket wifi", note: "Book via Klook. Pick up at Haneda Terminal 3 on 11/20; drop off at Narita Terminal 1 on 12/4.", level: "before" },
     { name: "Visit Japan Web", note: "Immigration + customs QR, done ≥6h before landing 11/20.", level: "before" },
   ],
 
   onArrival: [
-    { name: "Pick up pocket wifi", note: "Haneda Terminal 3, booked via Klook." },
-    { name: "Buy a physical Suica card", note: "Has to be a physical card: our Visa cards can't add Suica to Apple Wallet, and Welcome Suica is out because it expired." },
+    { name: "Pick up Shinkansen tickets at JR office (Shinjuku)" },
   ],
 
   pages: {
