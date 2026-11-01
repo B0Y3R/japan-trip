@@ -186,6 +186,7 @@ window.TRIP = {
         { date: "Fri 11/27", area: "Back to Tokyo (out with JP)", note: "Easy re-entry — back to the same Shin-Okubo Airbnb (check-in from 4:00 PM), drop bags. Optional activities below if you have energy, then a low-key Shimokita/Shibuya evening; let JP pick the bar.", cards: [
           { kind: "activity", name: "Tokyo Bay Bike Tour", blurb: "Saved Airbnb experience — bayside ride. Reserve a few weeks out.", tags: ["optional"], url: "https://www.airbnb.com/experiences/6763380?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
           { kind: "activity", name: "'Weird Tokyo' Bike Tour", blurb: "Saved Airbnb experience.", tags: ["optional"], url: "https://www.airbnb.com/experiences/92154?adults=2&checkin=2026-11-20&checkout=2026-11-24" },
+          { kind: "activity", name: "Park Hyatt New York Bar", blurb: "No reservations. Dress somewhat nice. Arrive at 5:30pm: live jazz and the cover charge start at 6:30pm.", query: "New York Bar Park Hyatt Tokyo" },
           { kind: "eat", name: "Low-key Shimokita izakaya / Shibuya yakitori", blurb: "Keep dinner relaxed after the train back.", tags: ["dinner"], query: "Shimokitazawa izakaya" },
         ] },
         { date: "Sat 11/28", area: "Kichijoji · Koganei", cards: [
@@ -207,6 +208,7 @@ window.TRIP = {
         { bridge: { to: "hakone", text: "Mon 11/30 · Hakone onsen night →" } },
         { date: "Tue 12/1", area: "Akihabara · Kagurazaka", note: "Check out of Yama-no-chaya by 10 AM and Romancecar back to Shinjuku, then into the city. (Muscle Girls Bar is closed Tuesdays — it's on 11/28.)", cards: [
           { kind: "sight", name: "Akihabara", blurb: "Electronics, retro games, gachapon.", query: "Akihabara Tokyo" },
+          { kind: "activity", name: "General Store Railyard", blurb: "In Kanda-Hanaokacho, right by Akihabara Station.", tags: ["our pick"], query: "General Store Railyard Akihabara" },
           { kind: "eat", name: "Kanda Matsuya", blurb: "Historic hand-cut soba near Akihabara for a real lunch.", tags: ["lunch", "veg-friendly"], query: "Kanda Matsuya soba Tokyo" },
           { kind: "eat", name: "Santosham (Jimbocho)", blurb: "Indian spot in the Jimbocho book district — between Akihabara and Kagurazaka. Plenty of vegetarian options.", tags: ["lunch", "veg-friendly"], query: "Santosham Jimbocho Tokyo" },
           { kind: "sight", name: "Kagurazaka", blurb: "Cobblestone 'little Paris' — hidden lanes, teahouses, French bistros.", query: "Kagurazaka Tokyo" },

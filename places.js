@@ -1,4 +1,12 @@
 window.PLACES = {
+"New York Bar Park Hyatt Tokyo": {
+"lat": 35.685136,
+"lng": 139.690961
+},
+"General Store Railyard Akihabara": {
+"lat": 35.698164,
+"lng": 139.774834
+},
 "Coco Ichibanya Tokyo": {
 "lat": 35.553911,
 "lng": 139.729174
