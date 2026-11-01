@@ -111,11 +111,11 @@ window.TRIP = {
         S("Tokyo Tower", "tk_tokyotower"), S("Inokashira Park (Kichijoji)", "tk_kichijoji"),
       ] },
       days: [
-        { date: "Fri 11/20", area: "Arrival · Haneda 4:40p", note: "Land, clear immigration with the Visit Japan Web QR, pick up the pocket wifi (Terminal 3), buy a physical Suica card + get a pocket of cash. Airbnb check-in (Tokyo #1) from 4:00 PM — 2-32-6 Ōkubo, Shinjuku (self check-in via lockbox; host sends directions). First-night ritual: a konbini run (7-Eleven egg sando, FamilyMart famichiki, a Strong Zero) on the way to the apartment.", cards: [
+        { date: "Fri 11/20", area: "Arrival · Haneda 4:40p", note: "Dinner + be in bed by 9-10pm. Prepare for a 3am wake-up: a konbini run, a late-night scooter ride, or a walk are options. JR trains start running at 4:30-5am.", cards: [
           { kind: "eat", name: "Coco Ichibanya", blurb: "Warm customizable curry, open late, zero decision fatigue after 20h of travel.", tags: ["our pick", "dinner", "veg-friendly"], query: "Coco Ichibanya Tokyo" },
         ] },
-        { date: "Sat 11/21", area: "Yoyogi · Harajuku · Shibuya", cards: [
-          { kind: "sight", name: "Meiji Jingu", blurb: "Start here early — the forest approach is a calm reset before Harajuku. Free.", query: "Meiji Jingu Tokyo" },
+        { date: "Sat 11/21", area: "Yoyogi · Harajuku · Shibuya", note: "Shops start opening around 10:30-11am. Expect an energy crash between 1-4pm: try to stay out and about, or nap for 1hr max.", cards: [
+          { kind: "sight", name: "Meiji Jingu", blurb: "Opens 6:30 AM. Start here early — the forest approach is a calm reset before Harajuku. Free.", query: "Meiji Jingu Tokyo" },
           { kind: "activity", name: "Ki-Re-I ID Photo Booth (Kitasando)", blurb: "Your retro ID-photo-booth stop near Kitasando.", query: "Ki-Re-I photo booth Kitasando Tokyo" },
           { kind: "sight", name: "Cat Street", blurb: "The walkable shopping spine between Harajuku and Shibuya.", query: "Cat Street Harajuku Tokyo" },
           { kind: "sight", name: "Hachiko + Miyashita Park", blurb: "The famous statue, then the rooftop park-on-a-mall with a rooftop bar.", query: "Hachiko Statue Shibuya" },
